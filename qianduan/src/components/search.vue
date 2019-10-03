@@ -1,10 +1,13 @@
 <template>
-    <div :style="{backgroundImage: 'url('+bgimg+')', width: '100%',minWidth:'100%',height:'200px',backgroundSize:'cover'}">
+    <div :style="{backgroundImage: 'url('+bgimg+')', width: '100%',minWidth:'100%',height:'180px',backgroundSize:'cover'}">
         <el-row class="pad">
-            <el-col :lg="6" :offset="8">
+            <el-col :lg="6" class="hidden-md-and-down" :offset="8">
                 <el-input class="search" v-model="input" placeholder="垃圾识别与分类"></el-input>
             </el-col>
-            <el-col :lg="2">
+            <el-col :md="16" :sm="16" class="hidden-lg-and-up">
+                <el-input class="search" v-model="input" placeholder="垃圾识别与分类"></el-input>
+            </el-col>
+            <el-col :lg="2" :md="8" :sm="8">
                 <el-button @click="searchLaji"><img :src="search" class="sou"/><span class="souText">搜索</span></el-button>
             </el-col>
         </el-row>
@@ -42,7 +45,7 @@ export default {
     line-height: 50%;
 }
 .el-button{
-    height: 74px;
+    height: 54px;
     width: 100%;
 }
 .sou{
@@ -57,7 +60,7 @@ export default {
 .el-input__inner{
     border-radius:5px 0 0 5px;
     border: solid 1px #5ec74d;
-    height: 75px;
+    height: 55px;
     font-size: 25px;
 
 }

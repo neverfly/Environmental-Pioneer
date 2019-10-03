@@ -1,23 +1,44 @@
 <template>
     <div class="nav">
-      <el-row  class="center">
-        <el-col :lg="5" :offset="5">
+      <el-row class="hidden-md-and-down">
+        <el-col :lg="5" :offset="4">
           <img :src="logo" alt="" class="logo"/>
         </el-col>
-        <el-col :lg="6" :offset="5" class="logoRight">
+        <el-col :lg="7" :offset="4" class="logoRight">
+          <router-link to=""><img :src="people"  class="icons" alt=""/>&nbsp;<span>登录</span></router-link>
+          <router-link to=""><img :src="login"  class="icons" alt=""/>&nbsp;<span>注册</span></router-link>
+          <span>|| English switch</span>
+        </el-col>
+      </el-row>
+      <el-row class="hidden-lg-and-up">
+        <el-col :md="5">
+          <img :src="logo" alt="" class="logo"/>
+        </el-col>
+        <el-col :md="11" class="logoRight">
           <router-link to=""><img :src="people"  class="icons" alt=""/>&nbsp;<span>登录</span></router-link>
           <router-link to=""><img :src="login"  class="icons" alt=""/>&nbsp;<span>注册</span></router-link>
           <span>|| English switch</span>
         </el-col>
       </el-row>
       <el-row>
-        <el-col :lg="12" :offset="6">
+        <!-- pc端 -->
+        <el-col :lg="16" class="hidden-md-and-down" :offset="7">
           <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-            <el-menu-item index="1"><img :src="shouye" class="icon"/>首页</el-menu-item>
-            <el-menu-item index="2"><img :src="news" class="icon"/>新闻</el-menu-item>
-            <el-menu-item index="3"><img :src="laji" class="icon"/>垃圾分类</el-menu-item>
-            <el-menu-item index="4"><img :src="jiandu" class="icon"/>监督与举报</el-menu-item>
-            <el-menu-item index="5"><img :src="people" class="icon"/>个人中心</el-menu-item>
+            <el-menu-item class="navPC" index="1"><img :src="shouye" class="icon"/>首页</el-menu-item>
+            <el-menu-item class="navPC" index="2"><img :src="news" class="icon"/>新闻</el-menu-item>
+            <el-menu-item class="navPC" index="3"><img :src="laji" class="icon"/>垃圾分类</el-menu-item>
+            <el-menu-item class="navPC" index="4"><img :src="jiandu" class="icon"/>监督与举报</el-menu-item>
+            <el-menu-item class="navPC" index="5"><img :src="people" class="icon"/>个人中心</el-menu-item>
+          </el-menu>
+        </el-col>
+        <!-- 移动端 -->
+        <el-col :md="22" class="hidden-lg-and-up">
+          <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+            <el-menu-item class="little" index="1"><img :src="shouye" class="icon"/>首页</el-menu-item>
+            <el-menu-item class="little" index="2"><img :src="news" class="icon"/>新闻</el-menu-item>
+            <el-menu-item class="little" index="3"><img :src="laji" class="icon"/>垃圾分类</el-menu-item>
+            <el-menu-item class="little" index="4"><img :src="jiandu" class="icon"/>监督与举报</el-menu-item>
+            <el-menu-item class="little" index="5"><img :src="people" class="icon"/>个人中心</el-menu-item>
           </el-menu>
         </el-col>
       </el-row>
@@ -61,7 +82,7 @@ import login from '@/assets/images/index_06.png'
 </script>
 <style scoped>
     *{
-        font-size: 25px;
+        font-size: 20px;
     }
     .nav{
         width: 100%;
@@ -84,11 +105,10 @@ import login from '@/assets/images/index_06.png'
     .icons{
         width: 15px;
     }
-    .el-menu-item{
+    .navPC{
         font-size: 18px;
-        text-align: center;
         color: #14a53b;
-        padding: 0 35px;
+        padding: 0 25px;
     }
     .el-menu{
         background-color: #d4f9c5;
@@ -107,5 +127,9 @@ import login from '@/assets/images/index_06.png'
     }
     .el-menu.el-menu--horizontal{
         border-bottom: none;
+    }
+    .little{
+      font-size: 15px;
+      padding: 0 15px;
     }
 </style>

@@ -13,3 +13,16 @@
     height: auto;
     padding-right: 13px;
 }
+.textCenter{
+    text-align: center;
+}
+h1{
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
