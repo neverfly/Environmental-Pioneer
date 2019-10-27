@@ -152,12 +152,15 @@ export default {
         this.$store.commit("madeShow",false);
         this.$store.commit("changeName","");
         this.$store.commit("changePass","");
-        this.$router.go(-1);
+        this.$router.push('/main');
+        this.shows=false;
       })
     }
   },
   beforeMount() {
     this.shows=this.$store.state.show;
+    console.log(this.shows);
+    
   },
   //登录注册模块监听
   computed:{

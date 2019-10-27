@@ -6,23 +6,14 @@
                 <el-col :lg={span:16,offset:4} :md="24">
                     <h1>{{article.title}}</h1>
                     <el-row style="marginBottom:20px">
-                        <el-col :span="6"><span>{{article.data}}</span></el-col>
-                        <el-col :span="6"><span>来源:{{article.from}}</span></el-col>
+                        <el-col :span="6"><span>时间: {{article.date}}</span></el-col>
+                        <el-col :span="6"><span>来源: {{article.source}}</span></el-col>
                         <el-col :span="6"><span>编辑：{{article.writer}}</span></el-col>
                         <el-col :span="6"><span>阅读量：{{article.readingQua}}</span></el-col>
                     </el-row>
                     <div class="content">
-                        <p>近些年，受国家政策扶持，我国工农业发展势头强劲，在给人民生活带来便利的同时也为我国国民经济贡献不少。但是有些专家提出，工农业发展迅速的背后对自然环境与生态平衡的破坏也逐渐显露，由于缺少强制性的国家标准，部分企业只注重经济效益忽略社会效益,发展过程中产生的废物直接排放到水体和土壤中，造成水土污染，尤其是对土壤造成重金属污染，对人民的生产生活甚至生命健康构成威胁。</p>
-                        <p>据环保行业研究员表示，目前我国超过10%的耕地受到重金属污染，每年粮食因此减产约一千万吨，受重金属污染导致不能食用的粮食也达一千两百万吨。据调查，目前我国重金属污染的耕地面积已经超过1.8亿亩，污染范围较大。和大气污染与水污染相比较，土壤重金属污染具备一定的隐蔽性，很多时候看不见也摸不着。以至于很长一段时期内，土壤重金属污染都未引起社会各界的关注。</p>
-                    　　<p>有些人会有疑问，小时候我们就学过，土壤是有很强大的修复能力的，很多植物甚至是人类在生长过程中也都需要一些金属元素，那为什么还会造成那么严重的重金属污染呢？</p>
-                        <p>其实就植物的需要而言，金属元素可分为两类类：一类是植物正常生长发育所需元素，且对人体又有一定生理功能，如铜、锌等，但过多会造成污染，妨碍植物生长发育；还有一类是植物生长发育不需要的元素，而对人体健康危害比较明显，如镉、汞、铅等。土壤重金属污染物中主要包括有汞、镉、铅、铜、铬、砷、镍、铁、锰、锌等元素。</p>
-                    　　<p>随着近些年工农业的发展，农药化肥的不合理使用、污泥及废弃物的滥用、污水灌溉、矿山开采、工业污水肆意排放等多种行为都在一点点侵蚀着土壤，造成土壤重金属污染愈加严重，加上土壤重金属污染具有不可逆性和难以修复性的特性，社会各界对此问题的关注度逐渐提高，对土壤重金属污染的修复工作也提出了更高要求。</p>
-                    　　<p>目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远。</p>
-                    　　<p>土壤为人类提供生存空间和重要的生态系统服务，它储存和过滤水，改善粮食安全功能性，在供应干净的水及抵御洪水和干旱方面发挥着关键的作用，土壤渗透的水还可以截留污染物，防止污染物深入地下水。可见没有健康的土壤，地球上的生命则不可持续。<p>
-                    　　<p>为了能够更好地应用各项修复处理技术，开展土壤中重金属的污染修复工作，还需广大技术工作们能够多参与到实践工作中，积攒更丰富地实践工作经验，以便充分发挥各项修复技术的应用优势，确保土壤中重金属的污染修复工作高效进展。</p>
-                    　　<p>此外，全体社会成员也需多份责任和监督意识，遇到不合理行为及时举报，土壤重金属污染防治之路，离不开你我的积极行动。</p>
-                        <p>文章链接：环保在线:</p>
-                        <p><small>//www.hbzhan.com/news/detail/130904.html</small></p>
+                        <p>{{article.content}}</p>
+                        <p><small>链接：{{article.src}}</small></p>
                     </div>
                 </el-col>
             </el-row>
@@ -31,19 +22,44 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
     name: 'majorNew',
     data() {
         return {
             article:{
-                title: "隐蔽性、复杂性 土壤重金属污染日益加剧修复之路需全员参与",
-                data: "2019.10.25",
-                from: '新闻周刊',
-                writer: 'XXXX',
-                readingQua: 9999,
+                title: "",
+                date: "",
+                source: '',
+                writer: '',
+                readingQua: 0,
+                src: ''
             }
         }
     },
+    created() {
+        this.getArticle();
+    },
+    methods:{
+        getArticle(){
+            axios.post("http://localhost:8080/new/article")
+            .then((res)=>{
+                console.log(res);
+                
+                this.article.title=res.data.data.title;
+                this.article.date=res.data.data.date;
+                this.article.content=res.data.data.content;
+                this.article.source=res.data.data.source;
+                this.article.writer=res.data.data.writer;
+                this.article.readingQua=res.data.data.readingQua;
+                this.article.src=res.data.data.src;
+            })
+            .catch(function(error){
+                console.log("error");
+                
+            })
+        }
+    }
 }
 </script>
 <style scoped>
