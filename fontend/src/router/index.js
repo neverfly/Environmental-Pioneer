@@ -36,6 +36,9 @@ export default new Router({
       path:'/majorNew',
       name:'majorNew',
       component: resolve => require(['../view/majorNew'],resolve)
+    },{
+      path:'*',
+      redirect:'/main'
     }
   ]
 })

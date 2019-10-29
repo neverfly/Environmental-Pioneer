@@ -9,7 +9,7 @@
 
         <!-- 主要信息 -->
         <h1 class="textCenter mainInfo">主要信息</h1><hr/>
-        <el-row :gutter="20">
+        <el-row>
             <el-col class="hidden-md-and-down" :lg={span:3,offset:4}>
                 <rankingList></rankingList>
             </el-col>

@@ -5,7 +5,13 @@ let userInfo=Mock.mock({
     data:{
         name:'mars',
         pass: '111111',
-        email: '1559830979@q.com'
+        email: '1559830979@qq.com',
+        token: false,
+        id:'1559830979',
+        address:'五道口职业技术学院',
+        qianming: "一位靓仔路过",
+        gender:'1',
+        nickName:'XXX'
     }
 })
 //文章
@@ -43,10 +49,21 @@ let article=Mock.mock({
         }
         objectList.push(newObject);
     }
-let game=Mock.mock({
-    objectList
-})
-//game
+    let game=Mock.mock({
+        objectList
+    })
+//排行榜
+    let rankList=[];
+    for (let i=0;i<10;i++){
+        let obj={
+            name: Mock.Random.cword(3),
+            score: 100-i
+        }
+        rankList.push(obj);
+    }
+    let ranking=Mock.mock({
+        rankList
+    })
 
 // 用户名
 Mock.mock(/goods\/goodAll/,'post',()=>{
@@ -59,5 +76,9 @@ Mock.mock(/new\/article/,'post',()=>{
 //game
 Mock.mock(/game\/question/,'post',()=>{
     return game
+});
+//排行榜
+Mock.mock(/game\/ranking/,'post',()=>{
+    return ranking
 });
 

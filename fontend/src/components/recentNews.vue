@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="width：90%;paddingLeft:5%;paddingRight:5%">
         <div class="block">
             
             <el-carousel height="150px">

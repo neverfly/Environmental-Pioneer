@@ -13,11 +13,13 @@
                     <span class="floatRi">{{item.grade}}</span>
                 </li>
             </ul>
-            <h1 class="textCenter bgColor"><a href="">立即参赛</a></h1>
+            <el-menu router class="el-menu-demo" mode="horizontal">
+                <el-menu-item index="/game"><h1 class="textCenter bgColor">立即参赛</h1></el-menu-item></el-menu>
         </el-row>
     </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
     name: 'rankingList',
     data() {
@@ -25,57 +27,74 @@ export default {
             items:[
                 {
                     num: 1,
-                    name: 'mars',
-                    grade: '99'
+                    name: '',
+                    grade: ''
                 },
                 {
                     num: 2,
-                    name: 'mars',
-                    grade: '99'
+                    name: '',
+                    grade: ''
                 },
                 {
                     num: 3,
-                    name: 'mars',
-                    grade: '99'
+                    name: '',
+                    grade: ''
                 },
                 {
                     num: 4,
-                    name: 'mars',
-                    grade: '99'
+                    name: '',
+                    grade: ''
                 },
                 {
                     num: 5,
-                    name: 'mars',
-                    grade: '99'
+                    name: '',
+                    grade: ''
                 },
                 {
                     num: 6,
-                    name: 'mars',
-                    grade: '99'
+                    name: '',
+                    grade: ''
                 },
                 {
                     num: 7,
-                    name: 'mars',
-                    grade: '99'
+                    name: '',
+                    grade: ''
                 },
                 {
                     num: 8,
-                    name: 'mars',
-                    grade: '99'
+                    name: '',
+                    grade: ''
                 },
                 {
                     num: 9,
-                    name: 'mars',
-                    grade: '99'
+                    name: '',
+                    grade: ''
                 },
                 {
                     num: 10,
-                    name: 'mars',
-                    grade: '99'
+                    name: '',
+                    grade: ''
                 },
             ]
         }
     },
+    created() {
+        this.getRankingIn();
+    },
+    methods:{
+        getRankingIn(){
+            axios.post("http://localhost:8080/game/ranking")
+            .then((res)=>{
+                for(var i=0;i<10;i++){
+                    this.items[i].name=res.data.rankList[i].name;
+                    this.items[i].grade=res.data.rankList[i].score;
+                }
+            })
+            .catch(function(error){
+                console.log("error");
+            })
+        }
+    }
 }
 </script>
 <style scoped>
@@ -95,5 +114,9 @@ export default {
     }
     .liBorder{
         border: solid 1px #d4f9c5;
+    }
+    .el-menu--horizontal>.el-menu-item{
+        width: 100%;
+        padding: 0;
     }
 </style>

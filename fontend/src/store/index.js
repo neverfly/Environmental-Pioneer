@@ -51,8 +51,14 @@ const store = new Vuex.Store({
     state:{
         show: false,
         name: 'sss',
+        id:'',
+        nickName:'',
+        gender:'1',
+        address:'',
+        qianming:'',
         pass: '1',
-        email: '1'
+        email: '1',
+        token:''
     },
     mutations:{
         madeShow(state,isShow){
@@ -61,11 +67,29 @@ const store = new Vuex.Store({
         changeName(state,newName){
             state.name=newName;
         },
+        changeId(state,newName){
+            state.id=newName;
+        },
+        changeGender(state,newName){
+            state.gender=newName;
+        },
+        changeNickName(state,newName){
+            state.nickName=newName;
+        },
+        changeAddress(state,newName){
+            state.address=newName;
+        },
+        changeqianming(state,newName){
+            state.qianming=newName;
+        },
         changePass(state,newName){
             state.pass=newName;
         },
         changeEmail(state,newName){
             state.email=newName;
+        },
+        getToken(state,newName){
+            state.token=newName;
         }
     }
 });

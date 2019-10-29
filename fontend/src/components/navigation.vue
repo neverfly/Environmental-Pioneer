@@ -24,7 +24,7 @@
             <el-menu-item class="navPC" index="/new"><img :src="news" class="icon"/>新闻</el-menu-item>
             <el-menu-item class="navPC" index="/garbage"><img :src="laji" class="icon"/>垃圾分类</el-menu-item>
             <el-menu-item class="navPC" index="/game"><i class="el-icon-edit icon" style="fontSize:25px;color:#14a53b"></i>分类答一答</el-menu-item>
-            <el-menu-item class="navPC" index="/majorNew"><img :src="people" class="icon"/>个人中心</el-menu-item>
+            <el-menu-item class="navPC" index="/personalCenter"><img :src="people" class="icon"/>个人中心</el-menu-item>
           </el-menu>
         </el-col>
       </el-row>
@@ -45,11 +45,15 @@
         :before-close="handleClose">
         <el-row class="tac">
           <el-col :span="24">
+            <p v-if="getShow" style="textAlign:center"><span>{{getName}}</span>&nbsp;&nbsp;<span @click="logOut">退出</span></p>
+          
             <el-menu
               :default-active="activeIndex"
               router
               class="el-menu-vertical-demo"
               >
+              <router-link style="marginLeft:10px" to="/login" v-if="!getShow"><img :src="people" class="icons" alt=""/>&nbsp;<span>登录</span></router-link>
+              <router-link to="login" v-if="!getShow"><img :src="login"  class="icons" alt=""/>&nbsp;<span>注册</span></router-link>
               <el-menu-item index="/main">
                 <span slot="title">首页</span>
                 <span class="el-icon-arrow-right" style="float:right;lineHeight:56px"></span>
@@ -151,21 +155,31 @@ export default {
         sessionStorage.clear();
         this.$store.commit("madeShow",false);
         this.$store.commit("changeName","");
+        this.$store.commit("changeId","");
+        this.$store.commit("changeGender","");
+        this.$store.commit("changeAddress","");
+        this.$store.commit("changeqianming","");
+        this.$store.commit("changeEmail","");
         this.$store.commit("changePass","");
+        this.$store.commit("changeNickName","");
+        this.$store.commit("getToken","");
         this.$router.push('/main');
         this.shows=false;
+      }).catch(function(){
+
       })
     }
   },
   beforeMount() {
     this.shows=this.$store.state.show;
-    console.log(this.shows);
-    
   },
   //登录注册模块监听
   computed:{
     getName:function(){
       return this.$store.state.name;
+    },
+    getShow:function(){
+      return this.$store.state.show;
     }
   }
 }

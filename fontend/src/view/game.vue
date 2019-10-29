@@ -1,7 +1,9 @@
 <template>
     <div>
         <navigation></navigation>
+        
         <el-row class="hidden-md-and-down">
+            <el-col :lg="5" class="hidden-md-and-down fixed"><rankingList></rankingList></el-col>
             <el-col :offset="5" :lg="14">
                 <h1 class="title">分类小测验</h1>
                 <p class="textCenter" style="fontSize:25px;marginTop:10px">每天分一分,生活美十分</p>
@@ -44,7 +46,7 @@
                 <p v-if="show">正确答案为：{{item.daan}}</p>
             </el-col>
             <el-col :offset="3" :span="18" style="marginBottom:20px">
-                <span class="jiaojuan" @click.once="tijiao">【提交】</span>
+                <span class="jiaojuan" @click="tijiao">【提交】</span>
                 <span class="jiaojuan">【状态<i class="el-icon-caret-bottom" style="fontSize:25px"></i>】</span>
             </el-col>
             <el-col :offset="3" :span="21">
@@ -60,6 +62,8 @@
 </template>
 <script>
 import axios from 'axios'
+import rankingList from '../components/rankingList'
+
 export default {
     name: 'game',
     data() {
@@ -162,12 +166,17 @@ export default {
             ]
         }
     },
+    components:{
+        rankingList
+    },
     beforeMount() {
         this.isLogin();
         this.getquestion();
     },
     methods: {
         tijiao:function(){
+            console.log("ssssssssssssss");
+            
             this.$confirm("确定提交吗?","提示",{
             confirmButtonText: "确定",
             cancleButtonText: '取消',
@@ -193,7 +202,9 @@ export default {
                 this.show=true;
                 // 步骤条不超过3
                 if (this.active+=2 > 2) this.active=3;
-        })
+        }).catch(function(){
+                console.log("error");
+            })
         },
         // 获取问题
         getquestion(){
@@ -215,12 +226,12 @@ export default {
         },
         //检查是否登录
         isLogin() {
-          if (sessionStorage.getItem('userName')) {
-            this.$store.commit('changeName',sessionStorage.getItem('userName'))
-          }else{
-            this.$router.push("/login");
-          }
-      }
+            if (sessionStorage.getItem('userName')) {
+                this.$store.commit('changeName',sessionStorage.getItem('userName'))
+            }else{
+                this.$router.push("/login");
+            }
+        }
 
     }
 }
@@ -246,5 +257,11 @@ export default {
     }
     .panduan{
         background-color: #f8b4b4;
+    }
+    .fixed{
+        position: fixed;
+        left: 0;
+        top: 30%;
+        width: 12%;
     }
 </style>
