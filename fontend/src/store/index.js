@@ -85,7 +85,7 @@ const store = new Vuex.Store({
         changePass(state,newName){
             state.pass=newName;
         },
-        changeEmail(state,newName){
+        getEmail(state,newName){
             state.email=newName;
         },
         getToken(state,newName){

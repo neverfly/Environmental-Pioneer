@@ -13,6 +13,9 @@
               <el-form-item label="确认密码:" prop="checkPass">
                   <el-input type="password" style="maxWidth:100%" v-model="zhuForm.checkPass"></el-input>
               </el-form-item>
+              <el-form-item label="邮箱:" prop="email">
+                  <el-input v-model="zhuForm.email" style="maxWidth:100%" autocomplete="off"></el-input>
+              </el-form-item>
               <el-form-item>
                   <el-button type="primary" @click="submitForm('zhuForm')">注册</el-button>
                   <el-button @click="resetForm('zhuForm')">重置</el-button><br/>
@@ -32,6 +35,7 @@
                   <el-button type="primary" @click="submitForm('dengForm')">登录</el-button>
                   <el-button @click="resetForm('dengForm')">重置</el-button><br/>
                   <span @click="exchange()">注册新账户</span>
+                  <span @click="forget()">忘记密码</span>
               </el-form-item>
           </el-form> 
       </div>
@@ -47,11 +51,17 @@
               <el-form-item label="确认密码:" prop="checkPass">
                   <el-input type="password" style="maxWidth:100%" v-model="zhuForm.checkPass"></el-input>
               </el-form-item>
+              <el-form-item label="邮箱:" prop="email">
+                  <el-input v-model="zhuForm.email" style="maxWidth:100%" autocomplete="off"></el-input>
+              </el-form-item>
               <el-checkbox v-model="checked">记住密码</el-checkbox>
               <el-form-item>
                   <el-button type="primary" @click="submitForm('zhuForm')">注册</el-button>
                   <el-button @click="resetForm('zhuForm')">重置</el-button><br/>
                   <span @click="exchange()">登录</span>
+                  <span @click="exchange()">注册新账户</span>
+                  <span @click="forget()">忘记密码</span>
+
               </el-form-item>
           </el-form> 
         <!-- 登录 -->
@@ -111,6 +121,18 @@ import logo from '@/assets/images/index_03.png'
           callback(new Error('两次输入密码不一致!'));
         } else {
           callback();
+        }
+      };
+      //邮箱
+      var checkEmail = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入邮箱'));
+        }
+        var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+        if(reg.test(value)){
+          callback();
+        }else{
+          callback(new Error('邮箱格式不正确'));
         }
       };
       return {
@@ -173,11 +195,13 @@ import logo from '@/assets/images/index_03.png'
           checkPass: [
             { required:true,validator: validatePass4, trigger: 'blur' }
           ],
+          email: [
+            { required:true,validator: checkEmail, trigger: 'blur' }
+          ],
         }
       };
     },
     beforeMount(){
-      this.getuserIn();
     },
     methods: {
       submitForm(ruleForm) {
@@ -222,7 +246,7 @@ import logo from '@/assets/images/index_03.png'
         this.$store.commit("changeGender",this.formss.gender);
         this.$store.commit("changeAddress",this.formss.address);
         this.$store.commit("changeqianming",this.formss.qianming);
-        this.$store.commit("changeEmail",this.formss.email);
+        this.$store.commit("getEmail",this.formss.email);
         this.$store.commit("changePass",this.formss.pass);
         this.$store.commit("changeNickName",this.formss.nickName);
         this.$store.commit("getToken",this.formss.token);
@@ -236,13 +260,21 @@ import logo from '@/assets/images/index_03.png'
         sessionStorage.setItem('userName',this.zhuForm.name);
         sessionStorage.setItem('userPass',this.zhuForm.pass);
         this.$store.commit("changePass",this.zhuForm.pass);
-        this.$store.commit("getToken",this.zhuForm.token);        
+        this.$store.commit("getToken",this.zhuForm.token);  
+        this.$store.commit("getEmail",this.zhuForm.email);    
+        console.log(this.zhuForm.email);
+            
       },
+      //清空内容
       resetForm(ruleForm){
         this.$refs[ruleForm].resetFields();
       },
       exchange(){
         this.showss=!this.showss;
+      },
+      //忘记密码
+      forget(){
+        alert("请查收邮箱");
       },
       //mock数据监测
       getuserIn(){

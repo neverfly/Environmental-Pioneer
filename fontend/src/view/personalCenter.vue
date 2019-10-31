@@ -6,7 +6,7 @@
                 <el-col :lg={span:12,offset:4} :md="16" v-if="showImg">
                     <div class="demo-basic--circle">
                         <div class="block">
-                        <el-avatar :size="100" :src="circleUrl"></el-avatar>
+                        <el-avatar :size="100" :src="touxiang"></el-avatar>
                         </div>
                     </div>
                 </el-col>
@@ -59,6 +59,7 @@
     </div>
 </template>
 <script>
+import touxiang from '../assets/images/u=732757285,310735219&fm=26&gp=0.jpg'
 export default {
     name:'personalCenter',
     data() {
@@ -73,6 +74,7 @@ export default {
                 address: '',
                 qianming:'',
             },
+            touxiang,
             showImg:false,
             name:'',
             imageUrl: ''

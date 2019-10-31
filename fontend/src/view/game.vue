@@ -3,7 +3,9 @@
         <navigation></navigation>
         
         <el-row class="hidden-md-and-down">
-            <el-col :lg="5" class="hidden-md-and-down fixed"><rankingList></rankingList></el-col>
+            <el-col :lg="5" class="hidden-md-and-down fixed"><img :src="leftImg" class="fixedL" alt=""></el-col>
+            <el-col :lg="5" class="hidden-md-and-down fixed"><img :src="rightImg" class="fixedR" alt=""></el-col>
+
             <el-col :offset="5" :lg="14">
                 <h1 class="title">分类小测验</h1>
                 <p class="textCenter" style="fontSize:25px;marginTop:10px">每天分一分,生活美十分</p>
@@ -63,6 +65,8 @@
 <script>
 import axios from 'axios'
 import rankingList from '../components/rankingList'
+import leftImg from '../assets/images/1.png'
+import rightImg from '../assets/images/2.png'
 
 export default {
     name: 'game',
@@ -71,6 +75,8 @@ export default {
             score: "  ",
             active: 1,
             show: false,
+            leftImg,
+            rightImg,
             items:[
                 {
                     question:"",
@@ -258,9 +264,15 @@ export default {
     .panduan{
         background-color: #f8b4b4;
     }
-    .fixed{
+    .fixedL{
         position: fixed;
         left: 0;
+        top: 30%;
+        width: 12%;
+    }
+    .fixedR{
+        position: fixed;
+        right: 0;
         top: 30%;
         width: 12%;
     }
