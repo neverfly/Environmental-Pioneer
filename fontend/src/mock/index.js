@@ -1,9 +1,14 @@
 import Mock from 'mockjs'
+//token
+let token=Mock.mock({
+    right:true,
+    token:'XXX'
+})
 //用户名
 let userInfo=Mock.mock({
     right:true,
     data:{
-        name:'mars',
+        name: 'mars',
         pass: '111111',
         email: '1559830979@qq.com',
         token: false,
@@ -11,7 +16,7 @@ let userInfo=Mock.mock({
         address:'五道口职业技术学院',
         qianming: "一位靓仔路过",
         gender:'1',
-        nickName:'XXX'
+        realname:'XXX'
     }
 })
 //文章
@@ -64,10 +69,20 @@ let article=Mock.mock({
     let ranking=Mock.mock({
         rankList
     })
-
+// 获取token
+Mock.mock(/login\/token/,'post',(option)=>{
+    console.log("getmocktoken");
+    return token;
+});
 // 用户名
-Mock.mock(/goods\/goodAll/,'post',()=>{
-    return userInfo
+Mock.mock(/goods\/goodAll/,'post',(option)=>{
+    console.log("用户名token验证");
+    console.log(option.body);
+    if('XXX'==token.token){
+        return userInfo
+    }else{
+        return "error";
+    }
 });
 //文章
 Mock.mock(/new\/article/,'post',()=>{

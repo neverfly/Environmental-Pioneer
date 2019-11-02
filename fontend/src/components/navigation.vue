@@ -109,6 +109,9 @@ import login from '@/assets/images/index_06.png'
 import bgimg from '@/assets/images/index_01.png'
 import search from '@/assets/images/index_07.png'
 import logoSmall from '@/assets/images/logoSmall.png'
+
+import axios from 'axios'
+
 export default {
   name: 'navigation',
   data() {
@@ -141,7 +144,6 @@ export default {
     },
     searchLaji(){
       console.log(this.input);
-      
     },
     handleClose(done) {
         done();
@@ -152,7 +154,7 @@ export default {
         confirmButtonText: "确定",
         cancleButtonText: '取消',
       }).then(()=>{
-        sessionStorage.clear();
+        localStorage.removeItem('token');
         this.$store.commit("madeShow",false);
         this.$store.commit("changeName","");
         this.$store.commit("changeId","");
@@ -168,12 +170,38 @@ export default {
       }).catch(function(){
 
       })
+    },
+    getuserIn(){
+      console.log("sssss");
+      console.log(localStorage.getItem("token"));
+      axios.post("http://localhost:8080/goods/goodAll",{
+        params: {
+          token:localStorage.getItem("token")
+        }
+      })
+      .then((res)=>{
+        console.log("getuserIn");
+        this.$store.state.name=res.data.data.name;
+        this.$store.state.pass=res.data.data.pass;
+        this.shows=true;
+        console.log(this.show);
+        
+      })
+      .catch(function(error){
+          console.log("error");
+          
+      })
     }
   },
-  beforeMount() {
-    this.shows=this.$store.state.show;
+  created() {
+    console.log("1111");
+    console.log(localStorage.getItem("token"));
+    if(localStorage.getItem("token")!=null){
+      this.getuserIn();
+    }
   },
   //登录注册模块监听
+  
   computed:{
     getName:function(){
       return this.$store.state.name;

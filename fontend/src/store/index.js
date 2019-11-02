@@ -52,7 +52,7 @@ const store = new Vuex.Store({
         show: false,
         name: 'sss',
         id:'',
-        nickName:'',
+        realname:'',
         gender:'1',
         address:'',
         qianming:'',
@@ -73,8 +73,8 @@ const store = new Vuex.Store({
         changeGender(state,newName){
             state.gender=newName;
         },
-        changeNickName(state,newName){
-            state.nickName=newName;
+        changerealname(state,newName){
+            state.realname=newName;
         },
         changeAddress(state,newName){
             state.address=newName;

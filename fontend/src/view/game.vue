@@ -232,9 +232,7 @@ export default {
         },
         //检查是否登录
         isLogin() {
-            if (sessionStorage.getItem('userName')) {
-                this.$store.commit('changeName',sessionStorage.getItem('userName'))
-            }else{
+            if(localStorage.getItem("token")==null){
                 this.$router.push("/login");
             }
         }

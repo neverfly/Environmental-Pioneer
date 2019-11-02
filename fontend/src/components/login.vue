@@ -34,7 +34,7 @@
               <el-form-item>
                   <el-button type="primary" @click="submitForm('dengForm')">登录</el-button>
                   <el-button @click="resetForm('dengForm')">重置</el-button><br/>
-                  <span @click="exchange()">注册新账户</span>
+                  <span @click="exchange()">注册新账户 | </span>
                   <span @click="forget()">忘记密码</span>
               </el-form-item>
           </el-form> 
@@ -84,6 +84,9 @@
 <script>
 import axios from 'axios'
 import logo from '@/assets/images/index_03.png'
+
+var rule;
+
   export default {
     data() {
       //注册密码输入
@@ -158,9 +161,8 @@ import logo from '@/assets/images/index_03.png'
           pass: '',
           email: '',
           token:'',
-          name: '',
           pass1: '',
-          nickName:''
+          realname:''
         },
         zhuForm:{
           name: '',
@@ -204,25 +206,27 @@ import logo from '@/assets/images/index_03.png'
     beforeMount(){
     },
     methods: {
+      
       submitForm(ruleForm) {
+        rule=ruleForm;
         //点击登录或者注册就去请求数据
-        this.getuserIn();
+        this.getToekn();
+        
+        
+        
+      },
+      afterGetUser(ruleForm){
+        console.log("afterGetUser");
         this.$refs[ruleForm].validate(valid => {
           if (valid) {
             //登录
             if(ruleForm=="dengForm"){
                 if(this.formss.name==this.dengForm.name&&this.formss.pass==this.dengForm.pass1){
                   this.login1Sucess();
-                  console.log(this.dengForm.id);
-                  
-                  console.log(this.$store.state);
-                  
                   this.$router.go(-1);
                 }else if(this.formss.name==this.dengForm.name&&this.formss.pass!=this.dengForm.pass1){
                   alert("密码错了,再看看呗");
                 }else if(this.formss.name!=this.dengForm.name){
-                  console.log(this.formss.name);
-                  
                   alert("没找到你的名字楠");
                 }
             }else if(ruleForm=='zhuForm'){
@@ -248,7 +252,7 @@ import logo from '@/assets/images/index_03.png'
         this.$store.commit("changeqianming",this.formss.qianming);
         this.$store.commit("getEmail",this.formss.email);
         this.$store.commit("changePass",this.formss.pass);
-        this.$store.commit("changeNickName",this.formss.nickName);
+        this.$store.commit("changerealname",this.formss.realname);
         this.$store.commit("getToken",this.formss.token);
         sessionStorage.setItem('userName',this.dengForm.name);
         sessionStorage.setItem('userPass',this.dengForm.pass);
@@ -262,8 +266,6 @@ import logo from '@/assets/images/index_03.png'
         this.$store.commit("changePass",this.zhuForm.pass);
         this.$store.commit("getToken",this.zhuForm.token);  
         this.$store.commit("getEmail",this.zhuForm.email);    
-        console.log(this.zhuForm.email);
-            
       },
       //清空内容
       resetForm(ruleForm){
@@ -276,15 +278,37 @@ import logo from '@/assets/images/index_03.png'
       forget(){
         alert("请查收邮箱");
       },
+      getToekn(){
+        axios.post('http://localhost:8080/login/token', {
+            params: {
+                name: this.dengForm.name,
+                pass: this.dengForm.pass1,
+            }
+        }).then((res)=>{
+          console.log("returnToken");
+          if(res.data.right){
+            localStorage.setItem("token",res.data.token);  
+            return res.data.token;
+          }else{
+            return 'error'
+          }
+        }).then(()=>{
+          this.getuserIn();
+        })
+      },
       //mock数据监测
       getuserIn(){
-        axios.post("http://localhost:8080/goods/goodAll")
+        axios.post("http://localhost:8080/goods/goodAll",{
+          params: {
+            token:localStorage.getItem("token")
+          }
+        })
         .then((res)=>{
-            console.log(res);
+          console.log("getuserIn");
             this.formss.name=res.data.data.name;
             this.formss.pass=res.data.data.pass;
             this.formss.token=res.data.data.token;
-            this.formss.nickName=res.data.data.nickName;
+            this.formss.realname=res.data.data.realname;
             this.formss.id=res.data.data.id;
             this.formss.gender=res.data.data.gender;
             this.formss.address=res.data.data.address;
@@ -294,6 +318,8 @@ import logo from '@/assets/images/index_03.png'
         .catch(function(error){
             console.log("error");
             
+        }).then(()=>{
+          this.afterGetUser(rule);
         })
       }
     }
