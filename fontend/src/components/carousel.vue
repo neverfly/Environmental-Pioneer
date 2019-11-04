@@ -5,7 +5,7 @@
             <el-col :lg="22" :offset="1" class="hidden-md-and-down">
                 <el-carousel :interval="4000" type="card" height="400px" class="mainBanner" arrow="always">
                     <el-carousel-item v-for="item in items" class="mainBanner" :key="item.name">
-                        <a href="item.href"><img class="carousel" :src="item.img" alt=""></a>
+                        <router-link :to="item.href"><img class="carousel" :src="item.img" alt=""></router-link>
                     </el-carousel-item>
                 </el-carousel>
             </el-col>
@@ -13,7 +13,7 @@
                 <div class="block">
                     <el-carousel trigger="click" height="200px" arrow="always">
                     <el-carousel-item v-for="item in items" :key="item.name">
-                        <a href="item.href"><img class="carousel" :src="item.img" alt=""></a>
+                        <router-link :to="item.href"><img class="carousel" :src="item.img" alt=""></router-link>
                     </el-carousel-item>
                     </el-carousel>
                 </div>
@@ -34,7 +34,7 @@ export default {
             items:[
                 {
                     name: "competition1",
-                    href: '#',
+                    href: '/game',
                     img: competition1
                 },
                 {

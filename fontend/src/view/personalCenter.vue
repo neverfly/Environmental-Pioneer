@@ -61,7 +61,6 @@ export default {
     beforeMount(){
         this.hasToken();
         this.showImg=this.$store.state.show;
-        this.form.gender=this.$store.state.gender;
     },
     methods: {
         hasToken(){
@@ -93,10 +92,16 @@ export default {
                 console.log("error");
                 
             }).then(()=>{
-                form.id=this.$store.data.data.id;
-                form.name=this.$store.data.data.name;
-                form.gender=this.$store.data.data.gender;
-                form.email=this.$store.data.data.email;
+                console.log("111111111111111111111111111");
+                
+                console.log(this.$store);
+                
+                this.form.id=this.$store.state.id;
+                this.form.name=this.$store.state.name;
+                this.form.gender=this.$store.state.gender;
+                this.form.email=this.$store.state.email;
+                this.form.gender=this.$store.state.gender;
+                console.log(this.form.gender);
                 this.showImg=true;
             })
         },
@@ -111,18 +116,6 @@ export default {
         },
         handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
-      },
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
       }
     }
 }
@@ -158,7 +151,7 @@ export default {
         font-size: 20px;
     }
     .el-button{
-        background-color: #98e778;
+        background-color: #ffffff;
         margin-left: calc(40% - 50px);
     }
     @media(min-width:1200px) {
@@ -194,5 +187,8 @@ export default {
         width: 100px;
         height: 100px;
         display: block;
+    }
+    .el-input__inner{
+        border-radius:5px 5px 5px 5px;
     }
 </style>

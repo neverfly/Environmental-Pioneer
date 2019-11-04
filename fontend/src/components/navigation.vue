@@ -161,9 +161,9 @@ export default {
         this.$store.commit("changeGender","");
         this.$store.commit("changeAddress","");
         this.$store.commit("changeqianming","");
-        this.$store.commit("changeEmail","");
+        this.$store.commit("getEmail","");
         this.$store.commit("changePass","");
-        this.$store.commit("changeNickName","");
+        this.$store.commit("changerealname","");
         this.$store.commit("getToken","");
         this.$router.push('/main');
         this.shows=false;

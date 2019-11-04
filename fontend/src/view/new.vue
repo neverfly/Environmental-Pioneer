@@ -32,7 +32,7 @@
         <el-row style="width:100%">
             <!-- 左侧新闻 -->
             <!-- pc -->
-            <el-col :offset="5" class="hidden-md-and-down" :lg="5">
+            <el-col class="hidden-md-and-down" :lg={span:5,offset:5}>
                 <el-row>
                     <el-col style="borderLeft:8px solid #14a53b;marginRight:5px;marginBottom:10px" :span="18">
                         <div >
@@ -55,7 +55,7 @@
                 </el-row>
             </el-col>
             <!-- 左侧新闻mobile -->
-            <el-col class="hidden-lg-and-up" :span="22" :offset="1" style="marginTop:10px;marginBottom:10px">
+            <el-col class="hidden-lg-and-up" :md={span:22} style="marginTop:10px;marginBottom:10px">
                 <el-row>
                     <el-col style="borderLeft:8px solid #14a53b;marginRight:5px;marginBottom:10px" :span="20">
                         <div >
@@ -110,16 +110,16 @@
                 </el-row>
             </el-col>
             <!-- 右边新闻 -->
-            <el-col :lg="5">
+            <el-col :lg="5" :md="24">
                 <el-row>
                     <el-col style="borderLeft:8px solid #14a53b;paddingLeft:5px;marginBottom:10px" :span="18">
                         <div >
-                            <h2>近期活动</h2><br>
-                            <span>RELATED REPORT</span>
+                            <h2>咨询投稿</h2><br>
+                            <span>POST SUBMISSION</span>
                         </div>
                     </el-col>
                 </el-row>
-                <img :src="welcome" alt="">
+                <img style="paddingLeft:7%;paddingRight:7%;width:86%" :src="welcome" alt="">
                 <span class="welcome">加入我们></span>
             </el-col>
         </el-row>
@@ -209,7 +209,7 @@ recentNews p{
 }
 .welcome{
      float:right;
-     margin-right: 70px;
+     margin-right: 7%;
      background-color:#2fb04f;
      color: #ffffff;
      font-size: 20px;

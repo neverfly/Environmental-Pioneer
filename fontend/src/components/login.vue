@@ -210,10 +210,11 @@ var rule;
       submitForm(ruleForm) {
         rule=ruleForm;
         //点击登录或者注册就去请求数据
-        this.getToekn();
-        
-        
-        
+        if(rule=='dengForm'){
+          this.getToekn();
+        }else{
+          this.getLoginToekn();
+        }
       },
       afterGetUser(ruleForm){
         console.log("afterGetUser");
@@ -296,12 +297,49 @@ var rule;
           this.getuserIn();
         })
       },
-      //mock数据监测
+      getLoginToekn(){
+        axios.post('http://localhost:8080/login/zhu', {
+            params: {
+                name: this.zhuForm.name,
+                pass: this.zhuForm.pass2,
+                email: this.zhuForm.email,
+            }
+        }).then((res)=>{
+          console.log("getLoginToekn");
+          if(res.data.right){
+            localStorage.setItem("token",res.data.token);  
+            return res.data.token;
+          }else{
+            return 'error'
+          }
+        }).then(()=>{
+          this.getuserIn();
+        })
+      },
+      loginGetToken(){
+        axios.post('http://localhost:8080/login/zhu', {
+            params: {
+                name: this.zhuForm.name,
+                pass: this.zhuForm.pass1,
+                email: this.zhuForm.emial,
+
+            }
+        }).then((res)=>{
+          console.log("returnToken");
+          if(res.data.right){
+            localStorage.setItem("token",res.data.token);  
+            return res.data.token;
+          }else{
+            return 'error'
+          }
+        }).then(()=>{
+          this.getuserIn();
+        })
+      },
+      //根据token获取get
       getuserIn(){
         axios.post("http://localhost:8080/goods/goodAll",{
-          params: {
-            token:localStorage.getItem("token")
-          }
+            token: localStorage.getItem("token")
         })
         .then((res)=>{
           console.log("getuserIn");

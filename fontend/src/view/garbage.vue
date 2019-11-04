@@ -68,7 +68,7 @@
                     <span style="fontSize:17px">CONCEPT INSTRODUCTION</span>
                 </div>
             </el-col>
-            <el-col :lg="12" :offset="6" class="hidden-md-and-down">
+            <el-col :lg={span:12,offset:6} class="hidden-md-and-down">
                 <el-tabs type="border-card">
                     <el-tab-pane label="可回收物">
                         <el-row :gutter="20" :style="{backgroundImage: 'url('+bgImg+')',width:'100%',height:'432px',backgroundSize:'cover'}">
@@ -218,10 +218,10 @@
                     </el-col>
                 </el-row>
             </el-col>
-            <el-col  :lg="12"  class="hidden-lg-and-up">
+            <el-col  :span="24"  class="hidden-lg-and-up">
                 <h1 class="textCenter">可回收垃圾</h1><hr/>
                 <el-row :gutter="20">
-                    <el-col :lg="6" v-for="(item,i) in items" :key="i">
+                    <el-col :span="12" v-for="(item,i) in items" :key="i">
                         <div class="yige">
                             <p>{{item.title1}}</p>
                             <p>{{item.title2}}</p>
@@ -256,7 +256,7 @@
             <el-col  class="hidden-lg-and-up" :span="24">
                 <h1 class="textCenter">有害垃圾</h1><hr/>
                 <el-row :gutter="20">
-                    <el-col :span="24" v-for="(item,i) in items" :key="i">
+                    <el-col :span="12" v-for="(item,i) in items" :key="i">
                         <div class="yige">
                             <p>{{item.title1}}</p>
                             <p>{{item.title2}}</p>
@@ -288,10 +288,10 @@
                     </el-col>
                 </el-row>
             </el-col>
-            <el-col  class="hidden-lg-and-up" :lg="12">
+            <el-col  class="hidden-lg-and-up" :span="24">
                 <h1 class="textCenter">干垃圾</h1><hr/>
                 <el-row :gutter="20">
-                    <el-col :lg="6" v-for="(item,i) in items" :key="i">
+                    <el-col :span="12" v-for="(item,i) in items" :key="i">
                         <div class="yige">
                             <p>{{item.title1}}</p>
                             <p>{{item.title2}}</p>
@@ -322,10 +322,10 @@
                     </el-col>
                 </el-row>
             </el-col>
-            <el-col class="hidden-lg-and-up" :lg="12">
+            <el-col class="hidden-lg-and-up" :span="24">
                 <h1 class="textCenter">湿垃圾</h1><hr/>
                 <el-row :gutter="20">
-                    <el-col :lg="6" v-for="(item,i) in items" :key="i">
+                    <el-col :span="12" v-for="(item,i) in items" :key="i">
                         <div class="yige">
                             <p>{{item.title1}}</p>
                             <p>{{item.title2}}</p>
@@ -497,7 +497,8 @@ export default {
     /* 每个垃圾样子 */
     .yige{
          width: 100%;
-         height: 70px;
+         height: 100px;
+         line-height: 25px;
          text-align: center;
          font-size:20px;
          background-color: #2fb04f;

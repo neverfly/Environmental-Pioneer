@@ -4,6 +4,10 @@ let token=Mock.mock({
     right:true,
     token:'XXX'
 })
+let token2=Mock.mock({
+    right:true,
+    token:'YYY'
+})
 //用户名
 let userInfo=Mock.mock({
     right:true,
@@ -11,6 +15,20 @@ let userInfo=Mock.mock({
         name: 'mars',
         pass: '111111',
         email: '1559830979@qq.com',
+        token: false,
+        id:'1559830979',
+        address:'五道口职业技术学院',
+        qianming: "一位靓仔路过",
+        gender:'1',
+        realname:'XXX'
+    }
+})
+let creatUserInfo=Mock.mock({
+    right:true,
+    data:{
+        name: '',
+        pass: '',
+        email: '',
         token: false,
         id:'1559830979',
         address:'五道口职业技术学院',
@@ -73,6 +91,11 @@ let article=Mock.mock({
 Mock.mock(/login\/token/,'post',(option)=>{
     console.log("getmocktoken");
     return token;
+});
+// 注册获取token
+Mock.mock(/login\/zhu/,'post',(option)=>{
+    console.log("getzhucetoken");
+    return token2;
 });
 // 用户名
 Mock.mock(/goods\/goodAll/,'post',(option)=>{

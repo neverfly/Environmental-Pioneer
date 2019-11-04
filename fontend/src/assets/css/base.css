@@ -38,7 +38,7 @@ a{
     border: solid 1px #5ec74d;
 }
 .el-input__inner{
-    border-radius: 5px 0 0 5px;
+    border-radius: 5px 5px 5px 5px;
     border: solid 1px #5ec74d;
     height: 54px;
     font-size: 23px;
