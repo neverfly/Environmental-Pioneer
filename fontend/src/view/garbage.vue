@@ -2,6 +2,8 @@
     <div>
         <navigation></navigation>
         <el-row>
+            <el-col :lg="5" class="hidden-md-and-down fixed"><img :src="leftImg" class="fixedL" alt=""></el-col>
+            <el-col :lg="5" class="hidden-md-and-down fixed"><img :src="rightImg" class="fixedR" alt=""></el-col>
             <el-col :offset="6" class="hidden-md-and-down" style="borderLeft:10px solid #14a53b;marginRight:5px;;paddingLeft:10px" :lg="16">
                 <div>
                     <h1 style="borderBottom:3px solid #14a53b;marginBottom:15px">疑问简答</h1><br>
@@ -350,12 +352,16 @@ import lajifenlei from '../assets/images/lajifenlei_02.png'
 import bgImg from '../assets/images/lajifenlei_03.png'
 import zuoImg from '../assets/images/lajifenlei_33.png'
 import feidianchi from '../assets/images/2_17.png'
+import leftImg from '../assets/images/1.png'
+import rightImg from '../assets/images/2.png'
 export default {
     name: 'garbege',
     data() {
         return {
             activeNames: ['1'],
             bgImg,
+            leftImg,
+            rightImg,
             zuoImg,
             lajifenlei,
             feidianchi,
@@ -525,5 +531,17 @@ export default {
         padding: 2.5% 2.5%;
         font-size: 12px;
         background-color: #f0f3f0;
+    }
+    .fixedL{
+        position: fixed;
+        left: 0;
+        top: 30%;
+        width: 12%;
+    }
+    .fixedR{
+        position: fixed;
+        right: 0;
+        top: 30%;
+        width: 12%;
     }
 </style>

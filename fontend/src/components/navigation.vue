@@ -143,7 +143,16 @@ export default {
     handleSelect(key, keyPath) {
     },
     searchLaji(){
-      console.log(this.input);
+      axios.post("http://localhost:8080/main/search",{
+          body: this.input
+      })
+      .then((res)=>{
+          alert(res.data);
+      })
+      .catch(function(error){
+          console.log("error");
+          
+      })
     },
     handleClose(done) {
         done();
@@ -207,7 +216,7 @@ export default {
       return this.$store.state.name;
     },
     getShow:function(){
-      return this.$store.state.show;
+      return this.shows;
     }
   }
 }

@@ -50,6 +50,18 @@ let article=Mock.mock({
         src: Mock.Random.url('http')
     }
 })
+//文章链接
+let articleList=Mock.mock({
+    code:200,
+    data:{
+        'title|5-10':'标题',
+        date: Mock.Random.date('yyyy-MM-dd'),
+        content: Mock.Random.cparagraph(50,100),
+        src: Mock.Random.url('http'),
+        liulan: 1111,
+        tokens: 'sss'
+    }
+})
 //game
     var zimu=function(){
         var data=Math.ceil(Math.random()*4);
@@ -118,5 +130,15 @@ Mock.mock(/game\/question/,'post',()=>{
 //排行榜
 Mock.mock(/game\/ranking/,'post',()=>{
     return ranking
+});
+//搜索栏
+Mock.mock(/main\/search/,'post',(option)=>{
+    console.log(option);
+    return "湿垃圾"
+});
+//文章链接
+Mock.mock(/main\/articleList/,'post',(option)=>{
+    console.log(option);
+    return articleList
 });
 

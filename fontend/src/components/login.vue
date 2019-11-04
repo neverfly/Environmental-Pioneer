@@ -3,7 +3,8 @@
       <!-- 注册 -->
       <div class="content hidden-md-and-down">
         <img :src="logo" alt="" class="logo"/>
-        <el-form :model="zhuForm" status-icon :rules="rules" ref="zhuForm" label-width="70px" class="demo-ruleForm center" v-show="!showss" style="max-Width:400px;min-Width:10%;marginTop:0 auto">
+        <router-link to="/main" class="backTo"><i class="el-icon-s-promotion" style="fontSize:30px;color:#3fffb8;">&nbsp;</i><span>回到首页</span></router-link>
+        <el-form :model="zhuForm" status-icon :rules="rules" ref="zhuForm" label-width="70px" class="demo-ruleForm center" v-show="!showss" style="max-Width:400px;min-Width:10%;marginTop:0 auto;width:500px">
               <el-form-item label="用户名:" prop="name">
                   <el-input v-model="zhuForm.name" autocomplete="off"></el-input>
               </el-form-item>
@@ -24,7 +25,7 @@
           </el-form> 
         <!-- 登录 -->
           <el-form :model="dengForm" status-icon :rules="rules" ref="dengForm" label-width="70px" class="demo-ruleForm center" v-show="showss"  style="max-Width:400px;min-Width:10%;marginTop:0 auto">
-              <el-form-item label="用户名:" prop="name">
+              <el-form-item label="用户名:" prop="name" style="minWidth:100px">
                   <el-input type="name" v-model="dengForm.name" autocomplete="off"></el-input>
               </el-form-item>
               <el-form-item label="密码:" prop="pass1">
@@ -216,6 +217,7 @@ var rule;
           this.getLoginToekn();
         }
       },
+      //回到首页
       afterGetUser(ruleForm){
         console.log("afterGetUser");
         this.$refs[ruleForm].validate(valid => {
@@ -277,7 +279,23 @@ var rule;
       },
       //忘记密码
       forget(){
-        alert("请查收邮箱");
+        this.$prompt('请输入邮箱', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+          inputErrorMessage: '邮箱格式不正确'
+        }).then(({ value }) => {
+          this.$message({
+            type: 'success',
+            message: "已重置密码请注意查收邮箱"
+          });
+          this.$router.push('/main');
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消重置'
+          });       
+        });
       },
       getToekn(){
         axios.post('http://localhost:8080/login/token', {
@@ -387,5 +405,18 @@ var rule;
       border-radius: 5%;
       padding: 20px;
       padding-top:40px; 
+      position: relative;
+    }
+    .backTo{
+      margin-bottom: 20px;
+      position: absolute;
+      top: 20px;
+      right:30px;
+    }
+    .backTo>span{
+      font-size: 30px;
+      text-align: center;
+      font-weight: 800;
+      color: #3fffb8;
     }
 </style>

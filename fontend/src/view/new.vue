@@ -58,7 +58,7 @@
             <el-col class="hidden-lg-and-up" :md={span:22} style="marginTop:10px;marginBottom:10px">
                 <el-row>
                     <el-col style="borderLeft:8px solid #14a53b;marginRight:5px;marginBottom:10px" :span="20">
-                        <div >
+                        <div>
                             <h2>相关新闻</h2><br>
                             <span>RELATED REPORT</span>
                         </div>
