@@ -146,7 +146,7 @@ var rule;
         formss:{
           name: '',
           id:'',
-          address:'',
+          avadar:'',
           qianming:'',
           pass: '',
           email: '',
@@ -155,7 +155,7 @@ var rule;
         dengForm: {
           name: '',
           id:'',
-          address:'',
+          avadar:'',
           qianming:'',
           pass: '',
           email: '',
@@ -166,7 +166,7 @@ var rule;
         zhuForm:{
           name: '',
           id:'',
-          address:'',
+          avadar:'',
           qianming:'',
           pass: '',
           email: '',
@@ -247,8 +247,8 @@ var rule;
         this.$store.commit("madeShow",true);
         this.$store.commit("changeName",this.formss.name);
         this.$store.commit("changeId",this.formss.id);
-        this.$store.commit("changeAddress",this.formss.address);
-        this.$store.commit("changeqianming",this.formss.qianming);
+        this.$store.commit("changeAvatar",this.formss.avadar);
+        this.$store.commit("changeuser_description",this.formss.qianming);
         this.$store.commit("getEmail",this.formss.email);
         this.$store.commit("changePass",this.formss.pass);
         this.$store.commit("changerealname",this.formss.realname);

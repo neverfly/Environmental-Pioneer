@@ -167,7 +167,7 @@ export default {
         this.$store.commit("madeShow",false);
         this.$store.commit("changeName","");
         this.$store.commit("changeId","");
-        this.$store.commit("changeAddress","");
+        this.$store.commit("changeAvatar","");
         this.$store.commit("changeuser_description","");
         this.$store.commit("getEmail","");
         this.$store.commit("changePass","");

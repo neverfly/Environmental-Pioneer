@@ -203,9 +203,14 @@ export default {
                         // 错误改变背景颜色
                         this.items[i].flag='true';
                     }
-                    this.show=true;
                 } 
                 this.show=true;
+                this.show=true;
+                    this.$notify({
+                    title: '成绩是'+this.score+"分",
+                    message: "继续努力哟",
+                    type: 'success'
+                    });
                 // 步骤条不超过3
                 if (this.active+=2 > 2) this.active=3;
         }).catch(function(){
