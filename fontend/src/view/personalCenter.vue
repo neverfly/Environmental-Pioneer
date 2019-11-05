@@ -3,34 +3,38 @@
         <navigation></navigation>
         <div class="personalCenter">
             <el-row class="demo-avatar demo-basic">
-                <el-col :lg={span:12} :md="16">
+                <el-col :lg="{span:12,offset:4}" :md="{span:4}">
                     <div class="demo-basic--circle">
                         <div class="block">
-                        <el-avatar :size="100" :src="touxiang"></el-avatar>
+                            <el-avatar :size="100" :src="form.avatar"></el-avatar>
                         </div>
                     </div>
                 </el-col>
+                <el-col :lg="{span:5,pull:9}" :md="{span:10,offset:3}" style="marginTop:20px">
+                    <el-upload
+                        class="avatar-uploader"
+                        action="http://localhost:8080/api/userViewSet"
+                        :show-file-list="false"
+                        :on-success="handleAvatarSuccess"
+                        :before-upload="beforeAvatarUpload">
+                        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
+                </el-col>
+                <el-col :lg="{span:20,offset:4}" :md="{span:24}">
+                    <el-form ref="form" :model="form" label-width="80px" style="maxWidth:800px">
+                        <div class="info">
+                            <span>ID:</span><span>{{this.$store.state.id}}</span><br><br>
+                            <span>昵称:</span><el-input v-model="form.name" :placeholder="this.$store.state.name" style="maxWidth:400px"></el-input><br><br>
+                            <span>邮箱:</span><el-input v-model="form.email" :placeholder="this.$store.state.email" style="maxWidth:400px"></el-input><br><br>
+                            <span>姓名:</span><el-input v-model="form.realname" :placeholder="this.$store.state.realname" style="maxWidth:400px"></el-input><br><br>
+                            <span>简介:</span><el-input v-model="form.user_description" :placeholder="this.$store.state.user_description" style="maxWidth:400px"></el-input>
+                        </div><br>
+                    </el-form>
+                    <el-button :plain="true" @click="open2" style="marginBottom:50px">保存修改</el-button>
+                </el-col>
             </el-row>
-            <el-form ref="form" :model="form" label-width="80px" style="maxWidth:800px">
-                <div>
-                    <p><span>ID: </span><span>{{this.$store.state.id}}</span></p>
-                    <p><span>昵称：</span>{{this.$store.state.name}}<span></span></p>
-                    <p><span>绑定邮箱: </span>{{this.$store.state.email}}<span></span></p>
-                    <p><span>姓名：</span>{{this.$store.state.realname}}<span></span></p>
-                </div>
-                <p>
-                    <span>性别：</span>
-                        <el-radio v-model="form.gender" label="1">男</el-radio>
-                        <el-radio v-model="form.gender" label="2">女</el-radio>
-                </p>
-                <el-form-item label="详细地址" class="title">
-                    <el-input v-model="form.address"></el-input>
-                </el-form-item>
-                <el-form-item label="个性签名" class="title">
-                    <el-input v-model="form.qianming"></el-input>
-                </el-form-item>
-            </el-form>
-            <el-button :plain="true" @click="open2" style="marginBottom:50px">保存修改</el-button>
+            
         </div>
         <footers></footers>
     </div>
@@ -46,11 +50,11 @@ export default {
             form: {
                 id: '',
                 realname:'',
-                phone: '',
                 name: '',
-                gender:'',
-                address: '',
-                qianming:'',
+                avtar: '',
+                user_description:'',
+                avartar:'',
+                email: ''
             },
             touxiang,
             showImg:false,
@@ -71,18 +75,18 @@ export default {
             }
         },
         getuserIn(){
-            axios.post("http://localhost:8080/goods/goodAll",{
+            axios.get("http://localhost:8080/api/UserViewSet",{
             params: {
                 token:localStorage.getItem("token")
             }
             })
             .then((res)=>{
+                console.log("211e");
                 this.$store.commit("madeShow",true);
                 this.$store.commit("changeName",res.data.data.name);
                 this.$store.commit("changeId",res.data.data.id);
-                this.$store.commit("changeGender",res.data.data.gender);
-                this.$store.commit("changeAddress",res.data.data.address);
-                this.$store.commit("changeqianming",res.data.data.qianming);
+                this.$store.commit("changeAvatar",res.data.data.avatar);
+                this.$store.commit("changeuser_description",res.data.data.user_description);
                 this.$store.commit("getEmail",res.data.data.email);
                 this.$store.commit("changePass",res.data.data.pass);
                 this.$store.commit("changerealname",res.data.data.realname);
@@ -90,33 +94,94 @@ export default {
             })
             .catch(function(error){
                 console.log("error");
-                
             }).then(()=>{
-                console.log("111111111111111111111111111");
-                
                 console.log(this.$store);
-                
                 this.form.id=this.$store.state.id;
                 this.form.name=this.$store.state.name;
-                this.form.gender=this.$store.state.gender;
                 this.form.email=this.$store.state.email;
-                this.form.gender=this.$store.state.gender;
-                console.log(this.form.gender);
+                this.form.avatar=this.$store.state.avatar;
+                this.form.user_description=this.$store.state.user_description;
+
                 this.showImg=true;
             })
         },
         open2() {
-            this.$message({
-            message: '保存成功',
-            type: 'success'
-            });
+            var self = this;
+            //  axios.post("http://localhost:8080/api/User/viewSet",{
+            //     token:localStorage.getItem("token"),
+            //     id:this.form.id,
+            //     name:this.form.name,
+            //     e_mail:this.form.email,
+            //     real_name:this.realname,
+            //     avartar:null,
+            //     user_description:this.form.user_description
+            // })
+            axios({
+                method: 'put',
+                url: 'http://localhost:8080/api/UserViewSet',
+                data: {
+                    "username":self.form.name,
+                    "e_mail":self.form.email,
+                    "real_name": self.form.realname,
+                    "avatar": self.form.isStart,
+                    "user_description":self.form.user_description,
+ 
+                }
+            })
+            .then((res)=>{
+                console.log("asdasdasdkjh");
+                
+                console.log(res);
+                
+                this.$store.commit("madeShow",true);
+                this.$store.commit("changeName",res.data.data.name);
+                this.$store.commit("changeId",res.data.data.id);
+                this.$store.commit("changeAvatar",res.data.data.avatar);
+                this.$store.commit("changeuser_description",res.data.data.user_description);
+                this.$store.commit("getEmail",res.data.data.email);
+                this.$store.commit("changePass",res.data.data.pass);
+                this.$store.commit("changerealname",res.data.data.realname);
+                this.$store.commit("getToken",res.data.data.token);
+                this.$message({
+                    message: '保存成功',
+                    type: 'success'
+                });
+            })
+            .catch(function(error){
+                console.log("error");
+                
+            }).then(()=>{
+                console.log("s1232312");
+                
+                console.log(this.$store);
+                this.form.id=this.$store.state.id;
+                this.form.name=this.$store.state.name;
+                this.form.email=this.$store.state.email;
+                this.form.avatar=this.$store.state.avatar;
+                console.log(this.$store.state.avatar);
+
+                this.showImg=true;
+            })
+            
             console.log(this.form);
             this.showImg=true;
             
         },
         handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      }
+            this.imageUrl = URL.createObjectURL(file.raw);
+        },
+        beforeAvatarUpload(file) {
+            const isJPG = file.type === 'image/jpeg';
+            const isLt2M = file.size / 1024 / 1024 < 2;
+
+            if (!isJPG) {
+            this.$message.error('上传头像图片只能是 JPG 格式!');
+            }
+            if (!isLt2M) {
+            this.$message.error('上传头像图片大小不能超过 2MB!');
+            }
+            return isJPG && isLt2M;
+        }
     }
 }
 </script>
@@ -128,6 +193,7 @@ export default {
             background-image: linear-gradient(#dff5d6 90%, #98e778 100%);
             width: 60%;
         }
+        
     }
     @media (max-width:1200px) {
         .personalCenter{
@@ -135,14 +201,16 @@ export default {
             width: 100%;
         }
     }
-    @media (min-width:1200px) {
-        p{
+    .info span{
+        line-height: 60px;
+        font-size: 25px;
+    }
+    p{
         font-size: 20px;
         margin-left: calc(30% - 40px);
         height: 40px;
         line-height: 40px; 
         }
-    }
     .el-form-item__label{
         color: #98e778;
         font-size: 20px;
@@ -152,15 +220,14 @@ export default {
     }
     .el-button{
         background-color: #ffffff;
-        margin-left: calc(40% - 50px);
+        margin-left: calc(30% - 50px);
     }
     @media(min-width:1200px) {
         .el-form-item{
-            margin-left: calc(30% - 40px);
+            width:500px;
         }
     }
     .demo-basic--circle{
-        margin-left: calc(40% - 40px);
         margin-top: 20px;
         margin-bottom: 20px;
     }
@@ -190,5 +257,8 @@ export default {
     }
     .el-input__inner{
         border-radius:5px 5px 5px 5px;
+    }
+    .el-form-item__label{
+        font-size: 14px;
     }
 </style>

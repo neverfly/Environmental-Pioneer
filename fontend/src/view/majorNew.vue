@@ -20,7 +20,7 @@
                     <h1 style="color:#14a53b;float:left">我要评论</h1>
                     <el-form>
                         <el-form-item>
-                            <el-input type="textarea" v-model="form" rows="10" style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)"></el-input>
+                            <el-input type="textarea" v-model="form"  runat="server" cols="85" rows="10" style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)"></el-input>
                         </el-form-item>
                         <el-form-item style="float:right">
                             <el-button type="primary" @click="input" class="tijiao">提交</el-button>
@@ -28,24 +28,27 @@
                     </el-form>
                 </el-col>
                 <el-col :lg="{span:16,offset:4}" :md="{span:20,offset:2}">
-                    <div class="demo-basic--circle" v-for="item in show" :key="item.name">
-                        <el-divider></el-divider>
-                        <div class="block"><el-avatar :size="40" src="circleUrl" style="float:left"></el-avatar></div>
-                        <span style="float:left;lineHeight:40px;paddingLeft:30px;fontSize:30px">{{item.name}}</span><br><br>
-                        <p style="fontSize:25px"><b>{{item.content}}</b></p>
-                        <p style="paddingTop:20px">{{item.time}}</p>
-                    </div>
-                    <div class="block" style="float:right">
-                        <el-pagination
-                        background
-                        @size-change="handleSizeChange"
-                        @current-change="handleCurrentChange"
-                        :current-page="currentPage4"
-                        :page-sizes="[100, 200, 300, 400]"
-                        :page-size="100"
-                        layout="total, sizes, prev, pager, next, jumper"
-                        :total="400">
-                        </el-pagination>
+                    <p v-if="pinglun.length==0" style="textAlign:center">暂无评论，我来发表第一篇评论！</p>
+                    <div v-else>
+                        <div class="demo-basic--circle" v-for="item in showPinglun" :key="item.name">
+                            <el-divider></el-divider>
+                            <div class="block"><el-avatar :size="40" :src="item.img" style="float:left"></el-avatar></div>
+                            <span style="float:left;lineHeight:40px;paddingLeft:30px;fontSize:30px">{{item.name}}</span><br><br>
+                            <p style="fontSize:23px;marginTop:15px">{{item.content}}</p>
+                            <p style="paddingTop:20px">{{item.time}}</p>
+                        </div>
+                        <div class="block" style="float:right">
+                            <el-pagination
+                            background
+                            @size-change="handleSizeChange"
+                            @current-change="handleCurrentChange"
+                            :current-page="currentPage4"
+                            :page-sizes="[1, 2, 3, 4]"
+                            :page-size="1"
+                            layout="total, sizes, prev, pager, next, jumper"
+                            :total="tiaoshu">
+                            </el-pagination>
+                        </div>
                     </div>
                 </el-col>
                 
@@ -55,6 +58,7 @@
     </div>
 </template>
 <script>
+import vue from 'vue'
 import axios from 'axios'
 export default {
     name: 'majorNew',
@@ -73,49 +77,90 @@ export default {
             currentPage3: 5,
             currentPage4: 1,
             form: '',
-            show:[
+            tiaoshu:'',
+            showPinglun:[
                 {
                     img: '',
                     name:'',
                     content:'',
-                    time:''
+                    time:'',
                 },{
                     img: '',
                     name:'',
                     content:'',
-                    time:''
+                    time:'',
                 },{
                     img: '',
                     name:'',
                     content:'',
-                    time:''
-                }
+                    time:'',
+                },
             ],
             pinglun:[
                 {
-                    img: '',
+                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
                     name:'1sss',
-                    content:'1111111111111111111',
-                    time:'2019-10-24'
+                    content:'低者物取。回系色去决关回理周结就往六风同还通也响完情到管风',
+                    time:'2019-10-24',
                 },{
-                    img: '',
+                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
                     name:'2sss',
-                    content:'1111111111111111111',
+                    content:'教去先究又保。局党更小半他青准候没反方响结应况则。识没参毛海车战形器自长你转群资就。',
                     time:'2019-10-24'
                 },{
-                    img: '',
+                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
                     name:'3sss',
-                    content:'1111111111111111111',
+                    content:'光养名。果众压学专采油住民八养还常联精际根。路干入',
                     time:'2019-10-24'
                 },{
-                    img: '',
+                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
                     name:'4sss',
-                    content:'1111111111111111111',
+                    content:'合得须济造。七手看展转该安率美年以把称。记志装并部快米满持始究思',
                     time:'2019-10-24'
                 },{
-                    img: '',
+                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
                     name:'5sss',
-                    content:'1111111111111111111',
+                    content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
+                    time:'2019-10-24'
+                },{
+                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    name:'6sss',
+                    content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
+                    time:'2019-10-24'
+                },{
+                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    name:'7sss',
+                    content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
+                    time:'2019-10-24'
+                },{
+                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    name:'8sss',
+                    content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
+                    time:'2019-10-24'
+                },{
+                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    name:'9sss',
+                    content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
+                    time:'2019-10-24'
+                },{
+                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    name:'10sss',
+                    content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
+                    time:'2019-10-24'
+                },{
+                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    name:'11sss',
+                    content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
+                    time:'2019-10-24'
+                },{
+                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    name:'12sss',
+                    content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
+                    time:'2019-10-24'
+                },{
+                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    name:'12sss',
+                    content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
                     time:'2019-10-24'
                 }
             ]
@@ -124,6 +169,11 @@ export default {
     },
     created() {
         this.getArticle();
+        for(var i=0;i<3;i++){
+            this.showPinglun[i]=this.pinglun[i];
+        }
+        //条数
+        this.tiaoshu=parseInt(this.pinglun.length/3);
     },
     methods:{
         getArticle(){
@@ -141,7 +191,6 @@ export default {
             })
             .catch(function(error){
                 console.log("error");
-                
             })
         },
         input(){
@@ -156,18 +205,20 @@ export default {
             var page= `${val}`;
             console.log(this.show[0]);
             console.log(this.pinglun[0]);
-            
             for(var i=0;i<3;i++){
-                this.show[i]=this.pinglun[(page-1)*3+i];
+                this.showPinglun[i]=this.pinglun[(page-1)*3+i];
+                console.log("少时诵诗书所");
+                console.log(this.showPinglun[i]);
             }
         },
+        //点击切换的数字
         handleCurrentChange(val) {
             console.log(`当前页: ${val}`);
-            console.log(this.show[0]);
-
+            console.log("pinglunshow");
             var page= `${val}`;
+            console.log(page);
             for(var i=0;i<3;i++){
-                this.show[i]=this.pinglun[(page-1)*3+i];
+                vue.set(this.showPinglun,i,this.pinglun[(page-1)*3+i])
             }
         }
     }

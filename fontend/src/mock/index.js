@@ -1,16 +1,19 @@
 import Mock from 'mockjs'
+import { Avatar } from 'element-ui'
 //token
 let token=Mock.mock({
     right:true,
     token:'XXX'
 })
 let token2=Mock.mock({
-    right:true,
-    token:'YYY'
+    msg:"Succeeded",
+    token:'XXX'
 })
-//用户名
+//用户信息
 let userInfo=Mock.mock({
-    right:true,
+    count:3,
+    next:null,
+    previous:null,
     data:{
         name: 'mars',
         pass: '111111',
@@ -18,9 +21,9 @@ let userInfo=Mock.mock({
         token: false,
         id:'1559830979',
         address:'五道口职业技术学院',
-        qianming: "一位靓仔路过",
-        gender:'1',
-        realname:'XXX'
+        user_description: "一位靓仔路过",
+        realname:'XXX',
+        avatar:'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683'
     }
 })
 let creatUserInfo=Mock.mock({
@@ -32,8 +35,7 @@ let creatUserInfo=Mock.mock({
         token: false,
         id:'1559830979',
         address:'五道口职业技术学院',
-        qianming: "一位靓仔路过",
-        gender:'1',
+        user_description: "一位靓仔路过",
         realname:'XXX'
     }
 })
@@ -105,20 +107,35 @@ Mock.mock(/login\/token/,'post',(option)=>{
     return token;
 });
 // 注册获取token
-Mock.mock(/login\/zhu/,'post',(option)=>{
+Mock.mock(/register/,'post',(option)=>{
     console.log("getzhucetoken");
+    console.log(option);
     return token2;
 });
 // 用户名
-Mock.mock(/goods\/goodAll/,'post',(option)=>{
+Mock.mock(/api\/UserViewSet/,'get',(option)=>{
     console.log("用户名token验证");
-    console.log(option.body);
+    console.log(option);
+    return userInfo;
+});
+Mock.mock(/api\/UserViewSet/,'post',(option)=>{
     if('XXX'==token.token){
-        return userInfo
+        console.log("1234567890");
+        return userInfo;
     }else{
         return "error";
     }
+}); 
+//修改用户信息
+Mock.mock(/api\/UserViewSet/,'put',(option)=>{
+    console.log("修改个人信息");
+    console.log(option.body);
+    console.log(userInfo.data);
+    
+    // userInfo.name=option.body;
+    return userInfo;
 });
+
 //文章
 Mock.mock(/new\/article/,'post',()=>{
     return article

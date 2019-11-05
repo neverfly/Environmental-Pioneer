@@ -3,7 +3,7 @@
         <div v-for="item in items" :key="item.title">
             <p class="title">{{item.title}}</p>
             <p class="content">{{item.content}}</p>
-            <p><a :href="item.href" class="more">了解详情></a></p>
+            <router-link to="/majorNew" class="more"><p>了解详情></p></router-link>
         </div>
     </div>
 </template>

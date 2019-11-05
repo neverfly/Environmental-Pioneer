@@ -2,7 +2,7 @@
     <div>
         <!-- carousel（轮播图） -->
         <el-row class="padTop">
-            <el-col :lg="22" :offset="1" class="hidden-md-and-down">
+            <el-col :lg="{span:22,offset:1}" class="hidden-md-and-down">
                 <el-carousel :interval="4000" type="card" height="400px" class="mainBanner" arrow="always">
                     <el-carousel-item v-for="item in items" class="mainBanner" :key="item.name">
                         <router-link :to="item.href"><img class="carousel" :src="item.img" alt=""></router-link>

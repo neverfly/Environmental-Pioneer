@@ -167,9 +167,8 @@ export default {
         this.$store.commit("madeShow",false);
         this.$store.commit("changeName","");
         this.$store.commit("changeId","");
-        this.$store.commit("changeGender","");
         this.$store.commit("changeAddress","");
-        this.$store.commit("changeqianming","");
+        this.$store.commit("changeuser_description","");
         this.$store.commit("getEmail","");
         this.$store.commit("changePass","");
         this.$store.commit("changerealname","");
@@ -181,9 +180,8 @@ export default {
       })
     },
     getuserIn(){
-      console.log("sssss");
-      console.log(localStorage.getItem("token"));
-      axios.post("http://localhost:8080/goods/goodAll",{
+      console.log("nav getuserIn");
+      axios.get("http://localhost:8080/api/UserViewSet",{
         params: {
           token:localStorage.getItem("token")
         }
@@ -193,8 +191,8 @@ export default {
         this.$store.state.name=res.data.data.name;
         this.$store.state.pass=res.data.data.pass;
         this.shows=true;
-        console.log(this.show);
-        
+        console.log("kdjhaskdhakjsdjhkj");
+        console.log(this.shows);
       })
       .catch(function(error){
           console.log("error");

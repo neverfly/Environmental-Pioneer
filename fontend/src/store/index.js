@@ -50,14 +50,13 @@ const actions={
 const store = new Vuex.Store({
     state:{
         show: false,
-        name: 'sss',
+        name: '',
         id:'',
         realname:'',
-        gender:'1',
-        address:'',
-        qianming:'',
-        pass: '1',
-        email: '1',
+        avatar:'',
+        user_description:'',
+        pass: '',
+        email: '',
         token:''
     },
     mutations:{
@@ -70,17 +69,14 @@ const store = new Vuex.Store({
         changeId(state,newName){
             state.id=newName;
         },
-        changeGender(state,newName){
-            state.gender=newName;
-        },
         changerealname(state,newName){
             state.realname=newName;
         },
-        changeAddress(state,newName){
-            state.address=newName;
+        changeAvatar(state,newName){
+            state.avatar=newName;
         },
-        changeqianming(state,newName){
-            state.qianming=newName;
+        changeuser_description(state,newName){
+            state.user_description=newName;
         },
         changePass(state,newName){
             state.pass=newName;

@@ -1,9 +1,9 @@
 <template>
     <div>
         <el-row v-for="item in items" :key="item.title" :gutter="20">
-            <el-col :span="4"><br><img :src="imgNew" alt="" class="lajiNew"></el-col>
-            <el-col :span="20"><br>
-                <router-link :to="item.link">
+            <el-col :lg="{span:4}"><br><img :src="imgNew" alt="" class="lajiNew"></el-col>
+            <el-col :lg="{span:20}"><br>
+                <router-link :to="item.link" @click="toArticle">
                     <h2>{{item.title}}</h2><br>
                     <p>{{item.content}}</p>
                     <span>{{item.date}}</span><span style="float:right">浏览量：{{item.liulan}}</span>
@@ -58,6 +58,9 @@ export default {
                 console.log("error");
                 
             })
+        },
+        toArticle(){
+            
         }
     },
 }

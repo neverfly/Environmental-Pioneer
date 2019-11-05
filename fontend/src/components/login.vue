@@ -146,7 +146,6 @@ var rule;
         formss:{
           name: '',
           id:'',
-          gender:'',
           address:'',
           qianming:'',
           pass: '',
@@ -156,7 +155,6 @@ var rule;
         dengForm: {
           name: '',
           id:'',
-          gender:'',
           address:'',
           qianming:'',
           pass: '',
@@ -168,7 +166,6 @@ var rule;
         zhuForm:{
           name: '',
           id:'',
-          gender:'',
           address:'',
           qianming:'',
           pass: '',
@@ -250,7 +247,6 @@ var rule;
         this.$store.commit("madeShow",true);
         this.$store.commit("changeName",this.formss.name);
         this.$store.commit("changeId",this.formss.id);
-        this.$store.commit("changeGender",this.formss.gender);
         this.$store.commit("changeAddress",this.formss.address);
         this.$store.commit("changeqianming",this.formss.qianming);
         this.$store.commit("getEmail",this.formss.email);
@@ -305,6 +301,8 @@ var rule;
             }
         }).then((res)=>{
           console.log("returnToken");
+          console.log(res.data.token);
+          
           if(res.data.right){
             localStorage.setItem("token",res.data.token);  
             return res.data.token;
@@ -314,50 +312,12 @@ var rule;
         }).then(()=>{
           this.getuserIn();
         })
-      },
-      getLoginToekn(){
-        axios.post('http://localhost:8080/login/zhu', {
-            params: {
-                name: this.zhuForm.name,
-                pass: this.zhuForm.pass2,
-                email: this.zhuForm.email,
-            }
-        }).then((res)=>{
-          console.log("getLoginToekn");
-          if(res.data.right){
-            localStorage.setItem("token",res.data.token);  
-            return res.data.token;
-          }else{
-            return 'error'
-          }
-        }).then(()=>{
-          this.getuserIn();
-        })
-      },
-      loginGetToken(){
-        axios.post('http://localhost:8080/login/zhu', {
-            params: {
-                name: this.zhuForm.name,
-                pass: this.zhuForm.pass1,
-                email: this.zhuForm.emial,
-
-            }
-        }).then((res)=>{
-          console.log("returnToken");
-          if(res.data.right){
-            localStorage.setItem("token",res.data.token);  
-            return res.data.token;
-          }else{
-            return 'error'
-          }
-        }).then(()=>{
-          this.getuserIn();
-        })
-      },
-      //根据token获取get
+      },//根据token获取get
       getuserIn(){
-        axios.post("http://localhost:8080/goods/goodAll",{
-            token: localStorage.getItem("token")
+        axios.get("http://localhost:8080/api/UserViewSet",{
+            params:{
+              token: localStorage.getItem("token")
+            }
         })
         .then((res)=>{
           console.log("getuserIn");
@@ -366,7 +326,6 @@ var rule;
             this.formss.token=res.data.data.token;
             this.formss.realname=res.data.data.realname;
             this.formss.id=res.data.data.id;
-            this.formss.gender=res.data.data.gender;
             this.formss.address=res.data.data.address;
             this.formss.qianming=res.data.data.qianming;
             this.formss.email=res.data.data.email;
@@ -377,7 +336,46 @@ var rule;
         }).then(()=>{
           this.afterGetUser(rule);
         })
+      },
+      //注册
+      getLoginToekn(){
+        axios.post('http://localhost:8080/register', {
+          username: this.zhuForm.name,
+          e_mail: this.zhuForm.email,
+          password: this.zhuForm.pass2,
+        }).then((res)=>{
+          if(res.data.msg=="Succeeded"){
+            //localStorage.setItem("token",res.data.token);  
+            //return res.data.token;
+            this.$message({
+              message: '恭喜你,注册成功',
+              type: 'success'
+            });
+          this.loginGetToken();
+          }else{
+            this.$message.error(res.data.msg);
+          }
+        })
+      },
+      loginGetToken(){
+        axios.post('http://localhost:8080/register', {
+          name: this.zhuForm.name,
+          pass: this.zhuForm.pass1,
+        }).then((res)=>{
+          console.log("returnToken");
+          console.log(res.data.token);
+          
+          if(res.data.msg=="Succeeded"){
+            localStorage.setItem("token",res.data.token);  
+          }else{
+            this.$message.error(res.data.msg);
+            return;
+          }
+        }).then(()=>{
+          this.getuserIn();
+        })
       }
+      
     }
   }
 </script>
