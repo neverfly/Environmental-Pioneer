@@ -3,7 +3,8 @@
         <navigation></navigation>
         <div class="article">
             <el-row>
-                <el-col :lg={span:16,offset:4}  :md="{span:20,offset:2}">
+                <cebian></cebian>
+                <el-col :lg="{span:18,offset:3}"  :md="{span:20,offset:2}">
                     <h1>{{article.title}}</h1>
                     <el-row style="marginBottom:20px">
                         <el-col :span="6"><span>时间: {{article.date}}</span></el-col>
@@ -11,16 +12,19 @@
                         <el-col :span="6"><span>编辑：{{article.writer}}</span></el-col>
                         <el-col :span="6"><span>阅读量：{{article.readingQua}}</span></el-col>
                     </el-row>
-                    <div class="content">
-                        <p>{{article.content}}</p>
-                        <p><small>链接：{{article.src}}</small></p>
+                    <div>
+                        <div class="content">{{article.content}}</div>
+                        <p class="link">链接：{{article.src}}</p>
                     </div>
                 </el-col>
                 <el-col :lg="{span:16,offset:4}" :md="{span:20,offset:2}">
                     <h1 style="color:#14a53b;float:left">我要评论</h1>
                     <el-form>
                         <el-form-item>
-                            <el-input type="textarea" v-model="form"  runat="server" cols="85" rows="10" style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)"></el-input>
+                            <el-input type="textarea" v-model="form" rows="6" resize="none" style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);fontSize:25px"
+                            maxlength="50"
+                            show-word-limit
+                            ></el-input>
                         </el-form-item>
                         <el-form-item style="float:right">
                             <el-button type="primary" @click="input" class="tijiao">提交</el-button>
@@ -42,10 +46,10 @@
                             background
                             @size-change="handleSizeChange"
                             @current-change="handleCurrentChange"
-                            :current-page="currentPage4"
+                            :current-page.sync="currentPage1"
                             :page-sizes="[1, 2, 3, 4]"
                             :page-size="1"
-                            layout="total, sizes, prev, pager, next, jumper"
+                            layout="prev, pager, next, jumper"
                             :total="tiaoshu">
                             </el-pagination>
                         </div>
@@ -60,6 +64,7 @@
 <script>
 import vue from 'vue'
 import axios from 'axios'
+import cebian from '../components/cebian'
 export default {
     name: 'majorNew',
     data() {
@@ -167,6 +172,9 @@ export default {
 
         }
     },
+    components:{
+        cebian
+    },
     created() {
         this.getArticle();
         for(var i=0;i<3;i++){
@@ -244,10 +252,19 @@ export default {
         font-weight: 300;
         color: #000000;
     }
-    .content p{
-        font-weight: 900;
-        line-height: 30px;
-        padding:0 10px 0 10px; 
+    .content{
+        font-weight: 500;
+        line-height: 35px;
+        padding:0 10px 0 10px;
+        font-size:20px;
+        text-indent: 40px;
+        text-align: left; 
+        color: #000000;
+    }
+    .link{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: #14A53B;
     }
     .tijiao span{
         color: #ffffff !important;

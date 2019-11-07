@@ -14,7 +14,18 @@
                 </li>
             </ul>
             <el-menu router class="el-menu-demo" mode="horizontal">
-                <el-menu-item index="/game"><h1 class="textCenter bgColor">立即参赛</h1></el-menu-item></el-menu>
+                <el-menu-item @click="isLogin"><h1 class="textCenter bgColor">立即参赛</h1></el-menu-item></el-menu>
+                <el-dialog
+                title="提示"
+                :visible.sync="dialogVisible"
+                width="30%"
+                :before-close="handleClose">
+                <span>参赛需先登录,是否登录?</span>
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="dialogVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="dialogVisible = false;toLogin()">确 定</el-button>
+                </span>
+                </el-dialog>
         </el-row>
     </div>
 </template>
@@ -24,6 +35,7 @@ export default {
     name: 'rankingList',
     data() {
         return {
+             dialogVisible: false,
             items:[
                 {
                     num: 1,
@@ -93,6 +105,23 @@ export default {
             .catch(function(error){
                 console.log("error");
             })
+        },
+        handleClose(done) {
+        this.$confirm('确定退出？')
+          .then(_ => {
+              done();
+          })
+          .catch(_ => {});
+        },
+        isLogin(){
+            if(localStorage.getItem("token")!=null){
+                this.$router.push("/game");
+            }else{
+                this.dialogVisible=true;
+            }
+        },
+        toLogin(){
+            this.$router.push('/login');
         }
     }
 }

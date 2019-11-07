@@ -1,7 +1,7 @@
 <template>
     <div class="bgColor">
       <!-- 注册 -->
-      <div class="content hidden-md-and-down">
+      <div class="content hidden-md-and-down" style="background: linear-gradient(#dff5d6 90%, #98e778 100%)">
         <img :src="logo" alt="" class="logo"/>
         <router-link to="/main" class="backTo"><i class="el-icon-s-promotion" style="fontSize:30px;color:#3fffb8;">&nbsp;</i><span>回到首页</span></router-link>
         <el-form :model="zhuForm" status-icon :rules="rules" ref="zhuForm" label-width="70px" class="demo-ruleForm center" v-show="!showss" style="max-Width:400px;min-Width:10%;marginTop:0 auto;width:500px">
@@ -85,9 +85,7 @@
 <script>
 import axios from 'axios'
 import logo from '@/assets/images/index_03.png'
-
 var rule;
-
   export default {
     data() {
       //注册密码输入
@@ -381,7 +379,7 @@ var rule;
 </script>
 <style scoped>
     .bgColor{
-      background: linear-gradient(to bottom,#bce9b3 50%,#72f766  100%);
+      background-color: #ffffff;
       width: 100%;
       margin: 0 auto;
       padding-top: 10%;
@@ -400,7 +398,6 @@ var rule;
       width: 40%;
       margin: 0 auto;
       background-color: #fff;
-      border-radius: 5%;
       padding: 20px;
       padding-top:40px; 
       position: relative;
@@ -416,5 +413,9 @@ var rule;
       text-align: center;
       font-weight: 800;
       color: #3fffb8;
+    }
+    .el-button--primary{
+      background-color: #b5f0ab;
+      border-color: #b5f0ab;
     }
 </style>

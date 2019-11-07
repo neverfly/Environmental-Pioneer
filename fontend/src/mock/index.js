@@ -20,10 +20,9 @@ let userInfo=Mock.mock({
         email: '1559830979@qq.com',
         token: false,
         id:'1559830979',
-        address:'五道口职业技术学院',
         user_description: "一位靓仔路过",
         realname:'XXX',
-        avatar:'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683'
+        avatar:'http://b-ssl.duitang.com/uploads/item/201806/07/20180607185957_fjrFt.thumb.700_0.jpeg'
     }
 })
 let creatUserInfo=Mock.mock({
@@ -47,7 +46,7 @@ let article=Mock.mock({
         date: Mock.Random.date('yyyy-MM-dd'),
         writer: Mock.Random.cword(4),
         source: Mock.Random.cword(4),
-        content: Mock.Random.cparagraph(100,200),
+        content: Mock.Random.cparagraph(100,150),
         'readingQua': Mock.Random.integer(100,10000),
         src: Mock.Random.url('http')
     }

@@ -17,7 +17,7 @@
                 <el-radio v-model="item.choice" label="2">{{item.choice2}}。</el-radio><br/>
                 <el-radio v-model="item.choice" label="3">{{item.choice3}}。</el-radio><br/>
                 <el-radio v-model="item.choice" label="4">{{item.choice4}}。</el-radio>
-                <p v-if="show">正确答案为：{{item.daan}}</p>
+                <p v-if="show" style="fontSize:25px;fontWeight:700">正确答案为：{{item.daan}}</p>
             </el-col>
             <el-col :offset="10" :lg="4" style="marginBottom:20px">
                 <span class="jiaojuan" @click.once="tijiao">【提交】</span>
@@ -39,13 +39,13 @@
                 <p class="textCenter" style="fontSize:25px;marginTop:10px">每天分一分,生活美十分</p>
                 <p style="float:right;fontSize:25px">得分：<span style="fontSize:35px">{{score}}</span></p>
             </el-col>
-            <el-col :class="{question:true,panduan:item.flag}" :span="24" v-for="(item,i) in items" :key="i">
+            <el-col :class="{question:true,panduan:item.flag}" :span="24" v-for="(item,i) in items" :key="i" style="paddingBottom:230px">
                 <p class="wenti">{{i+1}}{{item.question}}？</p>
                 <el-radio v-model="item.choice" label="1">{{item.choice1}}。</el-radio><br/>
                 <el-radio v-model="item.choice" label="2">{{item.choice2}}。</el-radio><br/>
                 <el-radio v-model="item.choice" label="3">{{item.choice3}}。</el-radio><br/>
                 <el-radio v-model="item.choice" label="4">{{item.choice4}}。</el-radio><br/>
-                <p v-if="show">正确答案为：{{item.daan}}</p>
+                <p v-if="show" style="fontSize:25px;fontWeight:600">正确答案为：{{item.daan}}</p>
             </el-col>
             <el-col :offset="3" :span="18" style="marginBottom:20px">
                 <span class="jiaojuan" @click="tijiao">【提交】</span>

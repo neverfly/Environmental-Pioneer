@@ -2,8 +2,7 @@
     <div>
         <navigation></navigation>
         <el-row>
-            <el-col :lg="5" class="hidden-md-and-down fixed"><img :src="leftImg" class="fixedL" alt=""></el-col>
-            <el-col :lg="5" class="hidden-md-and-down fixed"><img :src="rightImg" class="fixedR" alt=""></el-col>
+            <cebian></cebian>
             <el-col :offset="6" class="hidden-md-and-down" style="borderLeft:10px solid #14a53b;marginRight:5px;;paddingLeft:10px" :lg="16">
                 <div>
                     <h1 style="borderBottom:3px solid #14a53b;marginBottom:15px">疑问简答</h1><br>
@@ -17,27 +16,7 @@
                 </div>
             </el-col>
 
-            <el-col :lg="12" :offset="6" class="hidden-md-and-down" style="paddingTop:20px;borderBottom:20px;marginBottom:20px">
-                 <el-collapse v-model="activeNames" @change="handleChange">
-                    <el-collapse-item title="垃圾分类是什么？" name="1">
-                        <div class="content">垃圾分类，指按一定规定或标准将垃圾分类储存、分类投放和分类搬运，从而转变成公共资源的一系列活动的总称。分类的目的是提高垃圾的资源价值和经济价值，力争物尽其用。</div>
-                    </el-collapse-item>
-                    <el-collapse-item title="反馈 Feedback" name="2">
-                        <div class="content">控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
-                        <div class="content">页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
-                    </el-collapse-item>
-                    <el-collapse-item title="效率 Efficiency" name="3">
-                        <div class="content">简化流程：设计简洁直观的操作流程；</div>
-                        <div class="content">清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
-                        <div class="content">帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
-                    </el-collapse-item>
-                    <el-collapse-item title="可控 Controllability" name="4">
-                        <div class="content">用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
-                        <div class="content">结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
-                    </el-collapse-item>
-                </el-collapse>
-            </el-col>
-             <el-col :span="24" class="hidden-lg-and-up" style="paddingTop:20px;borderBottom:20px;marginBottom:20px">
+            <el-col :lg="{span:12,offset:6}" :md="24" class="hidden-md-and-down" style="paddingTop:20px;borderBottom:20px;marginBottom:20px">
                  <el-collapse v-model="activeNames" @change="handleChange">
                     <el-collapse-item title="垃圾分类是什么？" name="1">
                         <div class="content">垃圾分类，指按一定规定或标准将垃圾分类储存、分类投放和分类搬运，从而转变成公共资源的一系列活动的总称。分类的目的是提高垃圾的资源价值和经济价值，力争物尽其用。</div>
@@ -70,7 +49,7 @@
                     <span style="fontSize:17px">CONCEPT INSTRODUCTION</span>
                 </div>
             </el-col>
-            <el-col :lg={span:12,offset:6} class="hidden-md-and-down">
+            <el-col :lg="{span:12,offset:6}" class="hidden-md-and-down">
                 <el-tabs type="border-card">
                     <el-tab-pane label="可回收物">
                         <el-row :gutter="20" :style="{backgroundImage: 'url('+bgImg+')',width:'100%',height:'432px',backgroundSize:'cover'}">
@@ -347,21 +326,18 @@
 </template>
 <script>
 import changjianlaji from '../components/changjianlaji'
-
 import lajifenlei from '../assets/images/lajifenlei_02.png'
 import bgImg from '../assets/images/lajifenlei_03.png'
 import zuoImg from '../assets/images/lajifenlei_33.png'
 import feidianchi from '../assets/images/2_17.png'
-import leftImg from '../assets/images/1.png'
-import rightImg from '../assets/images/2.png'
+
+import cebian from '../components/cebian'
 export default {
     name: 'garbege',
     data() {
         return {
             activeNames: ['1'],
             bgImg,
-            leftImg,
-            rightImg,
             zuoImg,
             lajifenlei,
             feidianchi,
@@ -434,7 +410,6 @@ export default {
                     text: '废弃在自然界电池中的汞会慢慢从电池中溢出来，进入土壤或水源，再通过农作物进入人体，损伤人的肾脏。在微生物的作用下，无机汞可以转化成甲基汞，聚集在鱼类的身体里，人食用了这种鱼后，甲基汞会进入人的大脑细胞，使人的神经系统受到严重破坏，重者会发疯致死。著名的日本水俣病就是甲基汞所致。'
                 }
             ],
-
         }
     },
     methods: {
@@ -443,7 +418,8 @@ export default {
       }
     },
     components:{
-        changjianlaji
+        changjianlaji,
+        cebian
     }
 }
 </script>
@@ -531,17 +507,5 @@ export default {
         padding: 2.5% 2.5%;
         font-size: 12px;
         background-color: #f0f3f0;
-    }
-    .fixedL{
-        position: fixed;
-        left: 0;
-        top: 30%;
-        width: 12%;
-    }
-    .fixedR{
-        position: fixed;
-        right: 0;
-        top: 30%;
-        width: 12%;
     }
 </style>

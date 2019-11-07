@@ -9,21 +9,19 @@
                 <el-input class="search" v-model="input" placeholder="垃圾识别与分类"></el-input>
             </el-col>
             <el-col :lg="2" :md="8" :sm="8">
-                <el-button @click="searchLaji"><img :src="search" class="sou"/><span class="souText">搜索</span></el-button>
+                <el-button @click="searchLaji"><i class="el-icon-search"></i><span class="souText">搜索</span></el-button>
             </el-col>
         </el-row>
     </div>
 </template>
 <script>
 import bgimg from '@/assets/images/index_01.png'
-import search from '@/assets/images/index_07.png'
 
 export default {
     name: 'search',
     data() {
         return {
             bgimg,
-            search,
             input: ''
         }
     },

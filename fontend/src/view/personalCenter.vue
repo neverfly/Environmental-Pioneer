@@ -2,7 +2,8 @@
     <div>
         <navigation></navigation>
         <div class="personalCenter">
-            <el-row class="demo-avatar demo-basic">
+        
+            <el-row class="demo-avatar demo-basic" style="background-image: linear-gradient(#dff5d6 90%, #98e778 100%)">
                 <el-col :lg="{span:12,offset:4}" :md="{span:4}">
                     <div class="demo-basic--circle">
                         <div class="block">
@@ -10,10 +11,10 @@
                         </div>
                     </div>
                 </el-col>
-                <el-col :lg="{span:5,pull:9}" :md="{span:10,offset:3}" style="marginTop:20px">
+                <el-col :lg="{span:5,pull:12}" :md="{span:10,offset:3}" style="marginTop:20px">
                     <el-upload
                         class="avatar-uploader"
-                        action="http://localhost:8080/api/userViewSet"
+                        action="123"
                         :show-file-list="false"
                         :on-success="handleAvatarSuccess"
                         :before-upload="beforeAvatarUpload">
@@ -180,6 +181,38 @@ export default {
             if (!isLt2M) {
             this.$message.error('上传头像图片大小不能超过 2MB!');
             }
+            //校验成功上传文件
+            if(isJPG && isLt2M == true){
+            console.log(file);
+
+            //将文件转化为formdata数据上传
+            let fd = new FormData()
+            fd.append('file', file)
+            console.log(fd)
+        
+            // post上传图片
+
+            let that = this
+            
+                new Promise(function (resolve, reject) {
+                    that.axios,put('http://localhost:8080/api/userViewSet', fd, 
+                        {
+                            headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                        }).then((response) => {
+                            that.imgId = response.data.data
+                            resolve(that.imgId);
+                        }).catch((error) =>{
+                            this.$message.error('头像上传失败，请重新上传!');
+                        })
+                        }).then(function (id){
+                            that.axios.get('/file/view/'+id)
+                            .then((response) => {
+                                that.imageUrl = response.request.responseURL;
+                            })
+                        })         
+                }
             return isJPG && isLt2M;
         }
     }
@@ -190,14 +223,14 @@ export default {
         .personalCenter{
             margin-left: 20%;
             margin-right: 20%;
-            background-image: linear-gradient(#dff5d6 90%, #98e778 100%);
+            background-color: #ffffff;
             width: 60%;
         }
         
     }
     @media (max-width:1200px) {
         .personalCenter{
-            background-image: linear-gradient(#dff5d6 90%, #98e778 100%);
+            background-color: #ffffff;
             width: 100%;
         }
     }

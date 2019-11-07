@@ -2,7 +2,7 @@
     <div style="width:95%;paddingRight:5%">
         <div v-for="item in items" :key="item.title">
             <p class="title">{{item.title}}</p>
-            <p class="content">{{item.content}}</p>
+            <p class="content" style="textIndent:30px">{{item.content}}</p>
             <router-link to="/majorNew" class="more"><p>了解详情></p></router-link>
         </div>
     </div>

@@ -86,7 +86,7 @@
                 <el-input class="search" v-model="input" placeholder="垃圾识别与分类"></el-input>
             </el-col>
             <el-col :lg="2" class="hidden-md-and-down">
-                <el-button @click="searchLaji"><img :src="search" class="sou"/><span class="souText">搜索</span></el-button>
+                <el-button @click="searchLaji"><i class="el-icon-search"></i><span class="souText">搜索</span></el-button>
             </el-col>
             <!-- 搜索移动端 -->
             <el-col :span="15" class="hidden-lg-and-up" :offset="1">
@@ -107,7 +107,6 @@ import people from '@/assets/images/_0.png'
 import logo from '@/assets/images/index_03.png'
 import login from '@/assets/images/index_06.png'
 import bgimg from '@/assets/images/index_01.png'
-import search from '@/assets/images/index_07.png'
 import logoSmall from '@/assets/images/logoSmall.png'
 
 import axios from 'axios'
@@ -124,7 +123,6 @@ export default {
       people,
       logo,
       login,
-      search,
       logoSmall,
       input: '',
       shows: false,
@@ -316,6 +314,6 @@ export default {
   float: right;
 }
 .el-icon-search:before{
-  color: #14a53b;
+  color: #ffffff;
 }
 </style>
