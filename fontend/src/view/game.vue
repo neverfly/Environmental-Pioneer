@@ -1,7 +1,7 @@
 <template>
     <div>
         <navigation></navigation>
-        
+        <cebian></cebian>
         <el-row class="hidden-md-and-down">
             <el-col :lg="5" class="hidden-md-and-down fixed"><img :src="leftImg" class="fixedL" alt=""></el-col>
             <el-col :lg="5" class="hidden-md-and-down fixed"><img :src="rightImg" class="fixedR" alt=""></el-col>
@@ -67,7 +67,7 @@ import axios from 'axios'
 import rankingList from '../components/rankingList'
 import leftImg from '../assets/images/1.png'
 import rightImg from '../assets/images/2.png'
-
+import cebian from '../components/cebian'
 export default {
     name: 'game',
     data() {
@@ -173,7 +173,8 @@ export default {
         }
     },
     components:{
-        rankingList
+        rankingList,
+        cebian
     },
     beforeMount() {
         this.isLogin();

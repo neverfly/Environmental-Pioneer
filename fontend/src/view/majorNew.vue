@@ -13,7 +13,7 @@
                         <el-col :span="6"><span>阅读量：{{article.readingQua}}</span></el-col>
                     </el-row>
                     <div>
-                        <div class="content">{{article.content}}</div>
+                        <div class="content" v-html="article.content"></div>
                         <p class="link">链接：{{article.src}}</p>
                     </div>
                 </el-col>
@@ -103,67 +103,67 @@ export default {
             ],
             pinglun:[
                 {
-                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
                     name:'1sss',
                     content:'低者物取。回系色去决关回理周结就往六风同还通也响完情到管风',
                     time:'2019-10-24',
                 },{
-                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
                     name:'2sss',
                     content:'教去先究又保。局党更小半他青准候没反方响结应况则。识没参毛海车战形器自长你转群资就。',
                     time:'2019-10-24'
                 },{
-                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
                     name:'3sss',
                     content:'光养名。果众压学专采油住民八养还常联精际根。路干入',
                     time:'2019-10-24'
                 },{
-                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
                     name:'4sss',
                     content:'合得须济造。七手看展转该安率美年以把称。记志装并部快米满持始究思',
                     time:'2019-10-24'
                 },{
-                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
                     name:'5sss',
                     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
                     time:'2019-10-24'
                 },{
-                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
                     name:'6sss',
                     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
                     time:'2019-10-24'
                 },{
-                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
                     name:'7sss',
                     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
                     time:'2019-10-24'
                 },{
-                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
                     name:'8sss',
                     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
                     time:'2019-10-24'
                 },{
-                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
                     name:'9sss',
                     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
                     time:'2019-10-24'
                 },{
-                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
                     name:'10sss',
                     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
                     time:'2019-10-24'
                 },{
-                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
                     name:'11sss',
                     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
                     time:'2019-10-24'
                 },{
-                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
                     name:'12sss',
                     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
                     time:'2019-10-24'
                 },{
-                    img: 'https://profile.csdnimg.cn/F/9/3/3_weixin_43958683',
+                    img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
                     name:'12sss',
                     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
                     time:'2019-10-24'
@@ -176,7 +176,8 @@ export default {
         cebian
     },
     created() {
-        this.getArticle();
+        var aid=this.$route.params.aid;
+        this.getArticle(aid);
         for(var i=0;i<3;i++){
             this.showPinglun[i]=this.pinglun[i];
         }
@@ -184,8 +185,10 @@ export default {
         this.tiaoshu=parseInt(this.pinglun.length/3);
     },
     methods:{
-        getArticle(){
-            axios.post("http://localhost:8080/new/article")
+        getArticle(aid){
+            axios.post("http://localhost:8080/new/article",{
+                aid:aid
+            })
             .then((res)=>{
                 console.log(res);
                 
@@ -215,7 +218,6 @@ export default {
             console.log(this.pinglun[0]);
             for(var i=0;i<3;i++){
                 this.showPinglun[i]=this.pinglun[(page-1)*3+i];
-                console.log("少时诵诗书所");
                 console.log(this.showPinglun[i]);
             }
         },
@@ -252,14 +254,17 @@ export default {
         font-weight: 300;
         color: #000000;
     }
-    .content{
-        font-weight: 500;
-        line-height: 35px;
-        padding:0 10px 0 10px;
+    .content /deep/ p{
+        font-weight: 600;
+        line-height: 40px;
         font-size:20px;
         text-indent: 40px;
         text-align: left; 
         color: #000000;
+    }
+    .el-button--primary{
+        background-color: #cff9c8;
+        border-color: #cff9c8;
     }
     .link{
         margin-top: 20px;

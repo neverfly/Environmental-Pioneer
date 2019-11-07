@@ -3,7 +3,7 @@
         <!-- carousel（轮播图） -->
         <el-row class="padTop">
             <el-col :lg="{span:22,offset:1}" class="hidden-md-and-down">
-                <el-carousel :interval="4000" type="card" height="400px" class="mainBanner" arrow="always">
+                <el-carousel :interval="4000" type="card" height="450px" class="mainBanner" arrow="always">
                     <el-carousel-item v-for="item in items" class="mainBanner" :key="item.name">
                         <router-link :to="item.href"><img class="carousel" :src="item.img" alt=""></router-link>
                     </el-carousel-item>
@@ -24,8 +24,8 @@
 <script>
 import search from '../components/search'
 import competition1 from '@/assets/images/index_15_ss.jpg'
-import competition2 from '@/assets/images/index_15_ss.jpg'
-import competition3 from '@/assets/images/index_15_ss.jpg'
+import competition2 from '@/assets/images/2_14.png'
+import competition3 from '@/assets/images/2_116.png'
 
 export default {
     name: 'carousel',

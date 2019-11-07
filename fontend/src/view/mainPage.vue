@@ -68,7 +68,6 @@ import suliao from '@/assets/images/5_18.png'
 import lajiImg from '@/assets/images/2_19.png'
 import suliaoImg from '@/assets/images/2_17.png'
 
-
 import carousel from '../components/carousel'
 import rankingList from '../components/rankingList'
 import recentNews from '../components/recentNews'

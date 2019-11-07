@@ -33,7 +33,7 @@ export default new Router({
       name: "personalCenter",
       component: resolve => require(['../view/personalCenter'],resolve)
     },{
-      path:'/majorNew',
+      path:'/majorNew/:aid',
       name:'majorNew',
       component: resolve => require(['../view/majorNew'],resolve)
     },{

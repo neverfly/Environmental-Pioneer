@@ -66,6 +66,8 @@ export default {
     beforeMount(){
         this.hasToken();
         this.showImg=this.$store.state.show;
+        var aid=this.$route.params.aid;
+        alert(aid);
     },
     methods: {
         hasToken(){

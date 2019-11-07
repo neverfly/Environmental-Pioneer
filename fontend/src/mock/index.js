@@ -2,12 +2,15 @@ import Mock from 'mockjs'
 import { Avatar } from 'element-ui'
 //token
 let token=Mock.mock({
-    right:true,
+    msg:"Succeeded",
     token:'XXX'
 })
 let token2=Mock.mock({
     msg:"Succeeded",
-    token:'XXX'
+    token:'YYY'
+})
+let zhuce=Mock.mock({
+    msg:"Succeeded",
 })
 //用户信息
 let userInfo=Mock.mock({
@@ -42,11 +45,35 @@ let creatUserInfo=Mock.mock({
 let article=Mock.mock({
     code:200,
     data:{
-        'title|5-10':'标题',
+        'title|5-10':'标题1',
         date: Mock.Random.date('yyyy-MM-dd'),
         writer: Mock.Random.cword(4),
         source: Mock.Random.cword(4),
-        content: Mock.Random.cparagraph(100,150),
+        content: "<p>我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段.</p><p>我是第二段，我是第二段我是第二段我是第第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是二段我是第二段我是第二段我是第二段，我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段。</p><p>我是第我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段，我是第三段我是第三段，三段</p><p>我是最我是最后一段我是最后一段我是最后一段我，是最后一段我是最后一段我是最后一段我是最后一段我是最后一段，后一段</p>",
+        'readingQua': Mock.Random.integer(100,10000),
+        src: Mock.Random.url('http')
+    }
+})
+let article2=Mock.mock({
+    code:200,
+    data:{
+        'title|5-10':'标题2',
+        date: Mock.Random.date('yyyy-MM-dd'),
+        writer: Mock.Random.cword(4),
+        source: Mock.Random.cword(4),
+        content: "<p>我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段.</p><p>我是第二段，我是第二段我是第二段我是第第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是二段我是第二段我是第二段我是第二段，我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段。</p><p>我是第我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段，我是第三段我是第三段，三段</p><p>我是最我是最后一段我是最后一段我是最后一段我，是最后一段我是最后一段我是最后一段我是最后一段我是最后一段，后一段</p>",
+        'readingQua': Mock.Random.integer(100,10000),
+        src: Mock.Random.url('http')
+    }
+})
+let article3=Mock.mock({
+    code:200,
+    data:{
+        'title|5-10':'标题3',
+        date: Mock.Random.date('yyyy-MM-dd'),
+        writer: Mock.Random.cword(4),
+        source: Mock.Random.cword(4),
+        content: "<p>我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段,我是第一段.</p><p>我是第二段，我是第二段我是第二段我是第第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段我是二段我是第二段我是第二段我是第二段，我是第二段我是第二段我是第二段我是第二段我是第二段我是第二段。</p><p>我是第我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段我是第三段，我是第三段我是第三段，三段</p><p>我是最我是最后一段我是最后一段我是最后一段我，是最后一段我是最后一段我是最后一段我是最后一段我是最后一段，后一段</p>",
         'readingQua': Mock.Random.integer(100,10000),
         src: Mock.Random.url('http')
     }
@@ -100,21 +127,51 @@ let articleList=Mock.mock({
     let ranking=Mock.mock({
         rankList
     })
+
+// 第一步注册验证
+Mock.mock(/register/,'post',(option)=>{
+    console.log("获取注册验证的信息");
+    console.log(option);
+    return zhuce;
+});
 // 获取token
-Mock.mock(/login\/token/,'post',(option)=>{
-    console.log("getmocktoken");
+Mock.mock(/login/,'post',(option)=>{
+    console.log("申请获取token");
+    console.log(option);
+    // var obody=eval('('+option.body+')');
+    // for(var item in obody){
+    //     if(obody[item]==1){
+    //         return article;
+    //     }else if(obody[item]==2){
+    //         return article2;
+    //     }else if(obody[item]==3){
+    //         return article3;
+    //     }
+    // }
+    var obody=eval('('+option.body+')');
+    for(var item in obody){
+        if(obody[item]==1){
+            return token2;
+        }else{
+            return token;
+        }
+    }
     return token;
 });
-// 注册获取token
-Mock.mock(/register/,'post',(option)=>{
-    console.log("getzhucetoken");
-    console.log(option);
-    return token2;
-});
-// 用户名
+// 根据token获取用户名
 Mock.mock(/api\/UserViewSet/,'get',(option)=>{
     console.log("用户名token验证");
     console.log(option);
+    // var obody=eval('('+option.body+')');
+    // console.log(obody);
+    // return token2;
+    // for(var item in obody){
+    //     if(obody[item]==1){
+    //         return token2;
+    //     }else{
+    //         return token;
+    //     }
+    // }
     return userInfo;
 });
 Mock.mock(/api\/UserViewSet/,'post',(option)=>{
@@ -125,7 +182,7 @@ Mock.mock(/api\/UserViewSet/,'post',(option)=>{
         return "error";
     }
 }); 
-//修改用户信息
+//根据token修改用户信息
 Mock.mock(/api\/UserViewSet/,'put',(option)=>{
     console.log("修改个人信息");
     console.log(option.body);
@@ -135,9 +192,21 @@ Mock.mock(/api\/UserViewSet/,'put',(option)=>{
     return userInfo;
 });
 
-//文章
-Mock.mock(/new\/article/,'post',()=>{
-    return article
+//根据aid返回文章具体内容
+Mock.mock(/new\/article/,'post',(option)=>{
+    console.log("article");
+    //解析json
+    var obody=eval('('+option.body+')');
+    for(var item in obody){
+        if(obody[item]==1){
+            return article;
+        }else if(obody[item]==2){
+            return article2;
+        }else if(obody[item]==3){
+            return article3;
+        }
+    }
+    
 });
 //game
 Mock.mock(/game\/question/,'post',()=>{
