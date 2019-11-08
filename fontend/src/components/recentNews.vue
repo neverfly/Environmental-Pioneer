@@ -2,7 +2,7 @@
     <div style="width：90%;paddingLeft:5%;paddingRight:5%">
         <div class="block">
             
-            <el-carousel height="150px">
+            <el-carousel height="200px">
             <el-carousel-item v-for="item in 3" :key="item">
                 <img :src="recentNews" alt="" style="width:100%">
             </el-carousel-item>

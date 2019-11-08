@@ -39,12 +39,12 @@ export default {
                 },
                 {
                     name: "competition2",
-                    href: '#',
+                    href: '/new',
                     img: competition2
                 },
                 {
                     name: "competition3",
-                    href: '#',
+                    href: '/garbage',
                     img: competition3
                 }
             ]

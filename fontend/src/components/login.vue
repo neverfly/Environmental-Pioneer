@@ -141,15 +141,15 @@ var rule;
         logo,
         checked:false,
         showss:true,
-        formss:{
-          name: '',
-          id:'',
-          avadar:'',
-          qianming:'',
-          pass: '',
-          email: '',
-          token:''
-        },
+        // formss:{
+        //   name: '',
+        //   id:'',
+        //   avadar:'',
+        //   qianming:'',
+        //   pass: '',
+        //   email: '',
+        //   token:''
+        // },
         dengForm: {
           name: '',
           id:'',
@@ -212,30 +212,30 @@ var rule;
           this.getLoginToekn();
         }
       },
-      //登录成功
-      login1Sucess:function(){
-        this.$store.commit("madeShow",true);
-        this.$store.commit("changeName",this.formss.name);
-        this.$store.commit("changeId",this.formss.id);
-        this.$store.commit("changeAvatar",this.formss.avadar);
-        this.$store.commit("changeuser_description",this.formss.qianming);
-        this.$store.commit("getEmail",this.formss.email);
-        this.$store.commit("changePass",this.formss.pass);
-        this.$store.commit("changerealname",this.formss.realname);
-        this.$store.commit("getToken",this.formss.token);
-        sessionStorage.setItem('userName',this.dengForm.name);
-        sessionStorage.setItem('userPass',this.dengForm.pass);
-      },
+      // //登录成功
+      // login1Sucess:function(){
+      //   this.$store.commit("madeShow",true);
+      //   this.$store.commit("changeName",this.formss.name);
+      //   this.$store.commit("changeId",this.formss.id);
+      //   this.$store.commit("changeAvatar",this.formss.avadar);
+      //   this.$store.commit("changeuser_description",this.formss.qianming);
+      //   this.$store.commit("getEmail",this.formss.email);
+      //   this.$store.commit("changePass",this.formss.pass);
+      //   this.$store.commit("changerealname",this.formss.realname);
+      //   this.$store.commit("getToken",this.formss.token);
+      //   sessionStorage.setItem('userName',this.dengForm.name);
+      //   sessionStorage.setItem('userPass',this.dengForm.pass);
+      // },
       //注册成功
-      login2Sucess:function(){
-        this.$store.commit("madeShow",true);
-        this.$store.commit("changeName",this.zhuForm.name);
-        sessionStorage.setItem('userName',this.zhuForm.name);
-        sessionStorage.setItem('userPass',this.zhuForm.pass);
-        this.$store.commit("changePass",this.zhuForm.pass);
-        this.$store.commit("getToken",this.zhuForm.token);  
-        this.$store.commit("getEmail",this.zhuForm.email);    
-      },
+      // login2Sucess:function(){
+      //   this.$store.commit("madeShow",true);
+      //   this.$store.commit("changeName",this.zhuForm.name);
+      //   sessionStorage.setItem('userName',this.zhuForm.name);
+      //   sessionStorage.setItem('userPass',this.zhuForm.pass);
+      //   this.$store.commit("changePass",this.zhuForm.pass);
+      //   this.$store.commit("getToken",this.zhuForm.token);  
+      //   this.$store.commit("getEmail",this.zhuForm.email);    
+      // },
       //清空内容
       resetForm(ruleForm){
         this.$refs[ruleForm].resetFields();
@@ -263,41 +263,39 @@ var rule;
           });       
         });
       },
+      //登录获取token
       getToekn(){
         axios.post('http://localhost:8080/login', {
-            params: {
-                username: this.dengForm.name,
-                password: this.dengForm.pass1,
-            }
+          username: this.dengForm.name,
+          password: this.dengForm.pass1,
         }).then((res)=>{
           console.log("returnToken");
-          console.log(res.data.token);
-          
+          console.log(res);
           if(res.data.msg=="Succeeded"){
-            localStorage.setItem("token",res.data.token);  
-            this.getuserIn();
+            localStorage.setItem("token",res.data.token);
+            this.$router.go(-1);
           }else{
             this.$message.error(res.data.msg);
           }
         })
       },
-      //注册
+      //注册验证
       getLoginToekn(){
         axios.post('http://localhost:8080/register', {
           username: this.zhuForm.name,
           e_mail: this.zhuForm.email,
           password: this.zhuForm.pass2,
         }).then((res)=>{
+          console.log("注册验证返回");
           console.log(res);
-          
           if(res.data.msg=="Succeeded"){
             //localStorage.setItem("token",res.data.token);  
             //return res.data.token;
-            this.$message({
-              message: '恭喜你,注册成功',
-              type: 'success'
-            });
-          this.loginGetToken();
+            // this.$message({
+            //   message: '恭喜你,注册成功',
+            //   type: 'success'
+            // });
+            this.loginGetToken();
           }else{
             this.$message.error(res.data.msg);
           }
@@ -307,75 +305,79 @@ var rule;
       loginGetToken(){
         axios.post('http://localhost:8080/login', {
           username: this.zhuForm.name,
-          e_mail: this.zhuForm.email,
           password: this.zhuForm.pass2
         }).then((res)=>{
           console.log("前台获取到返回的token");
-          
           console.log(res);
           if(res.data.msg=="Succeeded"){
-            localStorage.setItem("token",res.data.token);  
+            localStorage.setItem("token",res.data.token);
+            this.$router.go(-1);
+            // this.getuserIn();
           }else{
             this.$message.error(res.data.msg);
-            return;
           }
-        }).then(()=>{
-          this.getuserIn();
         })
       },
       //根据token获取用户信息
-      getuserIn(){
-        axios.get("http://localhost:8080/api/UserViewSet",{
-            params:{
-              token: localStorage.getItem("token")
-            }
-        })
-        .then((res)=>{
-          console.log("getuserIn");
-            this.formss.name=res.data.data.name;
-            this.formss.pass=res.data.data.pass;
-            this.formss.token=res.data.data.token;
-            this.formss.realname=res.data.data.realname;
-            this.formss.id=res.data.data.id;
-            this.formss.address=res.data.data.address;
-            this.formss.qianming=res.data.data.qianming;
-            this.formss.email=res.data.data.email;
-        })
-        .catch(function(error){
-            console.log("error");
+      // getuserIn(){
+      //   axios.get("http://localhost:8080/api/UserViewSet",{
+      //     token: localStorage.getItem("token")
+      //   })
+      //   .then((res)=>{
+      //     console.log("获取到了用户信息");
+      //     console.log(res);
+      //       // this.formss.name=res.data.result.name;
+      //       // this.formss.pass=res.data.result.pass;
+      //       // this.formss.token=res.data.result.token;
+      //       // this.formss.realname=res.data.result.realname;
+      //       // this.formss.id=res.data.result.id;
+      //       // this.formss.address=res.data.result.address;
+      //       // this.formss.qianming=res.data.result.qianming;
+      //       // this.formss.email=res.data.result.email;
+      //       this.$store.state.name=res.data.result.name;
+      //       this.$store.state.avatar=res.data.result.avatar;
+      //       this.$store.state.e_mail=res.data.result.e_mail;
+      //       this.$store.state.real_name=res.data.result.real_name;
+      //       this.$store.state.user_description=res.data.result.user_description;
+      //       this.$store.state.username=res.data.result.username;
+      //       console.log(this.$store.state);
+      //   })
+      //   .catch(function(error){
+      //       console.log("error");
             
-        }).then(()=>{
-          this.afterGetUser(rule);
-        })
-      },
-      //回到首页
-      afterGetUser(ruleForm){
-        console.log("afterGetUser");
-        this.$refs[ruleForm].validate(valid => {
-          if (valid) {
-            //登录
-            if(ruleForm=="dengForm"){
-                if(this.formss.name==this.dengForm.name&&this.formss.pass==this.dengForm.pass1){
-                  this.login1Sucess();
-                  this.$router.go(-1);
-                }else if(this.formss.name==this.dengForm.name&&this.formss.pass!=this.dengForm.pass1){
-                  alert("密码错了,再看看呗");
-                }else if(this.formss.name!=this.dengForm.name){
-                  alert("没找到你的名字楠");
-                }
-            }else if(ruleForm=='zhuForm'){
-              if(this.formss.name==this.zhuForm.name){
-                alert("重名了");
-              }else{
-                this.login2Sucess();
-                this.$router.go(-1);
-              }
-            }
-          } else {       
-            return false;
-          }
-        });
-      },
+      //   })
+      //   .then(()=>{
+      //     this.afterGetUser(rule);
+      //   })
+      // },
+      // //回到首页
+      // afterGetUser(ruleForm){
+      //   console.log("afterGetUser");
+      //   this.$refs[ruleForm].validate(valid => {
+      //     if (valid) {
+      //       //登录
+      //       if(ruleForm=="dengForm"){
+      //           if(this.formss.name==this.dengForm.name&&this.formss.pass==this.dengForm.pass1){
+      //             this.login1Sucess();
+      //             this.$router.go(-1);
+      //           }else if(this.formss.name==this.dengForm.name&&this.formss.pass!=this.dengForm.pass1){
+      //             alert("密码错了,再看看呗");
+      //           }else if(this.formss.name!=this.dengForm.name){
+      //             alert("没找到你的名字楠");
+      //           }
+      //       }else if(ruleForm=='zhuForm'){
+      //         if(this.formss.name==this.zhuForm.name){
+      //           alert("重名了");
+      //         }else{
+      //           this.login2Sucess();
+      //           this.$router.go(-1);
+      //         }
+      //       }
+      //     } else {       
+      //       return false;
+      //     }
+      //   });
+      // },
       
     }
   }

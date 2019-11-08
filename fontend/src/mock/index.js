@@ -1,44 +1,71 @@
 import Mock from 'mockjs'
 import { Avatar } from 'element-ui'
 //token
-let token=Mock.mock({
-    msg:"Succeeded",
-    token:'XXX'
+let token1=Mock.mock({
+    "msg":"Succeeded",
+    "token":'XXX'
 })
 let token2=Mock.mock({
-    msg:"Succeeded",
-    token:'YYY'
+    "msg":"Succeeded",
+    "token":'YYY'
+})
+let token3=Mock.mock({
+    "msg":"Succeeded",
+    "token":'ZZZ'
+})
+let tokenError=Mock.mock({
+    "msg":"该邮箱已被注册",
+})
+let tokenError2=Mock.mock({
+    "msg":"重名了",
+})
+let tokenError3=Mock.mock({
+    "msg":"输入信息错误",
 })
 let zhuce=Mock.mock({
-    msg:"Succeeded",
+    "msg":"Succeeded",
 })
 //用户信息
-let userInfo=Mock.mock({
-    count:3,
-    next:null,
-    previous:null,
-    data:{
-        name: 'mars',
-        pass: '111111',
-        email: '1559830979@qq.com',
-        token: false,
-        id:'1559830979',
-        user_description: "一位靓仔路过",
-        realname:'XXX',
-        avatar:'http://b-ssl.duitang.com/uploads/item/201806/07/20180607185957_fjrFt.thumb.700_0.jpeg'
+let cao=Mock.mock({
+    "count":3,
+    "next":null,
+    "previous":null,
+    "result":{
+        "uid": 1772249059,
+        "username": 'cao',
+        "e_mail": '17722490599@qq.com',
+        "real_name":'caofeng',
+        "avatar":'//static.hdslb.com/images/member/noface.gif',
+        "user_description": "曹丰靓仔路过"
+        
     }
 })
-let creatUserInfo=Mock.mock({
-    right:true,
-    data:{
-        name: '',
-        pass: '',
-        email: '',
-        token: false,
-        id:'1559830979',
-        address:'五道口职业技术学院',
-        user_description: "一位靓仔路过",
-        realname:'XXX'
+let newone=Mock.mock({
+    "count":3,
+    "next":null,
+    "previous":null,
+    "result":{
+        "uid": 0,
+        "username": '',
+        "e_mail": '',
+        "real_name":'',
+        "avatar":'//static.hdslb.com/images/member/noface.gif',
+        "user_description": ""
+        
+    }
+})
+let mu=Mock.mock({
+    "count":2,
+    "next":null,
+    "previous":null,
+    "result":{
+        "uid": 1559830979,
+        "username": 'mars',
+        "e_mail": '1559830979@qq.com',
+        "real_name":'mudingdiao',
+        "avatar":'http://b-ssl.duitang.com/uploads/item/201806/07/20180607185957_fjrFt.thumb.700_0.jpeg',
+        "user_description": "牟定雕靓仔路过"
+        
     }
 })
 //文章
@@ -131,8 +158,20 @@ let articleList=Mock.mock({
 // 第一步注册验证
 Mock.mock(/register/,'post',(option)=>{
     console.log("获取注册验证的信息");
-    console.log(option);
-    return zhuce;
+    var obody=eval('('+option.body+')');
+    console.log(obody);
+    if(obody.username=='blue'){
+        return tokenError2;
+    }else if(obody.e_mail==='100@qq.com'){
+        console.log("ssss");
+        
+        return tokenError;
+    }else{
+        newone.result.username=obody.username;
+        newone.result.e_mail=obody.e_mail;
+        newone.result.password=obody.password;
+        return zhuce;
+    }
 });
 // 获取token
 Mock.mock(/login/,'post',(option)=>{
@@ -148,22 +187,25 @@ Mock.mock(/login/,'post',(option)=>{
     //         return article3;
     //     }
     // }
+    
     var obody=eval('('+option.body+')');
-    for(var item in obody){
-        if(obody[item]==1){
-            return token2;
-        }else{
-            return token;
-        }
+    console.log(obody.username);
+    if(obody.username==mu.result.username){
+        return token1;
+    }else if(obody.username==cao.result.username){
+        return token2;
+    }else if(obody.username==newone.result.username){
+        return token3;
+    }else{
+        return tokenError3;
     }
-    return token;
 });
 // 根据token获取用户名
 Mock.mock(/api\/UserViewSet/,'get',(option)=>{
     console.log("用户名token验证");
-    console.log(option);
-    // var obody=eval('('+option.body+')');
-    // console.log(obody);
+    console.log(option.url);
+    var obody=eval('('+option.body+')');
+    return cao;
     // return token2;
     // for(var item in obody){
     //     if(obody[item]==1){
@@ -172,7 +214,6 @@ Mock.mock(/api\/UserViewSet/,'get',(option)=>{
     //         return token;
     //     }
     // }
-    return userInfo;
 });
 Mock.mock(/api\/UserViewSet/,'post',(option)=>{
     if('XXX'==token.token){
@@ -183,11 +224,9 @@ Mock.mock(/api\/UserViewSet/,'post',(option)=>{
     }
 }); 
 //根据token修改用户信息
-Mock.mock(/api\/UserViewSet/,'put',(option)=>{
-    console.log("修改个人信息");
+Mock.mock(/api\/UserViewSet\/\//,'put',(option)=>{
+    console.log("修改信息已提交");
     console.log(option.body);
-    console.log(userInfo.data);
-    
     // userInfo.name=option.body;
     return userInfo;
 });

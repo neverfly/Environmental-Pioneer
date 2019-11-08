@@ -8,11 +8,11 @@
             </el-col>
             <el-col :lg="12" style="marginTop:10px;marginBottom:10px">
                 <el-tabs type="border-card">
-                    <el-tab-pane label="常见垃圾"><gezhonglaji></gezhonglaji></el-tab-pane>
-                    <el-tab-pane label="可回收垃圾"><gezhonglaji></gezhonglaji></el-tab-pane>
-                    <el-tab-pane label="湿垃圾"><gezhonglaji></gezhonglaji></el-tab-pane>
-                    <el-tab-pane label="干垃圾"><gezhonglaji></gezhonglaji></el-tab-pane>
-                    <el-tab-pane label="有害垃圾"><gezhonglaji></gezhonglaji></el-tab-pane>
+                    <el-tab-pane label="精选推荐"><gezhonglaji></gezhonglaji></el-tab-pane>
+                    <el-tab-pane label="每日新闻"><gezhonglaji></gezhonglaji></el-tab-pane>
+                    <el-tab-pane label="热点top"><gezhonglaji></gezhonglaji></el-tab-pane>
+                    <el-tab-pane label="往期新闻"><gezhonglaji></gezhonglaji></el-tab-pane>
+                    <el-tab-pane label="其他新闻"><gezhonglaji></gezhonglaji></el-tab-pane>
                 </el-tabs>
             </el-col>
         </el-row>
@@ -24,7 +24,6 @@
         </el-row>
         <el-row style="width:100%">
             <!-- 左侧新闻 -->
-            <!-- pc -->
             <el-col :lg="{span:5,offset:5}" :md="{span:22}">
                 <el-row>
                     <el-col style="borderLeft:8px solid #14a53b;marginRight:5px;marginBottom:10px" :lg="18" :md="20">
@@ -49,7 +48,6 @@
             </el-col>
             
             <!-- 中间新闻 -->
-            <!-- pc -->
             <el-col :lg="5">
                  <el-row>
                     <el-col style="borderLeft:8px solid #14a53b;paddingLeft:5px;marginBottom:10px" :span="18">
@@ -71,7 +69,7 @@
                             </li>
                         </ul>
                     </el-col>
-                    <!-- 中间新闻mobile -->
+                    <!-- 中间新闻 -->
                     <el-col :span="22" :offset="1" class="hidden-lg-and-up" style="marginBottom:10px">
                         <ul>
                             <li v-for="item in items" :key="item.key" style="width:100%;height:50px">
@@ -200,5 +198,10 @@ recentNews p{
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+@media (min-width:1000px) {
+    /deep/ .el-tabs__item{
+        padding:0 70px !important;
+    }
 }
 </style>

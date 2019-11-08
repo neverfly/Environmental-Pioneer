@@ -2,7 +2,6 @@
     <div>
         <navigation></navigation>
         <div class="personalCenter">
-        
             <el-row class="demo-avatar demo-basic" style="background-image: linear-gradient(#dff5d6 90%, #98e778 100%)">
                 <el-col :lg="{span:12,offset:4}" :md="{span:4}">
                     <div class="demo-basic--circle">
@@ -27,8 +26,8 @@
                         <div class="info">
                             <span>ID:</span><span>{{this.$store.state.id}}</span><br><br>
                             <span>昵称:</span><el-input v-model="form.name" :placeholder="this.$store.state.name" style="maxWidth:400px"></el-input><br><br>
-                            <span>邮箱:</span><el-input v-model="form.email" :placeholder="this.$store.state.email" style="maxWidth:400px"></el-input><br><br>
-                            <span>姓名:</span><el-input v-model="form.realname" :placeholder="this.$store.state.realname" style="maxWidth:400px"></el-input><br><br>
+                            <span>邮箱:</span><el-input v-model="form.email" :placeholder="this.$store.state.e_mail" style="maxWidth:400px"></el-input><br><br>
+                            <span>姓名:</span><el-input v-model="form.realname" :placeholder="this.$store.state.real_name" style="maxWidth:400px"></el-input><br><br>
                             <span>简介:</span><el-input v-model="form.user_description" :placeholder="this.$store.state.user_description" style="maxWidth:400px"></el-input>
                         </div><br>
                     </el-form>
@@ -67,7 +66,6 @@ export default {
         this.hasToken();
         this.showImg=this.$store.state.show;
         var aid=this.$route.params.aid;
-        alert(aid);
     },
     methods: {
         hasToken(){
@@ -85,15 +83,15 @@ export default {
             })
             .then((res)=>{
                 console.log("211e");
+                console.log(res);
                 this.$store.commit("madeShow",true);
-                this.$store.commit("changeName",res.data.data.name);
-                this.$store.commit("changeId",res.data.data.id);
-                this.$store.commit("changeAvatar",res.data.data.avatar);
-                this.$store.commit("changeuser_description",res.data.data.user_description);
-                this.$store.commit("getEmail",res.data.data.email);
-                this.$store.commit("changePass",res.data.data.pass);
-                this.$store.commit("changerealname",res.data.data.realname);
-                this.$store.commit("getToken",res.data.data.token);
+                this.$store.commit("changeName",res.data.result.username);
+                this.$store.commit("changeId",res.data.result.uid);
+                this.$store.commit("changeAvatar",res.data.result.avatar);
+                this.$store.commit("changeuser_description",res.data.result.user_description);
+                this.$store.commit("getEmail",res.data.result.e_mail);
+                this.$store.commit("changerealname",res.data.result.real_name);
+                
             })
             .catch(function(error){
                 console.log("error");
@@ -101,7 +99,8 @@ export default {
                 console.log(this.$store);
                 this.form.id=this.$store.state.id;
                 this.form.name=this.$store.state.name;
-                this.form.email=this.$store.state.email;
+                this.form.email=this.$store.state.e_mail;
+                this.form.realname=this.$store.state.real_name;
                 this.form.avatar=this.$store.state.avatar;
                 this.form.user_description=this.$store.state.user_description;
 
@@ -119,32 +118,46 @@ export default {
             //     avartar:null,
             //     user_description:this.form.user_description
             // })
-            axios({
-                method: 'put',
-                url: 'http://localhost:8080/api/UserViewSet',
+            axios.put("http://localhost:8080/api/UserViewSet//",{
                 data: {
                     "username":self.form.name,
                     "e_mail":self.form.email,
                     "real_name": self.form.realname,
                     "avatar": self.form.isStart,
                     "user_description":self.form.user_description,
- 
                 }
             })
+            // .then((res)=>{
+            //     console.log("信息修改了");
+            //     console.log(res);
+            //     this.$store.state.name=res.data.result.username;
+            // })
+            // .catch(function(error){
+            //     console.log("error");
+            // })
+            // axios({
+            //     method: 'put',
+            //     url: 'http://localhost:8080/api/UserViewSet//',
+            //     data: {
+            //         "username":self.form.name,
+            //         "e_mail":self.form.email,
+            //         "real_name": self.form.realname,
+            //         "avatar": self.form.isStart,
+            //         "user_description":self.form.user_description,
+ 
+            //     }
+            // })
             .then((res)=>{
-                console.log("asdasdasdkjh");
-                
                 console.log(res);
-                
                 this.$store.commit("madeShow",true);
-                this.$store.commit("changeName",res.data.data.name);
-                this.$store.commit("changeId",res.data.data.id);
-                this.$store.commit("changeAvatar",res.data.data.avatar);
-                this.$store.commit("changeuser_description",res.data.data.user_description);
-                this.$store.commit("getEmail",res.data.data.email);
-                this.$store.commit("changePass",res.data.data.pass);
-                this.$store.commit("changerealname",res.data.data.realname);
-                this.$store.commit("getToken",res.data.data.token);
+                this.$store.commit("changeName",res.data.result.name);
+                this.$store.commit("changeId",res.data.result.id);
+                this.$store.commit("changeAvatar",res.data.result.avatar);
+                this.$store.commit("changeuser_description",res.data.result.user_description);
+                this.$store.commit("getEmail",res.data.result.email);
+                this.$store.commit("changePass",res.data.result.pass);
+                this.$store.commit("changerealname",res.data.result.realname);
+                this.$store.commit("getToken",res.data.result.token);
                 this.$message({
                     message: '保存成功',
                     type: 'success'
@@ -152,23 +165,17 @@ export default {
             })
             .catch(function(error){
                 console.log("error");
-                
             }).then(()=>{
-                console.log("s1232312");
-                
                 console.log(this.$store);
                 this.form.id=this.$store.state.id;
                 this.form.name=this.$store.state.name;
-                this.form.email=this.$store.state.email;
+                this.form.email=this.$store.state.e_mail;
                 this.form.avatar=this.$store.state.avatar;
-                console.log(this.$store.state.avatar);
-
+                this.form.user_description=this.$store.state.user_description;
                 this.showImg=true;
             })
-            
             console.log(this.form);
             this.showImg=true;
-            
         },
         handleAvatarSuccess(res, file) {
             this.imageUrl = URL.createObjectURL(file.raw);

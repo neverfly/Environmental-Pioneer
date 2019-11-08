@@ -3,19 +3,12 @@
         <navigation></navigation>
         <el-row>
             <cebian></cebian>
-            <el-col :offset="6" class="hidden-md-and-down" style="borderLeft:10px solid #14a53b;marginRight:5px;;paddingLeft:10px" :lg="16">
+            <el-col class="hidden-md-and-down" style="borderLeft:10px solid #14a53b;marginRight:5px;;paddingLeft:10px" :lg="{span:16,offset:6}" :md="24">
                 <div>
                     <h1 style="borderBottom:3px solid #14a53b;marginBottom:15px">疑问简答</h1><br>
                     <span style="fontSize:17px">ANSWER QUESTION</span>
                 </div>
             </el-col>
-            <el-col class="hidden-lg-and-up" style="borderLeft:10px solid #14a53b;marginRight:5px;;paddingLeft:10px" :lg="24">
-                <div>
-                    <h1 style="borderBottom:3px solid #14a53b;marginBottom:15px">疑问简答</h1><br>
-                    <span style="fontSize:17px">ANSWER QUESTION</span>
-                </div>
-            </el-col>
-
             <el-col :lg="{span:12,offset:6}" :md="24" class="hidden-md-and-down" style="paddingTop:20px;borderBottom:20px;marginBottom:20px">
                  <el-collapse v-model="activeNames" @change="handleChange">
                     <el-collapse-item title="垃圾分类是什么？" name="1">

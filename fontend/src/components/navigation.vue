@@ -168,7 +168,6 @@ export default {
         this.$store.commit("changeAvatar","");
         this.$store.commit("changeuser_description","");
         this.$store.commit("getEmail","");
-        this.$store.commit("changePass","");
         this.$store.commit("changerealname","");
         this.$store.commit("getToken","");
         this.$router.push('/main');
@@ -180,33 +179,27 @@ export default {
     getuserIn(){
       console.log("nav getuserIn");
       axios.get("http://localhost:8080/api/UserViewSet",{
-        params: {
-          token:localStorage.getItem("token")
-        }
+          params:{
+            ordering:localStorage.getItem("token")
+          }
       })
       .then((res)=>{
         console.log("getuserIn");
-        this.$store.state.name=res.data.data.name;
-        this.$store.state.pass=res.data.data.pass;
-        this.shows=true;
-        console.log("kdjhaskdhakjsdjhkj");
-        console.log(this.shows);
+        console.log(res);
+        this.$store.state.name=res.data.result.username;
       })
       .catch(function(error){
           console.log("error");
-          
       })
     }
   },
   created() {
-    console.log("1111");
-    console.log(localStorage.getItem("token"));
     if(localStorage.getItem("token")!=null){
+      this.shows=true;
       this.getuserIn();
     }
   },
   //登录注册模块监听
-  
   computed:{
     getName:function(){
       return this.$store.state.name;
