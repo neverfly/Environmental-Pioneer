@@ -10,7 +10,9 @@
                 <el-tabs type="border-card">
                     <el-tab-pane label="精选推荐">
                         <el-row v-for="item in items1" :key="item.title" :gutter="20">
-                            <el-col :lg="{span:4}"><br><el-img :src="imgNew" alt="" class="lajiNew"></el-img></el-col>
+                            <el-col :lg="4">
+                                <img :src="imgNew" alt="" width="100%" class="lajiNew"  fit="contain"/>
+                            </el-col><br>
                             <el-col :lg="{span:20}"><br>
                                 <router-link :to="item.link+'/'+item.aid">
                                     <h2>{{item.title}}</h2><br>
@@ -22,7 +24,9 @@
                     </el-tab-pane>
                     <el-tab-pane label="每日新闻">
                         <el-row v-for="item in items2" :key="item.title" :gutter="20">
-                            <el-col :lg="{span:4}"><br><img :src="imgNew" alt="" class="lajiNew"></el-col>
+                            <el-col :lg="4">
+                                <img :src="imgNew"  width="100%" alt="" class="lajiNew" fit="contain">
+                            </el-col><br>
                             <el-col :lg="{span:20}"><br>
                                 <router-link :to="item.link+'/'+item.aid">
                                     <h2>{{item.title}}</h2><br>
@@ -34,7 +38,9 @@
                     </el-tab-pane>
                     <el-tab-pane label="热点top">
                         <el-row v-for="item in items3" :key="item.title" :gutter="20">
-                            <el-col :lg="{span:4}" style="width:100%"><br><img :src="imgNew" alt="" class="lajiNew"></el-col>
+                            <el-col :lg="4">
+                                <img :src="imgNew"  width="100%" alt="" class="lajiNew" fit="contain">
+                            </el-col><br>
                             <el-col :lg="{span:20}"><br>
                                 <router-link :to="item.link+'/'+item.aid">
                                     <h2>{{item.title}}</h2><br>
@@ -46,7 +52,9 @@
                     </el-tab-pane>
                     <el-tab-pane label="往期新闻">
                         <el-row v-for="item in items4" :key="item.title" :gutter="20">
-                            <el-col :lg="{span:4}"><br><img :src="imgNew" alt="" class="lajiNew"></el-col>
+                            <el-col :lg="{span:4}">
+                                <img :src="imgNew"  width="100%" alt="" class="lajiNew" fit="contain">
+                            </el-col><br>
                             <el-col :lg="{span:20}"><br>
                                 <router-link :to="item.link+'/'+item.aid">
                                     <h2>{{item.title}}</h2><br>
@@ -58,7 +66,9 @@
                     </el-tab-pane>
                     <el-tab-pane label="其他新闻">
                         <el-row v-for="item in items5" :key="item.title" :gutter="20">
-                            <el-col :lg="{span:4}"><br><img :src="imgNew" alt="" class="lajiNew"></el-col>
+                            <el-col :lg="{span:4}">
+                                <img :src="imgNew" alt=""  width="100%" class="lajiNew" fit="contain">
+                            </el-col><br>
                             <el-col :lg="{span:20}"><br>
                                 <router-link :to="item.link+'/'+item.aid">
                                     <h2>{{item.title}}</h2><br>
@@ -152,7 +162,6 @@
 </template>
 <script>
 import recentNews from '../components/recentNews'
-import gezhonglaji from '../components/gezhonglaji'
 import changtu from '../assets/images/new_3.png'
 import xiangguan from '../assets/images/new_1.png'
 import welcome from '../assets/images/new_4.png'
@@ -163,8 +172,7 @@ import axios from 'axios'
 export default {
     name: "new",
     components:{
-        recentNews,
-        gezhonglaji
+        recentNews
     },
     data() {
         return {

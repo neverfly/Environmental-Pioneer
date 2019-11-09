@@ -33,7 +33,7 @@ let cao=Mock.mock({
     "result":{
         "uid": 1772249059,
         "username": 'cao',
-        "e_mail": '17722490599@qq.com',
+        "e_mail": '',
         "real_name":'caofeng',
         "avatar":'//static.hdslb.com/images/member/noface.gif',
         "user_description": "曹丰靓仔路过"

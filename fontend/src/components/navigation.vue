@@ -10,8 +10,8 @@
           <router-link to="login"><img :src="login"  class="icons" alt=""/>&nbsp;<span>注册</span></router-link>
           <span>|| English switch</span>
         </el-col>
-        <el-col :lg="7" :offset="4" class="logoRight" v-show="shows">
-          <img :src="people" class="icons" alt=""/>&nbsp;<span>{{getName}}</span>
+        <el-col :lg="7" :offset="4" class="logoRight" v-show="shows" style="height:45px;lineHeight:45px">
+          <el-avatar :src="getAvatar" alt=""></el-avatar>&nbsp;<span>{{getName}}</span>
           <span @click="logOut">退出</span>
           <span>|| English switch</span>
         </el-col>
@@ -45,12 +45,14 @@
         :before-close="handleClose">
         <el-row class="tac">
           <el-col :span="24">
+             <div class="block" style="textAlign:center"><el-avatar :size="100" :src="getAvatar"></el-avatar></div>
             <p v-if="getShow" style="textAlign:center"><span>{{getName}}</span>&nbsp;&nbsp;<span @click="logOut">退出</span></p>
           
             <el-menu
               :default-active="activeIndex"
               router
               class="el-menu-vertical-demo"
+              style="textAlign:center"
               >
               <router-link style="marginLeft:10px" to="/login" v-if="!getShow"><img :src="people" class="icons" alt=""/>&nbsp;<span>登录</span></router-link>
               <router-link to="login" v-if="!getShow"><img :src="login"  class="icons" alt=""/>&nbsp;<span>注册</span></router-link>
@@ -128,6 +130,7 @@ export default {
       shows: false,
       drawer: false,
       direction: 'ltr',
+      avatar:this.$store.state.avatar,
       navBg:{
           backgroundImage: 'url(' + require('@/assets/images/index_01.png') + ')',
           backgroundRepeat:'no-repeat',
@@ -187,6 +190,7 @@ export default {
         console.log("getuserIn");
         console.log(res);
         this.$store.state.name=res.data.result.username;
+        this.$store.state.avatar=res.data.result.avatar;
       })
       .catch(function(error){
           console.log("error");
@@ -206,6 +210,9 @@ export default {
     },
     getShow:function(){
       return this.shows;
+    },
+    getAvatar:function(){
+      return this.$store.state.avatar;
     }
   }
 }

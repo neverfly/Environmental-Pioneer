@@ -46,7 +46,6 @@
     </div>
 </template>
 <script>
-import touxiang from '../assets/images/u=732757285,310735219&fm=26&gp=0.jpg'
 import axios from 'axios'
 export default {
     name:'personalCenter',
@@ -62,7 +61,6 @@ export default {
                 avatar:'',
                 email: ''
             },
-            touxiang,
             showImg:false,
             name:'',
             imageUrl: '',
@@ -201,50 +199,6 @@ export default {
         },
         handleAvatarSuccess(res, file) {
             this.imageUrl = URL.createObjectURL(file.raw);
-        },
-        beforeAvatarUpload(file) {
-            const isJPG = file.type === 'image/jpeg';
-            const isLt2M = file.size / 1024 / 1024 < 2;
-
-            if (!isJPG) {
-            this.$message.error('上传头像图片只能是 JPG 格式!');
-            }
-            if (!isLt2M) {
-            this.$message.error('上传头像图片大小不能超过 2MB!');
-            }
-            //校验成功上传文件
-            if(isJPG && isLt2M == true){
-            console.log(file);
-
-            //将文件转化为formdata数据上传
-            let fd = new FormData()
-            fd.append('file', file)
-            console.log(fd)
-        
-            // post上传图片
-
-            let that = this
-            
-                new Promise(function (resolve, reject) {
-                    that.axios,put('http://localhost:8080/api/userViewSet', fd, 
-                        {
-                            headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                        }).then((response) => {
-                            that.imgId = response.data.data
-                            resolve(that.imgId);
-                        }).catch((error) =>{
-                            this.$message.error('头像上传失败，请重新上传!');
-                        })
-                        }).then(function (id){
-                            that.axios.get('/file/view/'+id)
-                            .then((response) => {
-                                that.imageUrl = response.request.responseURL;
-                            })
-                        })         
-                }
-            return isJPG && isLt2M;
         }
     }
 }

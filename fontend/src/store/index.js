@@ -53,7 +53,7 @@ const store = new Vuex.Store({
         name: '',
         id:'',
         real_name:'',
-        avatar:'',
+        avatar:'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
         user_description:'',
         e_mail: '',
         token:''
