@@ -45,14 +45,14 @@ a{
 }
 /* 抽屉颜色 */
 .el-drawer__body{
-    background-color: #d4f9c5 !important;
+    background-image: linear-gradient(#96e6a1,#abecd6) !important;
   }
   .el-drawer__header{
-    background-color: #d4f9c5 !important;
+    background-color: #96e6a1 !important;
   
   }
   .el-drawer__open .el-drawer.ltr{
-      background-color: #d4f9c5;
+      background-color: #96e6a1;
   }
   .el-icon-close:before{
       font-size: 35px;

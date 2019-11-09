@@ -47,7 +47,6 @@
           <el-col :span="24">
              <div class="block" style="textAlign:center"><el-avatar :size="100" :src="getAvatar"></el-avatar></div>
             <p v-if="getShow" style="textAlign:center"><span>{{getName}}</span>&nbsp;&nbsp;<span @click="logOut">退出</span></p>
-          
             <el-menu
               :default-active="activeIndex"
               router

@@ -34,7 +34,18 @@
                             <span>昵称:</span><el-input v-model="form.name" :placeholder="this.$store.state.name" style="maxWidth:400px"></el-input><br><br>
                             <span>邮箱:</span><el-input v-model="form.email" :placeholder="this.$store.state.e_mail" style="maxWidth:400px"></el-input><br><br>
                             <span>姓名:</span><el-input v-model="form.realname" :placeholder="this.$store.state.real_name" style="maxWidth:400px"></el-input><br><br>
-                            <span>简介:</span><el-input v-model="form.user_description" :placeholder="this.$store.state.user_description" style="maxWidth:400px"></el-input>
+                            <span style="verticalAlign: top;">简介:</span>
+                            <el-input
+                            type="textarea"
+                            :placeholder="this.$store.state.user_description"
+                            v-model="form.user_description"
+                            maxlength="30"
+                            resize=none
+                            rows=11
+                            style="maxWidth:400px"
+                            show-word-limit
+                            >
+                            </el-input>
                         </div><br>
                     </el-form>
                     <el-button :plain="true" @click="change();open2()" style="marginBottom:50px">保存修改</el-button>
@@ -140,6 +151,7 @@ export default {
             axios.put("http://localhost:8080/api/UserViewSet//",{
                 data: {
                     "username":this.form.name,
+                    "uid":this.form.id,
                     "e_mail":this.form.email,
                     "real_name": this.form.realname,
                     "avatar": this.form.isStart,

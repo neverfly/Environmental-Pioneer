@@ -3,8 +3,8 @@
         <div class="block">
             
             <el-carousel height="200px">
-            <el-carousel-item v-for="item in 3" :key="item">
-                <img :src="recentNews" alt="" style="width:100%">
+            <el-carousel-item v-for="(item,i) in items2" :key="i">
+               <router-link :to="item.href+'/'+item.aid"> <img :src="recentNews" alt="" style="width:100%"></router-link>
             </el-carousel-item>
             </el-carousel>
         </div>
@@ -57,6 +57,25 @@ export default {
                     content: "智能垃圾分类让云和市民纷纷点赞",
                     href:'http://news.lsnews.com.cn/life/201911/t20191104_273879.shtml'
                 }
+            ],
+            items2:[
+                {
+                    img:'../assets/images/522.jpg',
+                    href:'/majorNew',
+                    aid:'1',
+                },
+                {
+                    img:'',
+                    href:'/majorNew',
+                    aid:'2'
+
+                },
+                {
+                    img:'',
+                    href:'/majorNew',
+                    aid:'3'
+
+                },
             ]
         }
     },

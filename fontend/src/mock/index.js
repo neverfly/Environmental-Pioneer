@@ -31,11 +31,11 @@ let cao=Mock.mock({
     "next":null,
     "previous":null,
     "result":{
-        "uid": 1772249059,
+        "uid": 2,
         "username": 'cao',
         "e_mail": '',
         "real_name":'caofeng',
-        "avatar":'//static.hdslb.com/images/member/noface.gif',
+        "avatar":'http://static.hdslb.com/images/member/noface.gif',
         "user_description": "曹丰靓仔路过"
         
     }
@@ -45,13 +45,12 @@ let newone=Mock.mock({
     "next":null,
     "previous":null,
     "result":{
-        "uid": 0,
+        "uid": 3,
         "username": '',
         "e_mail": '',
         "real_name":'',
-        "avatar":'//static.hdslb.com/images/member/noface.gif',
+        "avatar":'http://static.hdslb.com/images/member/noface.gif',
         "user_description": ""
-        
     }
 })
 let mu=Mock.mock({
@@ -59,11 +58,11 @@ let mu=Mock.mock({
     "next":null,
     "previous":null,
     "result":{
-        "uid": 1559830979,
+        "uid": 1,
         "username": 'mars',
         "e_mail": '1559830979@qq.com',
         "real_name":'mudingdiao',
-        "avatar":'http://b-ssl.duitang.com/uploads/item/201806/07/20180607185957_fjrFt.thumb.700_0.jpeg',
+        "avatar":'http://static.hdslb.com/images/member/noface.gif',
         "user_description": "牟定雕靓仔路过"
         
     }
@@ -71,7 +70,10 @@ let mu=Mock.mock({
 //文章
 let article=Mock.mock({
     code:200,
-    data:{
+    count:3,
+    next:null,
+    preview:null,
+    result:{
         'title|5-10':'标题1',
         date: Mock.Random.date('yyyy-MM-dd'),
         writer: Mock.Random.cword(4),
@@ -83,7 +85,10 @@ let article=Mock.mock({
 })
 let article2=Mock.mock({
     code:200,
-    data:{
+    count:3,
+    next:null,
+    preview:null,
+    result:{
         'title|5-10':'标题2',
         date: Mock.Random.date('yyyy-MM-dd'),
         writer: Mock.Random.cword(4),
@@ -95,7 +100,10 @@ let article2=Mock.mock({
 })
 let article3=Mock.mock({
     code:200,
-    data:{
+    count:3,
+    next:null,
+    preview:null,
+    result:{
         'title|5-10':'标题3',
         date: Mock.Random.date('yyyy-MM-dd'),
         writer: Mock.Random.cword(4),
@@ -160,12 +168,12 @@ Mock.mock(/register/,'post',(option)=>{
     console.log("获取注册验证的信息");
     var obody=eval('('+option.body+')');
     console.log(obody);
-    if(obody.username=='blue'){
-        return tokenError2;
+    if(obody.username=='mars'||obody.username=='cao'){
+        return "名字重了";
     }else if(obody.e_mail==='100@qq.com'){
         console.log("ssss");
         
-        return tokenError;
+        return  "邮箱重名";
     }else{
         newone.result.username=obody.username;
         newone.result.e_mail=obody.e_mail;
@@ -177,45 +185,37 @@ Mock.mock(/register/,'post',(option)=>{
 Mock.mock(/login/,'post',(option)=>{
     console.log("申请获取token");
     console.log(option);
-    // var obody=eval('('+option.body+')');
-    // for(var item in obody){
-    //     if(obody[item]==1){
-    //         return article;
-    //     }else if(obody[item]==2){
-    //         return article2;
-    //     }else if(obody[item]==3){
-    //         return article3;
-    //     }
-    // }
-    
     var obody=eval('('+option.body+')');
     console.log(obody.username);
-    if(obody.username==mu.result.username){
+    if(obody.username==mu.result.username&&obody.password==111111){
         return token1;
-    }else if(obody.username==cao.result.username){
+    }else if(obody.username==cao.result.username&&obody.password==111111){
         return token2;
-    }else if(obody.username==newone.result.username){
+    }else if(obody.username==newone.result.username&&obody.password==111111){
         return token3;
     }else{
-        return tokenError3;
+        return "信息错误";
     }
 });
 // 根据token获取用户名
 Mock.mock(/api\/UserViewSet/,'get',(option)=>{
     console.log("用户名token验证");
-    console.log(option.url);
-    var obody=eval('('+option.body+')');
-    return cao;
-    // return token2;
-    // for(var item in obody){
-    //     if(obody[item]==1){
-    //         return token2;
-    //     }else{
-    //         return token;
-    //     }
-    // }
+    console.log(option.url[option.url.length-2]);
+    if(option.url[option.url.length-2]=='X'){
+        return mu;
+    }else if(option.url[option.url.length-2]=='Y'){
+        return cao;
+    }else if(option.url[option.url.length-2]=='Z'){
+        return newone;
+    }else{
+        return "error";
+    }
 });
 Mock.mock(/api\/UserViewSet/,'post',(option)=>{
+    console.log("111111111111111s");
+    
+    console.log(option);
+    
     if('XXX'==token.token){
         console.log("1234567890");
         return userInfo;
@@ -223,21 +223,28 @@ Mock.mock(/api\/UserViewSet/,'post',(option)=>{
         return "error";
     }
 }); 
-//根据token修改用户信息
+//根据uid修改用户信息
 Mock.mock(/api\/UserViewSet\/\//,'put',(option)=>{
     console.log("修改信息已提交");
     console.log(option.body);
     // userInfo.name=option.body;
     var obody=eval('('+option.body+')');
+    var gai;
     console.log(obody);
     obody=obody.data;
-    cao.result.username=obody.username;
-    cao.result.e_mail=obody.e_mail;
-    cao.result.real_name=obody.real_name;
-    cao.result.avatar=obody.avatar;
-    cao.result.user_description=obody.user_description;
+    if(obody.uid==1){
+        gai=mu;
+    }else if(obody.uid==2){
+        gai=cao;
+    }else{
+        gai=newone;
+    }
+    gai.result.username=obody.username;
+    gai.result.e_mail=obody.e_mail;
+    gai.result.real_name=obody.real_name;
+    gai.result.avatar=obody.avatar;
+    gai.result.user_description=obody.user_description;
     console.log(cao);
-    
     return cao;
 });
 

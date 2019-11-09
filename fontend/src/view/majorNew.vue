@@ -190,15 +190,16 @@ export default {
                 aid:aid
             })
             .then((res)=>{
-                console.log(res);
+                console.log("sssssssssss");
                 
-                this.article.title=res.data.data.title;
-                this.article.date=res.data.data.date;
-                this.article.content=res.data.data.content;
-                this.article.source=res.data.data.source;
-                this.article.writer=res.data.data.writer;
-                this.article.readingQua=res.data.data.readingQua;
-                this.article.src=res.data.data.src;
+                console.log(res);
+                this.article.title=res.data.result.title;
+                this.article.date=res.data.result.date;
+                this.article.content=res.data.result.content;
+                this.article.source=res.data.result.source;
+                this.article.writer=res.data.result.writer;
+                this.article.readingQua=res.data.result.readingQua;
+                this.article.src=res.data.result.src;
             })
             .catch(function(error){
                 console.log("error");

@@ -44,12 +44,13 @@
       <!-- 移动端 -->
       <div class="hidden-lg-and-up" style="paddingRight:10px;zIndex:444">
         <img :src="logo" alt="" class="logo"/>
+        <!-- 注册 -->
         <el-form :model="zhuForm" status-icon :rules="rules" ref="zhuForm" label-width="70px" class="demo-ruleForm" v-show="!showss" style="max-Width:400px;min-Width:10%;marginTop:0 auto">
               <el-form-item prop="name">
                   <el-input v-model="zhuForm.name" autocomplete="off" style="border-top:0;border-left:0;border-right:0;" placeholder="用户名" class="inputs"></el-input>
               </el-form-item><br>
               <el-form-item prop="pass2">
-                  <el-input type="password" v-model="zhuForm.pass2"  style="maxWidth:100%;border-top:0;border-left:0;border-right:0;" autocomplete="off" placeholder="密码"></el-input>
+                  <el-input type="password" v-model="zhuForm.pass2"  style="maxWidth:100%;border-top:0;border-left:0;border-right:0" autocomplete="off" placeholder="密码"></el-input>
               </el-form-item><br>
               <el-form-item prop="checkPass">
                   <el-input type="password" style="maxWidth:100%;border-top:0;border-left:0;border-right:0;" v-model="zhuForm.checkPass" placeholder="确认密码"></el-input>
@@ -96,7 +97,6 @@
           callback(new Error('请输入密码'));
         } else {
           if (this.zhuForm.checkPass !== '') {
-            console.log("sssssssssssss");
             this.$refs.zhuForm.validateField('checkPass');
           }
           callback();
@@ -149,15 +149,6 @@
         },
         logo,
         showss:true,
-        // formss:{
-        //   name: '',
-        //   id:'',
-        //   avadar:'',
-        //   qianming:'',
-        //   pass: '',
-        //   email: '',
-        //   token:''
-        // },
         dengForm: {
           name: '',
           id:'',
@@ -213,36 +204,20 @@
       submitForm(ruleForm) {
         rule=ruleForm;
         //点击登录或者注册就去请求数据
-        if(rule=='dengForm'){
-          this.getToekn();
-        }else{
-          this.getLoginToekn();
-        }
+        this.$refs[ruleForm].validate((valid) => {
+          if (valid) {
+            if(rule=='dengForm'){
+              this.getToekn();
+            }else{
+              this.getLoginToekn();
+            }
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
       },
-      // //登录成功
-      // login1Sucess:function(){
-      //   this.$store.commit("madeShow",true);
-      //   this.$store.commit("changeName",this.formss.name);
-      //   this.$store.commit("changeId",this.formss.id);
-      //   this.$store.commit("changeAvatar",this.formss.avadar);
-      //   this.$store.commit("changeuser_description",this.formss.qianming);
-      //   this.$store.commit("getEmail",this.formss.email);
-      //   this.$store.commit("changePass",this.formss.pass);
-      //   this.$store.commit("changerealname",this.formss.realname);
-      //   this.$store.commit("getToken",this.formss.token);
-      //   sessionStorage.setItem('userName',this.dengForm.name);
-      //   sessionStorage.setItem('userPass',this.dengForm.pass);
-      // },
-      //注册成功
-      // login2Sucess:function(){
-      //   this.$store.commit("madeShow",true);
-      //   this.$store.commit("changeName",this.zhuForm.name);
-      //   sessionStorage.setItem('userName',this.zhuForm.name);
-      //   sessionStorage.setItem('userPass',this.zhuForm.pass);
-      //   this.$store.commit("changePass",this.zhuForm.pass);
-      //   this.$store.commit("getToken",this.zhuForm.token);  
-      //   this.$store.commit("getEmail",this.zhuForm.email);    
-      // },
+      
       //清空内容
       resetForm(ruleForm){
         this.$refs[ruleForm].resetFields();
@@ -282,7 +257,7 @@
             localStorage.setItem("token",res.data.token);
             this.$router.go(-1);
           }else{
-            this.$message.error(res.data.msg);
+            this.$message.error(res.data);
           }
         })
       },
@@ -296,15 +271,9 @@
           console.log("注册验证返回");
           console.log(res);
           if(res.data.msg=="Succeeded"){
-            //localStorage.setItem("token",res.data.token);  
-            //return res.data.token;
-            // this.$message({
-            //   message: '恭喜你,注册成功',
-            //   type: 'success'
-            // });
             this.loginGetToken();
           }else{
-            this.$message.error(res.data.msg);
+            this.$message.error(res.data);
           }
         })
       },
@@ -321,71 +290,10 @@
             this.$router.go(-1);
             // this.getuserIn();
           }else{
-            this.$message.error(res.data.msg);
+            this.$message.error(res.data);
           }
         })
       },
-      //根据token获取用户信息
-      // getuserIn(){
-      //   axios.get("http://localhost:8080/api/UserViewSet",{
-      //     token: localStorage.getItem("token")
-      //   })
-      //   .then((res)=>{
-      //     console.log("获取到了用户信息");
-      //     console.log(res);
-      //       // this.formss.name=res.data.result.name;
-      //       // this.formss.pass=res.data.result.pass;
-      //       // this.formss.token=res.data.result.token;
-      //       // this.formss.realname=res.data.result.realname;
-      //       // this.formss.id=res.data.result.id;
-      //       // this.formss.address=res.data.result.address;
-      //       // this.formss.qianming=res.data.result.qianming;
-      //       // this.formss.email=res.data.result.email;
-      //       this.$store.state.name=res.data.result.name;
-      //       this.$store.state.avatar=res.data.result.avatar;
-      //       this.$store.state.e_mail=res.data.result.e_mail;
-      //       this.$store.state.real_name=res.data.result.real_name;
-      //       this.$store.state.user_description=res.data.result.user_description;
-      //       this.$store.state.username=res.data.result.username;
-      //       console.log(this.$store.state);
-      //   })
-      //   .catch(function(error){
-      //       console.log("error");
-            
-      //   })
-      //   .then(()=>{
-      //     this.afterGetUser(rule);
-      //   })
-      // },
-      // //回到首页
-      // afterGetUser(ruleForm){
-      //   console.log("afterGetUser");
-      //   this.$refs[ruleForm].validate(valid => {
-      //     if (valid) {
-      //       //登录
-      //       if(ruleForm=="dengForm"){
-      //           if(this.formss.name==this.dengForm.name&&this.formss.pass==this.dengForm.pass1){
-      //             this.login1Sucess();
-      //             this.$router.go(-1);
-      //           }else if(this.formss.name==this.dengForm.name&&this.formss.pass!=this.dengForm.pass1){
-      //             alert("密码错了,再看看呗");
-      //           }else if(this.formss.name!=this.dengForm.name){
-      //             alert("没找到你的名字楠");
-      //           }
-      //       }else if(ruleForm=='zhuForm'){
-      //         if(this.formss.name==this.zhuForm.name){
-      //           alert("重名了");
-      //         }else{
-      //           this.login2Sucess();
-      //           this.$router.go(-1);
-      //         }
-      //       }
-      //     } else {       
-      //       return false;
-      //     }
-      //   });
-      // },
-      
     }
   }
 </script>
