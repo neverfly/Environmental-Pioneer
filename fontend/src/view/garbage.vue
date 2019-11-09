@@ -10,7 +10,7 @@
                 </div>
             </el-col>
             <el-col :lg="{span:12,offset:6}" :md="24" class="hidden-md-and-down" style="paddingTop:20px;borderBottom:20px;marginBottom:20px">
-                 <el-collapse v-model="activeNames" @change="handleChange">
+                 <el-collapse v-model="activeNames" @change="handleChange" accordion>
                     <el-collapse-item title="垃圾分类是什么？" name="1">
                         <div class="content">垃圾分类：指按一定规定或标准将垃圾分类储存、分类投放和分类搬运，从而转变成公共资源的一系列活动的总称。分类的目的是提高垃圾的资源价值和经济价值，力争物尽其用。垃圾在分类储存阶段属于公众的私有品，垃圾经公众分类投放后成为公众所在小区或社区的区域性准公共资源，垃圾分类驳运到垃圾集中点或转运站后成为没有排除性的公共资源。从国内外各城市对生活垃圾分类的方法来看，大致都是根据垃圾的成分构成、产生量，结合本地垃圾的资源利用和处理方式来进行分类的。</div>
                     </el-collapse-item>

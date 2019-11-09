@@ -103,7 +103,7 @@ export default {
             if(localStorage.getItem("token")!=null){
                 this.getuserIn();
             }else{
-                this.$router.push("/login");
+                this.$router.replace("/login");
             }
         },
         getuserIn(){
@@ -154,31 +154,10 @@ export default {
                     "uid":this.form.id,
                     "e_mail":this.form.email,
                     "real_name": this.form.realname,
-                    "avatar": this.form.isStart,
                     "avatar": this.form.avatar,
                     "user_description":this.form.user_description,
                 }
             })
-            // .then((res)=>{
-            //     console.log("信息修改了");
-            //     console.log(res);
-            //     this.$store.state.name=res.data.result.username;
-            // })
-            // .catch(function(error){
-            //     console.log("error");
-            // })
-            // axios({
-            //     method: 'put',
-            //     url: 'http://localhost:8080/api/UserViewSet//',
-            //     data: {
-            //         "username":self.form.name,
-            //         "e_mail":self.form.email,
-            //         "real_name": self.form.realname,
-            //         "avatar": self.form.isStart,
-            //         "user_description":self.form.user_description,
- 
-            //     }
-            // })
             .then((res)=>{
                 console.log("修改后的返回值");
                 var obody=eval('('+res.config.data+')');

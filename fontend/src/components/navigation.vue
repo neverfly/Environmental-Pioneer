@@ -147,7 +147,10 @@ export default {
           body: this.input
       })
       .then((res)=>{
-          alert(res.data);
+          this.$notify({
+            title: '自定义位置',
+            message: res.data
+          });
       })
       .catch(function(error){
           console.log("error");

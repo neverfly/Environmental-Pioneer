@@ -1,6 +1,5 @@
 <template>
     <div>
-    <!-- <div :style="{backgroundImage: 'url('+bgimg+')', width: '100%',minWidth:'100%',height:'180px',backgroundSize:'cover'}"> -->
         <el-row class="pad">
             <el-col :lg="6" class="hidden-md-and-down" :offset="8">
                 <el-input class="search" v-model="input" placeholder="垃圾识别与分类"></el-input>
@@ -27,7 +26,10 @@ export default {
     },
     methods: {
         searchLaji(){
-            console.log(this.input);
+             this.$notify({
+            title: "记得每天分类哦",
+            message: this.input
+            });
             
         }
     },

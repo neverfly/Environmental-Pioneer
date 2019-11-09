@@ -172,7 +172,6 @@ Mock.mock(/register/,'post',(option)=>{
         return "名字重了";
     }else if(obody.e_mail==='100@qq.com'){
         console.log("ssss");
-        
         return  "邮箱重名";
     }else{
         newone.result.username=obody.username;
@@ -191,7 +190,7 @@ Mock.mock(/login/,'post',(option)=>{
         return token1;
     }else if(obody.username==cao.result.username&&obody.password==111111){
         return token2;
-    }else if(obody.username==newone.result.username&&obody.password==111111){
+    }else if(obody.username==newone.result.username&&obody.password==newone.result.password){
         return token3;
     }else{
         return "信息错误";

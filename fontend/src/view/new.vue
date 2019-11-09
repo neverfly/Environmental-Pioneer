@@ -126,9 +126,9 @@
                         <ul>
                             <li v-for="item in items" :key="item.key" style="width:100%;height:50px">
                                 <p class="middleNewTitle"><span class="yuan">&nbsp;</span>&nbsp;{{item.title}}</p>
-                                &nbsp;&nbsp;&nbsp;<span  class="middleCon">时间：{{item.date}}</span>&nbsp;
+                                &nbsp;&nbsp;&nbsp;<span  class="middleCon">时间：{{item.date}}</span>
                                 <span  class="middleCon">{{item.location}}</span>
-                                <span><a href="" style="float:right;fontSize:20px;paddingRight:20px;marginTop:-5px">了解详情></a></span>
+                                <span><a href="" style="float:right;fontSize:10px;paddingRight:20px;marginTop:2px">了解详情></a></span>
                             </li>
                         </ul>
                     </el-col>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="hidden-md-only hidden-sm-only">
         <a href="">
             <img :src="search" alt="">
             <div>

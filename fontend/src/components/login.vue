@@ -2,10 +2,9 @@
    <div :style="note">
       <div class="bgColor">
       <!-- pc端 -->
-      <div class="content hidden-md-and-down" style="borderRadius:20px;zIndex:444">
+      <div class="content hidden-sm-and-down" style="borderRadius:20px;zIndex:444">
         <img :src="logo" alt="" class="logo"/>
-        <router-link to="/main" class="backTo"><i class="el-icon-s-promotion" style="fontSize:30px">&nbsp;</i><span>回到首页</span></router-link>
-        <el-form :model="zhuForm" status-icon :rules="rules" ref="zhuForm" label-width="70px" class="demo-ruleForm center" v-show="!showss" style="max-Width:400px;min-Width:10%;marginTop:0 auto;width:500px">
+        <el-form :model="zhuForm" status-icon :rules="rules" ref="zhuForm" class="demo-ruleForm center" v-show="!showss" style="max-Width:400px;min-Width:10%;marginTop:0 auto;width:500px">
               <el-form-item prop="name">
                   <el-input v-model="zhuForm.name" autocomplete="off" placeholder='用户名' class="inputs"></el-input>
               </el-form-item><br>
@@ -26,7 +25,7 @@
               </el-form-item>
           </el-form> 
         <!-- 登录 -->
-          <el-form :model="dengForm" status-icon :rules="rules" ref="dengForm" label-width="70px" class="demo-ruleForm center" v-show="showss"  style="max-Width:400px;min-Width:10%;marginTop:0 auto">
+          <el-form :model="dengForm" status-icon :rules="rules" ref="dengForm" class="demo-ruleForm center" v-show="showss"  style="max-Width:400px;min-Width:10%;marginTop:0 auto">
               <el-form-item  prop="name" style="minWidth:100px">
                   <el-input type="name" v-model="dengForm.name" autocomplete="off" style="border-top:0;border-left:0;border-right:0;" placeholder="用户名" class="inputs"></el-input>
               </el-form-item><br>
@@ -42,40 +41,39 @@
           </el-form> 
       </div>
       <!-- 移动端 -->
-      <div class="hidden-lg-and-up" style="paddingRight:10px;zIndex:444">
+      <div class="hidden-md-and-up" style="margin:0 auto;textAlign:center">
         <img :src="logo" alt="" class="logo"/>
         <!-- 注册 -->
-        <el-form :model="zhuForm" status-icon :rules="rules" ref="zhuForm" label-width="70px" class="demo-ruleForm" v-show="!showss" style="max-Width:400px;min-Width:10%;marginTop:0 auto">
+        <el-form :model="zhuForm" status-icon :rules="rules" ref="zhuForm" class="demo-ruleForm" v-show="!showss" style="max-Width:400px;min-Width:10%;marginTop:0 auto">
               <el-form-item prop="name">
-                  <el-input v-model="zhuForm.name" autocomplete="off" style="border-top:0;border-left:0;border-right:0;" placeholder="用户名" class="inputs"></el-input>
+                  <el-input v-model="zhuForm.name" autocomplete="off" style="border-top:0;border-left:0;border-right:0;marginRight:10px" placeholder="用户名" class="inputs"></el-input>
               </el-form-item><br>
               <el-form-item prop="pass2">
-                  <el-input type="password" v-model="zhuForm.pass2"  style="maxWidth:100%;border-top:0;border-left:0;border-right:0" autocomplete="off" placeholder="密码"></el-input>
+                  <el-input type="password" v-model="zhuForm.pass2"  style="maxWidth:100%;border-top:0;border-left:0;border-right:0;marginRight:10px" autocomplete="off" placeholder="密码"></el-input>
               </el-form-item><br>
               <el-form-item prop="checkPass">
-                  <el-input type="password" style="maxWidth:100%;border-top:0;border-left:0;border-right:0;" v-model="zhuForm.checkPass" placeholder="确认密码"></el-input>
+                  <el-input type="password" style="maxWidth:100%;border-top:0;border-left:0;border-right:0;marginRight:10px" v-model="zhuForm.checkPass" placeholder="确认密码"></el-input>
               </el-form-item><br>
               <el-form-item  prop="email">
-                  <el-input v-model="zhuForm.email" style="maxWidth:100%;border-top:0;border-left:0;border-right:0;" autocomplete="off" placeholder="注册"></el-input>
+                  <el-input v-model="zhuForm.email" style="maxWidth:100%;border-top:0;border-left:0;border-right:0;marginRight:10px" autocomplete="off" placeholder="邮箱"></el-input>
               </el-form-item><br>
-              <el-form-item>
+              <el-form-item style="textAlign:center">
                   <el-button type="primary" @click="submitForm('zhuForm')">注册</el-button>
                   <el-button @click="resetForm('zhuForm')">重置</el-button><br/>
                   <span @click="exchange()">登录 | </span>
                   <span @click="exchange()">注册新账户</span>
                   <span @click="forget()">忘记密码</span>
-
               </el-form-item>
           </el-form> 
         <!-- 登录 -->
-          <el-form :model="dengForm" status-icon :rules="rules" ref="dengForm" label-width="10px" class="demo-ruleForm" v-show="showss"  style="max-Width:400px;min-Width:10%;marginTop:0 auto">
+          <el-form :model="dengForm" status-icon :rules="rules" ref="dengForm" label-width="10px" class="demo-ruleForm" v-show="showss"  style="max-Width:400px;min-Width:10%">
               <el-form-item prop="name">
-                  <el-input type="name" v-model="dengForm.name" autocomplete="off" style="border-top:0;border-left:0;border-right:0;" placeholder="用户名" class="inputs mobiledeng"></el-input>
+                  <el-input type="name" v-model="dengForm.name" autocomplete="off" style="border-top:0;border-left:0;border-right:0;marginRight:10px" placeholder="用户名" class="inputs mobiledeng"></el-input>
               </el-form-item><br>
               <el-form-item prop="pass1">
-                  <el-input type="password" v-model="dengForm.pass1" autocomplete="off" style="border-top:0;border-left:0;border-right:0;" placeholder="密码" class=" mobiledeng"></el-input>
+                  <el-input type="password" v-model="dengForm.pass1" autocomplete="off" style="border-top:0;border-left:0;border-right:0;marginRight:10px" placeholder="密码" class=" mobiledeng"></el-input>
               </el-form-item><br>
-              <el-form-item>
+              <el-form-item style="textAlign:center">
                   <el-button type="primary" @click="submitForm('dengForm')" class="mobileBtn">登录</el-button><br>
                   <span @click="exchange()">注册新账户</span>
                   <span @click="forget()">忘记密码</span>
@@ -141,7 +139,7 @@
       };
       return {
          note: {
-          backgroundImage: "url(" + require("../assets/images/TIM20191109154834.png") + ")",
+          backgroundImage: "url(" + require("../assets/images/denglu.jpg") + ")",
           backgroundRepeat: "no-repeat",
           backgroundSize: "100% 100%",
           marginTop: "5px",
@@ -198,8 +196,18 @@
         }
       };
     },
-    beforeMount(){
-    },
+    // mounted () {
+    //   const that = this;
+    //   window.onresize = () => {
+    //     return (() => {
+    //       if(document.body.clientWidth>992){
+    //         import bgImg from '../assets/images/TIM20191109154834.png'
+    //       }else{
+    //         import bgImg from '../assets/images/TIM20191109154834.png'
+    //       }
+    //     })()
+    //   }
+    // },
     methods: {
       submitForm(ruleForm) {
         rule=ruleForm;
@@ -212,12 +220,14 @@
               this.getLoginToekn();
             }
           } else {
-            console.log('error submit!!');
+            this.$message({
+              message: '请重新查看输入信息',
+              type: 'warning'
+            });
             return false;
           }
         });
       },
-      
       //清空内容
       resetForm(ruleForm){
         this.$refs[ruleForm].resetFields();

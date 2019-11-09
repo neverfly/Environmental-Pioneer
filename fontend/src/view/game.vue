@@ -239,7 +239,7 @@ export default {
         //检查是否登录
         isLogin() {
             if(localStorage.getItem("token")==null){
-                this.$router.push("/login");
+                this.$router.replace("/login");
             }
         }
 
