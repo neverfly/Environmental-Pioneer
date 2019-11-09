@@ -228,7 +228,17 @@ Mock.mock(/api\/UserViewSet\/\//,'put',(option)=>{
     console.log("修改信息已提交");
     console.log(option.body);
     // userInfo.name=option.body;
-    return userInfo;
+    var obody=eval('('+option.body+')');
+    console.log(obody);
+    obody=obody.data;
+    cao.result.username=obody.username;
+    cao.result.e_mail=obody.e_mail;
+    cao.result.real_name=obody.real_name;
+    cao.result.avatar=obody.avatar;
+    cao.result.user_description=obody.user_description;
+    console.log(cao);
+    
+    return cao;
 });
 
 //根据aid返回文章具体内容

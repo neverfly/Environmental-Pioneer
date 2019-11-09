@@ -8,11 +8,66 @@
             </el-col>
             <el-col :lg="12" style="marginTop:10px;marginBottom:10px">
                 <el-tabs type="border-card">
-                    <el-tab-pane label="精选推荐"><gezhonglaji></gezhonglaji></el-tab-pane>
-                    <el-tab-pane label="每日新闻"><gezhonglaji></gezhonglaji></el-tab-pane>
-                    <el-tab-pane label="热点top"><gezhonglaji></gezhonglaji></el-tab-pane>
-                    <el-tab-pane label="往期新闻"><gezhonglaji></gezhonglaji></el-tab-pane>
-                    <el-tab-pane label="其他新闻"><gezhonglaji></gezhonglaji></el-tab-pane>
+                    <el-tab-pane label="精选推荐">
+                        <el-row v-for="item in items1" :key="item.title" :gutter="20">
+                            <el-col :lg="{span:4}"><br><el-img :src="imgNew" alt="" class="lajiNew"></el-img></el-col>
+                            <el-col :lg="{span:20}"><br>
+                                <router-link :to="item.link+'/'+item.aid">
+                                    <h2>{{item.title}}</h2><br>
+                                    <p>{{item.content}}</p>
+                                    <span>{{item.date}}</span><span style="float:right">浏览量：{{item.liulan}}</span>
+                                </router-link>
+                            </el-col>
+                        </el-row>
+                    </el-tab-pane>
+                    <el-tab-pane label="每日新闻">
+                        <el-row v-for="item in items2" :key="item.title" :gutter="20">
+                            <el-col :lg="{span:4}"><br><img :src="imgNew" alt="" class="lajiNew"></el-col>
+                            <el-col :lg="{span:20}"><br>
+                                <router-link :to="item.link+'/'+item.aid">
+                                    <h2>{{item.title}}</h2><br>
+                                    <p>{{item.content}}</p>
+                                    <span>{{item.date}}</span><span style="float:right">浏览量：{{item.liulan}}</span>
+                                </router-link>
+                            </el-col>
+                        </el-row>
+                    </el-tab-pane>
+                    <el-tab-pane label="热点top">
+                        <el-row v-for="item in items3" :key="item.title" :gutter="20">
+                            <el-col :lg="{span:4}" style="width:100%"><br><img :src="imgNew" alt="" class="lajiNew"></el-col>
+                            <el-col :lg="{span:20}"><br>
+                                <router-link :to="item.link+'/'+item.aid">
+                                    <h2>{{item.title}}</h2><br>
+                                    <p>{{item.content}}</p>
+                                    <span>{{item.date}}</span><span style="float:right">浏览量：{{item.liulan}}</span>
+                                </router-link>
+                            </el-col>
+                        </el-row>
+                    </el-tab-pane>
+                    <el-tab-pane label="往期新闻">
+                        <el-row v-for="item in items4" :key="item.title" :gutter="20">
+                            <el-col :lg="{span:4}"><br><img :src="imgNew" alt="" class="lajiNew"></el-col>
+                            <el-col :lg="{span:20}"><br>
+                                <router-link :to="item.link+'/'+item.aid">
+                                    <h2>{{item.title}}</h2><br>
+                                    <p>{{item.content}}</p>
+                                    <span>{{item.date}}</span><span style="float:right">浏览量：{{item.liulan}}</span>
+                                </router-link>
+                            </el-col>
+                        </el-row>
+                    </el-tab-pane>
+                    <el-tab-pane label="其他新闻">
+                        <el-row v-for="item in items5" :key="item.title" :gutter="20">
+                            <el-col :lg="{span:4}"><br><img :src="imgNew" alt="" class="lajiNew"></el-col>
+                            <el-col :lg="{span:20}"><br>
+                                <router-link :to="item.link+'/'+item.aid">
+                                    <h2>{{item.title}}</h2><br>
+                                    <p>{{item.content}}</p>
+                                    <span>{{item.date}}</span><span style="float:right">浏览量：{{item.liulan}}</span>
+                                </router-link>
+                            </el-col>
+                        </el-row>
+                    </el-tab-pane>
                 </el-tabs>
             </el-col>
         </el-row>
@@ -33,7 +88,6 @@
                         </div>
                     </el-col>
                     <el-col :lg="5" class="hidden-md-and-down">
-                        <span style="color:#666666">更多></span>
                     </el-col>
                     <el-col :lg="24" :md="{span:22,offset:1}">
                         <div :style="{backgroundImage: 'url('+xiangguan+')',width:'91%',height:'250px',backgroundSize:'cover'}">
@@ -57,7 +111,6 @@
                         </div>
                     </el-col>
                     <el-col :span="5" class="hidden-md-and-down">
-                        <span style="color:#666666">更多></span>
                     </el-col>
                     <el-col :lg="24" class="hidden-md-and-down">
                         <ul>
@@ -103,6 +156,9 @@ import gezhonglaji from '../components/gezhonglaji'
 import changtu from '../assets/images/new_3.png'
 import xiangguan from '../assets/images/new_1.png'
 import welcome from '../assets/images/new_4.png'
+import imgNew from '../assets/images/new_1.png'
+
+import axios from 'axios'
 
 export default {
     name: "new",
@@ -112,8 +168,10 @@ export default {
     },
     data() {
         return {
+            fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
             changtu ,
             xiangguan,
+            imgNew,
             welcome,
             items:[
                 {
@@ -142,7 +200,127 @@ export default {
                     location: '展馆：北京国际展览中心',
                     href: ''
                 }
-            ]        
+            ],
+            items1:[
+                {
+                    title: '1.“侬好”，变成了“侬是什么垃圾？',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:1
+                },{
+                    title: '2.“侬好”，变成了“侬是什么垃圾？',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:2
+                },{
+                    title: '3.“侬好”，变成了“侬是什么垃圾？',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:3
+                }
+            ],
+            items2:[
+                {
+                    title: '1.2019年，垃圾分类成为一种新时尚。',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:1
+                },{
+                    title: '2.2019年，垃圾分类成为一种新时尚。',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:2
+                },{
+                    title: '3.2019年，垃圾分类成为一种新时尚。',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:3
+                }
+            ],
+            items3:[
+                {
+                    title: '1.国家推行生活垃圾分类制度',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:1
+                },{
+                    title: '2.国家推行生活垃圾分类制度',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:2
+                },{
+                    title: '3.国家推行生活垃圾分类制度',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:3
+                }
+            ],
+            items4:[
+                {
+                    title: '1.上海迎来最严垃圾分类措施',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:1
+                },{
+                    title: '2.上海迎来最严垃圾分类措施',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:2
+                },{
+                    title: '3.上海迎来最严垃圾分类措施',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:3
+                }
+            ],
+            items5:[
+                {
+                    title: '1.“垃圾分类”的火爆始于上海。',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:1
+                },{
+                    title: '2.“垃圾分类”的火爆始于上海。',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:2
+                },{
+                    title: '3.“垃圾分类”的火爆始于上海。',
+                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    link:'/majorNew',
+                    date: '2019年08月23日 14:59:12 ',
+                    liulan: '513',
+                    aid:3
+                }
+            ]      
         }
     },
 }
@@ -199,9 +377,9 @@ recentNews p{
     bottom: 0;
     width: 100%;
 }
-@media (min-width:1000px) {
+@media (min-width:1000px){
     /deep/ .el-tabs__item{
-        padding:0 70px !important;
+        padding:0 75px !important;
     }
 }
 </style>

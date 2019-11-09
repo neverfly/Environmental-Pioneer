@@ -2,26 +2,32 @@
     <div>
         <navigation></navigation>
         <div class="personalCenter">
-            <el-row class="demo-avatar demo-basic" style="background-image: linear-gradient(#dff5d6 90%, #98e778 100%)">
-                <el-col :lg="{span:12,offset:4}" :md="{span:4}">
-                    <div class="demo-basic--circle">
-                        <div class="block">
+            <!-- 头像 -->
+            <el-row class="demo-avatar demo-basic" style="background-image: linear-gradient(#dff5d6 90%, #98e778 100%);padding:50px 0">
+                <el-col :lg="{span:4,offset:4}" :md="{span:4}">
                             <el-avatar :size="100" :src="form.avatar"></el-avatar>
-                        </div>
+                </el-col>
+                <el-col :lg="{span:7,pull:2}" :md="{span:10,offset:3}" style="marginTop:20px" v-show="!showChange">
+                    <div class="demo-basic--circle" >
+                            <span @click="chooce(index)" v-for="(item,index) in iamgeChoice" :key="index"><el-avatar :size="50" :src="item.image" style="margin:0 10px" ></el-avatar></span>
                     </div>
                 </el-col>
-                <el-col :lg="{span:5,pull:12}" :md="{span:10,offset:3}" style="marginTop:20px">
-                    <el-upload
-                        class="avatar-uploader"
-                        action="123"
-                        :show-file-list="false"
-                        :on-success="handleAvatarSuccess"
-                        :before-upload="beforeAvatarUpload">
-                        <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                    </el-upload>
+                <!-- 个人信息内容 -->
+                <el-col :lg="{span:20,offset:4}" :md="{span:24}" v-if="showChange">
+                    <el-divider></el-divider>
+                    <span @click="change" v-if="showChange" style="color:rgb(77, 195, 48);float:right;paddingRight:200px;fontWeight:600">修改信息</span>
+                    <el-form ref="form" :model="form" label-width="80px" style="maxWidth:800px">
+                        <div class="info">
+                            <span>ID:</span><span>{{this.$store.state.id}}</span><br><br>
+                            <span>昵称:</span><span>{{form.name}}</span><br><br>
+                            <span>邮箱:</span><span>{{form.email}}</span><br><br>
+                            <span>姓名:</span><span>{{form.realname}}</span><br><br>
+                            <span>简介:</span><span>{{form.user_description}}</span>
+                        </div><br>
+                    </el-form>
                 </el-col>
-                <el-col :lg="{span:20,offset:4}" :md="{span:24}">
+                <el-col v-else  :lg="{span:20,offset:4}" :md="{span:24}">
+                    <el-divider></el-divider>
                     <el-form ref="form" :model="form" label-width="80px" style="maxWidth:800px">
                         <div class="info">
                             <span>ID:</span><span>{{this.$store.state.id}}</span><br><br>
@@ -31,7 +37,7 @@
                             <span>简介:</span><el-input v-model="form.user_description" :placeholder="this.$store.state.user_description" style="maxWidth:400px"></el-input>
                         </div><br>
                     </el-form>
-                    <el-button :plain="true" @click="open2" style="marginBottom:50px">保存修改</el-button>
+                    <el-button :plain="true" @click="change();open2()" style="marginBottom:50px">保存修改</el-button>
                 </el-col>
             </el-row>
             
@@ -53,13 +59,22 @@ export default {
                 name: '',
                 avtar: '',
                 user_description:'',
-                avartar:'',
+                avatar:'',
                 email: ''
             },
             touxiang,
             showImg:false,
             name:'',
-            imageUrl: ''
+            imageUrl: '',
+            showChange:true,
+            iamgeChoice:[
+                {image:'https://c-ssl.duitang.com/uploads/item/201801/17/20180117181801_KRYJQ.thumb.700_0.jpeg'},
+                {image:'https://c-ssl.duitang.com/uploads/item/201709/26/20170926003219_RCjJE.thumb.700_0.jpeg'},
+                {image:'https://c-ssl.duitang.com/uploads/item/201412/09/20141209183953_uiree.thumb.1900_0.jpeg'},
+                {image:'https://c-ssl.duitang.com/uploads/item/201509/25/20150925110828_iMnGx.thumb.700_0.jpeg'},
+                {image:'https://c-ssl.duitang.com/uploads/item/201802/21/20180221223815_xkkyq.thumb.700_0.jpg'}
+
+            ]
         }
     },
     beforeMount(){
@@ -68,6 +83,13 @@ export default {
         var aid=this.$route.params.aid;
     },
     methods: {
+        change(){
+            this.showChange=!this.showChange;
+        },
+        chooce(item){
+            this.form.avatar=this.iamgeChoice[item].image;
+           
+        },
         hasToken(){
             if(localStorage.getItem("token")!=null){
                 this.getuserIn();
@@ -108,7 +130,6 @@ export default {
             })
         },
         open2() {
-            var self = this;
             //  axios.post("http://localhost:8080/api/User/viewSet",{
             //     token:localStorage.getItem("token"),
             //     id:this.form.id,
@@ -120,11 +141,12 @@ export default {
             // })
             axios.put("http://localhost:8080/api/UserViewSet//",{
                 data: {
-                    "username":self.form.name,
-                    "e_mail":self.form.email,
-                    "real_name": self.form.realname,
-                    "avatar": self.form.isStart,
-                    "user_description":self.form.user_description,
+                    "username":this.form.name,
+                    "e_mail":this.form.email,
+                    "real_name": this.form.realname,
+                    "avatar": this.form.isStart,
+                    "avatar": this.form.avatar,
+                    "user_description":this.form.user_description,
                 }
             })
             // .then((res)=>{
@@ -148,16 +170,16 @@ export default {
             //     }
             // })
             .then((res)=>{
-                console.log(res);
+                console.log("修改后的返回值");
+                var obody=eval('('+res.config.data+')');
+                console.log(obody);
+                obody=obody.data;
                 this.$store.commit("madeShow",true);
-                this.$store.commit("changeName",res.data.result.name);
-                this.$store.commit("changeId",res.data.result.id);
-                this.$store.commit("changeAvatar",res.data.result.avatar);
-                this.$store.commit("changeuser_description",res.data.result.user_description);
-                this.$store.commit("getEmail",res.data.result.email);
-                this.$store.commit("changePass",res.data.result.pass);
-                this.$store.commit("changerealname",res.data.result.realname);
-                this.$store.commit("getToken",res.data.result.token);
+                this.$store.commit("changeName",obody.username);
+                this.$store.commit("changeAvatar",obody.avatar);
+                this.$store.commit("changeuser_description",obody.user_description);
+                this.$store.commit("getEmail",obody.e_mail);
+                this.$store.commit("changerealname",obody.real_name);
                 this.$message({
                     message: '保存成功',
                     type: 'success'
