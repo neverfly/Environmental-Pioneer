@@ -81,7 +81,8 @@ export default {
                 {image:'https://c-ssl.duitang.com/uploads/item/201709/26/20170926003219_RCjJE.thumb.700_0.jpeg'},
                 {image:'https://c-ssl.duitang.com/uploads/item/201412/09/20141209183953_uiree.thumb.1900_0.jpeg'},
                 {image:'https://c-ssl.duitang.com/uploads/item/201509/25/20150925110828_iMnGx.thumb.700_0.jpeg'},
-                {image:'https://c-ssl.duitang.com/uploads/item/201802/21/20180221223815_xkkyq.thumb.700_0.jpg'}
+                {image:'https://c-ssl.duitang.com/uploads/item/201802/21/20180221223815_xkkyq.thumb.700_0.jpg'},
+                {image:'https://avatars0.githubusercontent.com/u/47131504?s=64&v=4'}
 
             ]
         }
@@ -188,9 +189,6 @@ export default {
             console.log(this.form);
             this.showImg=true;
         },
-        handleAvatarSuccess(res, file) {
-            this.imageUrl = URL.createObjectURL(file.raw);
-        }
     }
 }
 </script>

@@ -18,7 +18,7 @@
       </el-row>
       <el-row>
 
-        <el-col :lg="16" class="hidden-md-and-down" :offset="8">
+        <el-col :lg="16" class="hidden-md-and-down" :offset="6">
           <el-menu :default-active="activeIndex" router class="el-menu-demo" mode="horizontal" @select="handleSelect">
             <el-menu-item class="navPC" index="/main"><img :src="shouye" class="icon"/>首页</el-menu-item>
             <el-menu-item class="navPC" index="/new"><img :src="news" class="icon"/>新闻</el-menu-item>

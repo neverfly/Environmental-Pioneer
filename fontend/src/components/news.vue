@@ -40,7 +40,7 @@ export default {
     }
     .content{
         font-family: MicrosoftYaHei;
-        font-size: 15px;
+        font-size: 14px;
         font-weight: normal;
         font-stretch: normal;
         letter-spacing: 1px;

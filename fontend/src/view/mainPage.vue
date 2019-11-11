@@ -24,27 +24,27 @@
             </el-col>
         </el-row>
         <!-- 一长串图 -->
-        <img :src="xianjie" alt="" style="width:100%;marginTop:20px"/>
+        <el-image :src="xianjie" alt="" style="width:100%;marginTop:20px" lazy></el-image>
         <!-- 常见垃圾 -->
         <h1 class="textCenter mainInfo">常见垃圾</h1><hr/>
         <el-row> 
             <!-- 常见垃圾 -->
             <el-col :lg="{span:8,offset:4}" :md="24">
                 <div align="center">
-                    <img :src="laji" alt="" class="mobileLaji"/>
+                    <el-image :src="laji" alt="" class="mobileLaji" lazy></el-image>
                     <div class="lajiImage">
-                        <img :src="suliaoImg" alt=""/>
+                        <el-image :src="suliaoImg" alt="" lazy></el-image>
                     </div>
-                    <p class="duanluo1" style="color:#6c4b12;backgroundColor:#f2c679">废弃在自然界电池中的汞会慢慢从电池中溢出来，进入土壤或水源，再通过农作物进入人体，损伤人的肾脏。在微生物的作用下，无机汞可以转化成甲基汞，聚集在鱼类的身体里，人食用了这种鱼后，甲基汞会进入人的大脑细胞，使人的神经系统受到严重破坏，重者会发疯致死。著名的日本水俣病就是甲基汞所致。</p>
+                    <p class="duanluo1" style="color:#6c4b12;backgroundColor:#f2c679;textAlign:left">废弃在自然界电池中的汞会慢慢从电池中溢出来，进入土壤或水源，再通过农作物进入人体，损伤人的肾脏。在微生物的作用下，无机汞可以转化成甲基汞，聚集在鱼类的身体里，人食用了这种鱼后，甲基汞会进入人的大脑细胞，使人的神经系统受到严重破坏，重者会发疯致死。</p>
                 </div>
             </el-col>
             <el-col :lg="8">
                 <div align="center">
-                    <img :src="suliao" alt="" class="mobileLaji"/>
+                    <el-image :src="suliao" alt="" class="mobileLaji" lazy></el-image>
                     <div class="lajiImage" style="backgroundColor:rgb(205, 221, 242)">
-                        <img :src="lajiImg" alt=""/>
+                        <el-image :src="lajiImg" alt="" lazy></el-image>
                     </div>
-                    <p class="duanluo1" style="color: #0e3e7e;backgroundColor:#91befa;">破坏免疫力。有些塑料袋和纸质餐盒会添加一些增白剂、荧光粉，它们除了有潜在致癌性，还会破坏人体的免疫力。引起血液系统疾病。非食品用塑料袋中含有的聚氯乙烯，经高温加热后，就易产生二恶英等有害物质，引起肝肾以及中枢神经系统、血液系统疾病。</p>
+                    <p class="duanluo1" style="color: #0e3e7e;backgroundColor:#91befa;textAlign:left">破坏免疫力。有些塑料袋和纸质餐盒会添加一些增白剂、荧光粉，它们除了有潜在致癌性，还会破坏人体的免疫力。引起血液系统疾病。非食品用塑料袋中含有的聚氯乙烯，经高温加热后，就易产生二恶英等有害物质，引起肝肾以及中枢神经系统、血液系统疾病。</p>
                 </div>
             </el-col>
         </el-row>

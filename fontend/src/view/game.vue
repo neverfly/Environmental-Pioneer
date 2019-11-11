@@ -12,7 +12,7 @@
                 <p style="float:right;fontSize:25px">得分：<span style="fontSize:35px">{{score}}</span></p>
             </el-col>
             <el-col :offset="5" :class="{question:true,panduan:item.flag}" :lg="14" v-for="(item,i) in items" :key="i">
-                <p class="wenti">{{i+1}}{{item.question}}？</p>
+                <p class="wenti">{{i+1}}.{{item.question}}？</p>
                 <el-radio v-model="item.choice" label="1">{{item.choice1}}。</el-radio><br/>
                 <el-radio v-model="item.choice" label="2">{{item.choice2}}。</el-radio><br/>
                 <el-radio v-model="item.choice" label="3">{{item.choice3}}。</el-radio><br/>
@@ -40,7 +40,7 @@
                 <p style="float:right;fontSize:25px">得分：<span style="fontSize:35px">{{score}}</span></p>
             </el-col>
             <el-col :class="{question:true,panduan:item.flag}" :span="24" v-for="(item,i) in items" :key="i" style="paddingBottom:230px">
-                <p class="wenti">{{i+1}}{{item.question}}？</p>
+                <p class="wenti">{{i+1}}.{{item.question}}？</p>
                 <el-radio v-model="item.choice" label="1">{{item.choice1}}。</el-radio><br/>
                 <el-radio v-model="item.choice" label="2">{{item.choice2}}。</el-radio><br/>
                 <el-radio v-model="item.choice" label="3">{{item.choice3}}。</el-radio><br/>
@@ -205,6 +205,7 @@ export default {
                         this.items[i].flag='true';
                     }
                 } 
+                this.putscore();
                 this.show=true;
                 this.show=true;
                     this.$notify({
@@ -214,21 +215,49 @@ export default {
                     });
                 // 步骤条不超过3
                 if (this.active+=2 > 2) this.active=3;
-        }).catch(function(){
-                console.log("error");
-            })
+                    }).catch(function(){
+                        console.log("error");
+                    })
         },
         // 获取问题
         getquestion(){
             axios.post("http://localhost:8080/game/question")
             .then((res)=>{
+                console.log("获取问题");
+                console.log(res);
+                
                 for(var i=0;i<10;i++){
-                    this.items[i].question=res.data.objectList[i].question;
-                    this.items[i].choice1=res.data.objectList[i].choice1;
-                    this.items[i].choice2=res.data.objectList[i].choice2;
-                    this.items[i].choice3=res.data.objectList[i].choice3;
-                    this.items[i].choice4=res.data.objectList[i].choice4;
-                    this.items[i].daan=res.data.objectList[i].daan;
+                    this.items[i].question=res.data.outList[i].question;
+                    this.items[i].choice1=res.data.outList[i].choice1;
+                    this.items[i].choice2=res.data.outList[i].choice2;
+                    this.items[i].choice3=res.data.outList[i].choice3;
+                    this.items[i].choice4=res.data.outList[i].choice4;
+                    this.items[i].daan=res.data.outList[i].daan;
+                }
+            })
+            .catch(function(error){
+                console.log("error");
+                
+            })
+        },
+        putscore(){
+            axios.get("http://localhost:8080/game/score",{
+                params:{
+                    score:this.score,
+                    username:this.$store.username
+                }
+            })
+            .then((res)=>{
+                console.log("获取问题");
+                console.log(res);
+                
+                for(var i=0;i<10;i++){
+                    this.items[i].question=res.data.outList[i].question;
+                    this.items[i].choice1=res.data.outList[i].choice1;
+                    this.items[i].choice2=res.data.outList[i].choice2;
+                    this.items[i].choice3=res.data.outList[i].choice3;
+                    this.items[i].choice4=res.data.outList[i].choice4;
+                    this.items[i].daan=res.data.outList[i].daan;
                 }
             })
             .catch(function(error){

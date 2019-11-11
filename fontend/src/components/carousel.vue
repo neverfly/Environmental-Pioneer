@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- carousel（轮播图） -->
-        <el-row class="padTop">
+        <el-row>
             <el-col :lg="{span:22,offset:1}" class="hidden-md-and-down">
                 <el-carousel :interval="4000" type="card" height="450px" class="mainBanner" arrow="always">
                     <el-carousel-item v-for="item in items" class="mainBanner" :key="item.name">

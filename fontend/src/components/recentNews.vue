@@ -1,30 +1,29 @@
 <template>
     <div style="width：90%;paddingLeft:5%;paddingRight:5%">
         <div class="block">
-            
             <el-carousel height="200px">
             <el-carousel-item v-for="(item,i) in items2" :key="i">
-               <router-link :to="item.href+'/'+item.aid"> <img :src="recentNews" alt="" style="width:100%"></router-link>
+               <router-link :to="item.href+'/'+item.aid"> <img :src="item.img" alt="" style="width:100%"></router-link>
             </el-carousel-item>
             </el-carousel>
         </div>
-        
         <h1 class="recNew">最新新闻</h1>
         <ul>
             <li v-for="item in items" :key="item.key">
-                
                 <p><a :href="item.href" target="_blank"><span class="yuan">&nbsp;</span>&nbsp;{{item.content}}</a></p>
             </li>
         </ul>
     </div>
 </template>
 <script>
-import recentNews from '@/assets/images/3_20.png'
+import recentNews1 from '@/assets/images/522.jpg'
+import recentNews2 from '@/assets/images/3_20.png'
+import recentNews3 from '@/assets/images/12.jpeg'
+
 export default {
     name: 'recentNews',
     data() {
         return {
-            recentNews,
             items:[
                 {
                     key:'1',
@@ -38,7 +37,7 @@ export default {
                 },
                 {
                     key:'3',
-                    content: "年底前沧州市中心城区全面启动生活垃圾分类",
+                    content: "沧州市中心城区全面启动生活垃圾分类",
                     href:'https://new.qq.com/omn/HEC20191/HEC2019110400095600.html'
 
                 },
@@ -62,17 +61,20 @@ export default {
                 {
                     img:'../assets/images/522.jpg',
                     href:'/majorNew',
+                    img: recentNews1,
                     aid:'1',
                 },
                 {
                     img:'',
                     href:'/majorNew',
+                    img: recentNews2,
                     aid:'2'
 
                 },
                 {
                     img:'',
                     href:'/majorNew',
+                    img: recentNews3,
                     aid:'3'
 
                 },
@@ -90,7 +92,7 @@ export default {
     }
     
     li>p{
-        line-height: 34px;
+        line-height: 25px;
         font-family: MicrosoftYaHei;
         font-size: 12px;
         font-weight: normal;

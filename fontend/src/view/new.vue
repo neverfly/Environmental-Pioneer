@@ -102,9 +102,9 @@
                     <el-col :lg="24" :md="{span:22,offset:1}">
                         <div :style="{backgroundImage: 'url('+xiangguan+')',width:'91%',height:'250px',backgroundSize:'cover'}">
                             <div class="bgColor">
-                                <span class="xiangguanTitle">第十届中国国际纳米技术产业博览会10月将隆</span>
-                                <p class="xiangguancon">2018年第九届纳博会组织了14场专业报,221个行业报告，邀请国内外院士15人。</p>
-                                <p><a href="" style="color:#000000;float:right;backgroundColor:#E7E7E7;fontWeight:bold">了解详情></a></p>
+                                <span class="xiangguanTitle">垃圾分类知识介绍</span>
+                                <p class="xiangguancon">垃圾分类是社会进步和生态文明的标志，是人人均可参与其中来保护环境和改善环境的方式。我们追求进步，崇尚文明，希望有碧水蓝天净土，共建美好家园。</p>
+                                <p><a href="http://www.sohu.com/a/328261782_100019774" style="color:#000000;float:right;backgroundColor:#E7E7E7;fontWeight:bold" target="_blank">了解详情></a></p>
                             </div>
                         </div>
                     </el-col>
