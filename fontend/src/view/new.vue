@@ -9,70 +9,70 @@
             <el-col :lg="12" style="marginTop:10px;marginBottom:10px">
                 <el-tabs type="border-card">
                     <el-tab-pane label="精选推荐">
-                        <el-row v-for="item in items1" :key="item.title" :gutter="20">
-                            <el-col :lg="4">
-                                <img :src="imgNew" alt="" width="100%" class="lajiNew"  fit="contain"/>
+                        <el-row v-for="(item,i) in items1" :key="i" :gutter="20"><br>
+                            <el-col :lg="4"><br>
+                                <img :src="item.image" alt="" width="100%" class="lajiNew"  fit="contain"/>
                             </el-col><br>
-                            <el-col :lg="{span:20}"><br>
+                            <el-col :lg="{span:20}">
                                 <router-link :to="item.link+'/'+item.aid">
                                     <h2>{{item.title}}</h2><br>
-                                    <p>{{item.content}}</p>
+                                    <p>{{item.content|ellipsis}}</p>
                                     <span>{{item.date}}</span><span style="float:right">浏览量：{{item.liulan}}</span>
                                 </router-link>
                             </el-col>
                         </el-row>
                     </el-tab-pane>
                     <el-tab-pane label="每日新闻">
-                        <el-row v-for="item in items2" :key="item.title" :gutter="20">
-                            <el-col :lg="4">
-                                <img :src="imgNew"  width="100%" alt="" class="lajiNew" fit="contain">
+                        <el-row v-for="(item,i) in items2" :key="i" :gutter="20"><br>
+                            <el-col :lg="4"><br>
+                                <img :src="item.image"  width="100%" alt="" class="lajiNew" fit="contain">
                             </el-col><br>
-                            <el-col :lg="{span:20}"><br>
+                            <el-col :lg="{span:20}">
                                 <router-link :to="item.link+'/'+item.aid">
                                     <h2>{{item.title}}</h2><br>
-                                    <p>{{item.content}}</p>
+                                    <p>{{item.content|ellipsis}}</p>
                                     <span>{{item.date}}</span><span style="float:right">浏览量：{{item.liulan}}</span>
                                 </router-link>
                             </el-col>
                         </el-row>
                     </el-tab-pane>
                     <el-tab-pane label="热点top">
-                        <el-row v-for="item in items3" :key="item.title" :gutter="20">
-                            <el-col :lg="4">
-                                <img :src="imgNew"  width="100%" alt="" class="lajiNew" fit="contain">
+                        <el-row v-for="(item,i) in items3" :key="i" :gutter="20"><br>
+                            <el-col :lg="4"><br>
+                                <img :src="item.image"  width="100%" alt="" class="lajiNew" fit="contain">
                             </el-col><br>
-                            <el-col :lg="{span:20}"><br>
+                            <el-col :lg="{span:20}">
                                 <router-link :to="item.link+'/'+item.aid">
                                     <h2>{{item.title}}</h2><br>
-                                    <p>{{item.content}}</p>
+                                    <p>{{item.content | ellipsis}}</p>
                                     <span>{{item.date}}</span><span style="float:right">浏览量：{{item.liulan}}</span>
                                 </router-link>
                             </el-col>
                         </el-row>
                     </el-tab-pane>
                     <el-tab-pane label="往期新闻">
-                        <el-row v-for="item in items4" :key="item.title" :gutter="20">
-                            <el-col :lg="{span:4}">
-                                <img :src="imgNew"  width="100%" alt="" class="lajiNew" fit="contain">
+                        <el-row v-for="(item,i) in items4" :key="i" :gutter="20"><br>
+                            <el-col :lg="{span:4}"><br>
+                                <img :src="item.image"  width="100%" alt="" class="lajiNew" fit="contain">
                             </el-col><br>
-                            <el-col :lg="{span:20}"><br>
+                            <el-col :lg="{span:20}">
                                 <router-link :to="item.link+'/'+item.aid">
                                     <h2>{{item.title}}</h2><br>
-                                    <p>{{item.content}}</p>
+                                    <p>{{item.content | ellipsis}}</p>
                                     <span>{{item.date}}</span><span style="float:right">浏览量：{{item.liulan}}</span>
                                 </router-link>
                             </el-col>
                         </el-row>
                     </el-tab-pane>
                     <el-tab-pane label="其他新闻">
-                        <el-row v-for="item in items5" :key="item.title" :gutter="20">
-                            <el-col :lg="{span:4}">
-                                <img :src="imgNew" alt=""  width="100%" class="lajiNew" fit="contain">
+                        <el-row v-for="(item,i) in items5" :key="i" :gutter="20"><br>
+                            <el-col :lg="{span:4}"><br>
+                                <img :src="item.image" alt=""  width="100%" class="lajiNew" fit="contain">
                             </el-col><br>
-                            <el-col :lg="{span:20}"><br>
+                            <el-col :lg="{span:20}">
                                 <router-link :to="item.link+'/'+item.aid">
                                     <h2>{{item.title}}</h2><br>
-                                    <p>{{item.content}}</p>
+                                    <p>{{item.content | ellipsis}}</p>
                                     <span>{{item.date}}</span><span style="float:right">浏览量：{{item.liulan}}</span>
                                 </router-link>
                             </el-col>
@@ -116,7 +116,7 @@
                  <el-row>
                     <el-col style="borderLeft:8px solid #14a53b;paddingLeft:5px;marginBottom:10px" :span="18">
                         <div >
-                            <h2>近期活动</h2><br>
+                            <h2>近期新闻</h2><br>
                             <span>RELATED REPORT</span>
                         </div>
                     </el-col>
@@ -124,20 +124,19 @@
                     </el-col>
                     <el-col :lg="24" class="hidden-md-and-down">
                         <ul>
-                            <li v-for="item in items" :key="item.key" style="width:100%;height:50px">
-                                <p class="middleNewTitle"><span class="yuan">&nbsp;</span>&nbsp;{{item.title}}</p>
-                                &nbsp;&nbsp;&nbsp;<span  class="middleCon">时间：{{item.date}}</span>
-                                <span  class="middleCon">{{item.location}}</span>
-                                <span><a href="" style="float:right;fontSize:10px;paddingRight:20px;marginTop:2px">了解详情></a></span>
+                            <li v-for="(item,i) in items6" :key="i" style="width:100%;height:50px">
+                                <p class="middleNewTitle"><span class="yuan">&nbsp;</span>&nbsp;{{item.title | less}}</p>
+                                
+                                <span><router-link :to="item.link+'/'+item.aid" href="" style="float:right;fontSize:10px;paddingRight:20px;marginTop:2px">了解详情></router-link></span>
                             </li>
                         </ul>
                     </el-col>
                     <!-- 中间新闻 -->
                     <el-col :span="22" :offset="1" class="hidden-lg-and-up" style="marginBottom:10px">
                         <ul>
-                            <li v-for="item in items" :key="item.key" style="width:100%;height:50px">
-                                <p class="middleNewTitle"><span class="yuan">&nbsp;</span>&nbsp;{{item.title}}</p>
-                                <p><a href="" style="float:right;fontSize:20px;paddingRight:20px">了解详情></a></p>
+                            <li v-for="(item,i) in items6" :key="i" style="width:100%;height:50px">
+                                <p class="middleNewTitle"><span class="yuan">&nbsp;</span>&nbsp;{{item.title | less}}</p>
+                                <p><router-link :to="item.link+'/'+item.aid" style="float:right;fontSize:20px;paddingRight:20px">了解详情></router-link></p>
                             </li>
                         </ul>
                     </el-col>
@@ -211,130 +210,264 @@ export default {
             ],
             items1:[
                 {
-                    title: '1.“侬好”，变成了“侬是什么垃圾？',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    title: '',
+                    content: '',
                     link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
+                    date: '',
+                    liulan: '894',
+                    aid:0,
+                    image:'',
+                },{
+                    title: '',
+                    content: '',
+                    link:'/majorNew',
+                    date: '',
+                    liulan: '324',
+                    image:'',
                     aid:1
                 },{
-                    title: '2.“侬好”，变成了“侬是什么垃圾？',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    title: '',
+                    content: '',
                     link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
+                    date: '',
+                    liulan: '534',
+                    image:'',
                     aid:2
-                },{
-                    title: '3.“侬好”，变成了“侬是什么垃圾？',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
-                    link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
-                    aid:3
                 }
             ],
             items2:[
                 {
-                    title: '1.2019年，垃圾分类成为一种新时尚。',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    title: '',
+                    content: '',
                     link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
-                    aid:1
-                },{
-                    title: '2.2019年，垃圾分类成为一种新时尚。',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
-                    link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
-                    aid:2
-                },{
-                    title: '3.2019年，垃圾分类成为一种新时尚。',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
-                    link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
+                    date: '',
+                    liulan: '894',
+                    image:'',
                     aid:3
+                },{
+                    title: '',
+                    content: '',
+                    link:'/majorNew',
+                    date: '',
+                    liulan: '324',
+                    image:'',
+                    aid:4
+                },{
+                    title: '',
+                    content: '',
+                    link:'/majorNew',
+                    date: '',
+                    liulan: '534',
+                    image:'',
+                    aid:5
                 }
             ],
             items3:[
                 {
-                    title: '1.国家推行生活垃圾分类制度',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    title: '',
+                    content: '',
                     link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
-                    aid:1
+                    date: '',
+                    liulan: '894',
+                    image:'',
+                    aid:6
                 },{
-                    title: '2.国家推行生活垃圾分类制度',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    title: '',
+                    content: '',
                     link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
-                    aid:2
+                    date: '',
+                    liulan: '324',
+                    image:'',
+                    aid:7
                 },{
-                    title: '3.国家推行生活垃圾分类制度',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    title: '',
+                    content: '',
                     link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
-                    aid:3
+                    date: '',
+                    liulan: '534',
+                    image:'',
+                    aid:8
                 }
             ],
             items4:[
                 {
-                    title: '1.上海迎来最严垃圾分类措施',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    title: '',
+                    content: '',
                     link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
-                    aid:1
+                    date: '',
+                    liulan: '894',
+                    aid:9
                 },{
-                    title: '2.上海迎来最严垃圾分类措施',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    title: '',
+                    content: '',
                     link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
-                    aid:2
+                    date: '',
+                    liulan: '324',
+                    image:'',
+                    aid:10
                 },{
-                    title: '3.上海迎来最严垃圾分类措施',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    title: '',
+                    content: '',
                     link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
-                    aid:3
+                    date: '',
+                    liulan: '534',
+                    image:'',
+                    aid:11
                 }
             ],
             items5:[
                 {
-                    title: '1.“垃圾分类”的火爆始于上海。',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    title: '',
+                    content: '',
                     link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
+                    date: '',
+                    liulan: '673',
+                    image:'',
+                    aid:12
+                },{
+                    title: '',
+                    content: '',
+                    link:'/majorNew',
+                    date: '',
+                    liulan: '235',
+                    image:'',
+                    aid:13
+                },{
+                    title: '',
+                    content: '',
+                    link:'/majorNew',
+                    date: '',
+                    liulan: '146',
+                    image:'',
+                    aid:14
+                }
+            ],
+            items6:[
+                {
+                    title: '',
+                    content: '',
+                    link:'/majorNew',
+                    date: '',
+                    liulan: '673',
+                    image:'',
+                    aid:0
+                },{
+                    title: '',
+                    content: '',
+                    link:'/majorNew',
+                    date: '',
+                    liulan: '235',
+                    image:'',
                     aid:1
                 },{
-                    title: '2.“垃圾分类”的火爆始于上海。',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    title: '',
+                    content: '',
                     link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
+                    date: '',
+                    liulan: '146',
+                    image:'',
                     aid:2
                 },{
-                    title: '3.“垃圾分类”的火爆始于上海。',
-                    content: '目前国内对于土壤重金属污染常用的修复技术有物理修复技术、化学修复技术、生物修复技术和混合修复技术，其中每种修复技术中还包括更细的修复方法，虽然目前我们对土壤中重金属的污染实际情况及各项修复处理技术等有了深层次地认识及了解，但是，由于土壤修复的复杂性，重金属污染的危害性，土壤修复之路仍任重而道远',
+                    title: '',
+                    content: '',
                     link:'/majorNew',
-                    date: '2019年08月23日 14:59:12 ',
-                    liulan: '513',
+                    date: '',
+                    liulan: '146',
+                    image:'',
                     aid:3
+                },{
+                    title: '',
+                    content: '',
+                    link:'/majorNew',
+                    date: '',
+                    liulan: '146',
+                    image:'',
+                    aid:4
                 }
-            ]      
+            ],
+            newLists:[]    
         }
+    },
+    filters: {
+        ellipsis(value) {
+            if (!value) return "";
+            if (value.length > 200) {
+                return value.slice(0, 200) + "...";
+            }
+            return value;
+        },
+        less(value) {
+            if (!value) return "";
+            if (value.length > 14) {
+                return value.slice(0, 14) + "...";
+            }
+            return value;
+        }
+    },
+        
+    mounted(){
+      this.getnewList();
+    },
+    methods: {
+        getnewList(){
+            axios.get("http://localhost:8080/api/NewsViewSet/",{
+                params:{
+                    ordering:localStorage.getItem("token")
+                }
+            })
+            .then((res)=>{
+                console.log("获取新闻信息");
+                console.log(res.data);
+                this.newLists=res.data;
+                console.log(this.newLists);
+                //把获取的新闻分开
+                for(var i=0,j=0;i<3;i++,j++){
+                    this.items1[j].title=this.newLists[i].results.topic;
+                    this.items1[j].content=this.newLists[i].results.content;
+                    this.items1[j].image=this.newLists[i].results.image;
+                    this.items1[j].date=this.newLists[i].results.create_time;
+                }
+                for(var i=3,j=0;i<6;i++,j++){
+                    this.items2[j].title=this.newLists[i].results.topic;
+                    this.items2[j].content=this.newLists[i].results.content;
+                    this.items2[j].image=this.newLists[i].results.image;
+                    this.items2[j].date=this.newLists[i].results.create_time;
+                }
+                for(var i=6,j=0;i<9;i++,j++){
+                    this.items3[j].title=this.newLists[i].results.topic;
+                    this.items3[j].content=this.newLists[i].results.content;
+                    this.items3[j].image=this.newLists[i].results.image;
+                    this.items3[j].date=this.newLists[i].results.create_time;
+                }
+                for(var i=9,j=0;i<12;i++,j++){
+                    this.items4[j].title=this.newLists[i].results.topic;
+                    this.items4[j].content=this.newLists[i].results.content;
+                    this.items4[j].image=this.newLists[i].results.image;
+                    this.items4[j].date=this.newLists[i].results.create_time;
+                }
+                for(var i=12,j=0;i<15;i++,j++){
+                    this.items5[j].title=this.newLists[i].results.topic;
+                    this.items5[j].content=this.newLists[i].results.content;
+                    this.items5[j].image=this.newLists[i].results.image;
+                    this.items5[j].date=this.newLists[i].results.create_time;
+                }
+                for(var i=0,j=0;i<5;i++,j++){
+                    this.items6[j].title=this.newLists[i].results.topic;
+                    this.items6[j].content=this.newLists[i].results.content;
+                    this.items6[j].image=this.newLists[i].results.image;
+                    this.items6[j].date=this.newLists[i].results.create_time;
+                }
+                console.log(this.newLists);
+            })
+            .catch(function(error){
+                console.log("error");
+            })
+        },
     },
 }
 </script>
 <style scoped>
-recentNews p{
+ .recentNews p{
     line-height: 30px;
     height: 30px;
 }

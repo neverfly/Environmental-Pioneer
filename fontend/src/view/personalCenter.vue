@@ -83,7 +83,6 @@ export default {
                 {image:'https://c-ssl.duitang.com/uploads/item/201509/25/20150925110828_iMnGx.thumb.700_0.jpeg'},
                 {image:'https://c-ssl.duitang.com/uploads/item/201802/21/20180221223815_xkkyq.thumb.700_0.jpg'},
                 {image:'https://avatars0.githubusercontent.com/u/47131504?s=64&v=4'}
-
             ]
         }
     },
@@ -117,12 +116,12 @@ export default {
                 console.log("211e");
                 console.log(res);
                 this.$store.commit("madeShow",true);
-                this.$store.commit("changeName",res.data.result.username);
-                this.$store.commit("changeId",res.data.result.uid);
-                this.$store.commit("changeAvatar",res.data.result.avatar);
-                this.$store.commit("changeuser_description",res.data.result.user_description);
-                this.$store.commit("getEmail",res.data.result.e_mail);
-                this.$store.commit("changerealname",res.data.result.real_name);
+                this.$store.commit("changeName",res.data.results.username);
+                this.$store.commit("changeId",res.data.results.uid);
+                this.$store.commit("changeAvatar",res.data.results.avatar);
+                this.$store.commit("changeuser_description",res.data.results.user_description);
+                this.$store.commit("getEmail",res.data.results.e_mail);
+                this.$store.commit("changerealname",res.data.results.real_name);
                 
             })
             .catch(function(error){

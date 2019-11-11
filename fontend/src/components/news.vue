@@ -3,7 +3,7 @@
         <div v-for="item in items" :key="item.title">
             <p class="title">{{item.title}}</p>
             <p class="content" style="textIndent:30px">{{item.content}}</p>
-            <router-link to="/majorNew" class="more"><p>了解详情></p></router-link>
+            <router-link :to="item.href" class="more"><p>了解详情></p></router-link>
         </div>
     </div>
 </template>
@@ -16,12 +16,12 @@ export default {
                 {
                     title: "一、土壤污染防治法实施",
                     content:"2018年8月31日，十三届全国人大常委会第五次会议表决通过了《中华人民共和国土壤污染防治法》，将于2019年1月1日起施行。这是我国首次制定专门的法律来规范防治土壤污染，是继水污染防治法、大气污染防治法之后，土壤污染防治领域的专门性法律，填补了环境保护领域特别是污染防治的立法空白。",
-                    href: ''
+                    href: '/majorNew/1'
                 },
                 {
                     title: "二、第二轮中央环保督察",
                     content: "2018年12月15日，生态环境部部长李干杰出席中国生态文明论坛南京年会时表示，2019年将全面启动新一轮督察，并计划再花4年时间，开展第二轮中央环保督察。在第二轮中央环保督察的4年时间中，前3年为常规的全面督察行动，最后1年“回头看”。根据中央全面深化改革委员会的规划，下一步环保督察的工作是：解决突出环境问题，改善环境质量，推动经济高质量发展。",
-                    href: ''
+                    href: '/majorNew/2'
                 }
             ]
         }

@@ -143,13 +143,15 @@ export default {
     handleSelect(key, keyPath) {
     },
     searchLaji(){
-      axios.post("http://localhost:8080/main/search",{
-          body: this.input
+      axios.get("http://localhost:8080/api/GarbagesearchViewSet",{
+          params:{
+            "search": this.input
+          }
       })
       .then((res)=>{
           this.$notify({
-            title: '自定义位置',
-            message: res.data
+            title: res.data.Garbage_type,
+            message: res.data.Garbage_jieshao
           });
       })
       .catch(function(error){
@@ -182,8 +184,7 @@ export default {
       })
     },
     getuserIn(){
-      console.log("nav getuserIn");
-      axios.get("http://localhost:8080/api/UserViewSet",{
+      axios.get("http://localhost:8080/api/UserViewSet//",{
           params:{
             ordering:localStorage.getItem("token")
           }
@@ -191,8 +192,8 @@ export default {
       .then((res)=>{
         console.log("getuserIn");
         console.log(res);
-        this.$store.state.name=res.data.result.username;
-        this.$store.state.avatar=res.data.result.avatar;
+        this.$store.state.name=res.data.results.username;
+        this.$store.state.avatar=res.data.results.avatar;
       })
       .catch(function(error){
           console.log("error");

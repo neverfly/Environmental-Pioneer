@@ -7,17 +7,16 @@
                 <el-col :lg="{span:18,offset:3}"  :md="{span:20,offset:2}">
                     <h1>{{article.title}}</h1>
                     <el-row style="marginBottom:20px">
-                        <el-col :span="6"><span>时间: {{article.date}}</span></el-col>
-                        <el-col :span="6"><span>标签: {{article.source}}</span></el-col>
+                        <el-col :span="6" :offset="3"><span>时间: {{article.date}}</span></el-col>
+                        <el-col :span="6" :offset="6"><span>标签: {{article.source}}</span></el-col>
                         <!-- <el-col :span="6"><span>编辑：{{article.writer}}</span></el-col> -->
                         <!-- <el-col :span="6"><span>阅读量：{{article.readingQua}}</span></el-col> -->
                     </el-row>
                     <div>
                         <div class="content" v-html="article.content"></div>
-                        <p class="link">链接：{{article.src}}</p>
                     </div>
                 </el-col>
-                <el-col :lg="{span:16,offset:4}" :md="{span:20,offset:2}">
+                <el-col :lg="{span:16,offset:4}" :md="{span:20,offset:2}" style="marginTop:20px">
                     <h1 style="color:#14a53b;float:left">我要评论</h1>
                     <el-form>
                         <el-form-item>
@@ -85,83 +84,13 @@ export default {
             tiaoshu:'',
             showPinglun:[
             ],
-            pinglun:[
-                // {
-                //     img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
-                //     name:'1sss',
-                //     content:'低者物取。回系色去决关回理周结就往六风同还通也响完情到管风',
-                //     time:'2019-10-24',
-                // },{
-                //     img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
-                //     name:'2sss',
-                //     content:'教去先究又保。局党更小半他青准候没反方响结应况则。识没参毛海车战形器自长你转群资就。',
-                //     time:'2019-10-24'
-                // },{
-                //     img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
-                //     name:'3sss',
-                //     content:'光养名。果众压学专采油住民八养还常联精际根。路干入',
-                //     time:'2019-10-24'
-                // },{
-                //     img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
-                //     name:'4sss',
-                //     content:'合得须济造。七手看展转该安率美年以把称。记志装并部快米满持始究思',
-                //     time:'2019-10-24'
-                // },{
-                //     img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
-                //     name:'5sss',
-                //     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
-                //     time:'2019-10-24'
-                // },{
-                //     img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
-                //     name:'6sss',
-                //     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
-                //     time:'2019-10-24'
-                // },{
-                //     img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
-                //     name:'7sss',
-                //     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
-                //     time:'2019-10-24'
-                // },{
-                //     img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
-                //     name:'8sss',
-                //     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
-                //     time:'2019-10-24'
-                // },{
-                //     img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
-                //     name:'9sss',
-                //     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
-                //     time:'2019-10-24'
-                // },{
-                //     img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
-                //     name:'10sss',
-                //     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
-                //     time:'2019-10-24'
-                // },{
-                //     img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
-                //     name:'11sss',
-                //     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
-                //     time:'2019-10-24'
-                // },{
-                //     img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
-                //     name:'12sss',
-                //     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
-                //     time:'2019-10-24'
-                // },{
-                //     img: 'https://profile.csdnimg.cn/0/4/5/1_weixin_45044123',
-                //     name:'12sss',
-                //     content:'下次打为法自。从该非发极京满总空写权如业如运。备学住马飞层',
-                //     time:'2019-10-24'
-                // }
-            ]
-
+            pinglun:[]
         }
     },
     components:{
         cebian
     },
-    mounted(){
-    },
-    created() {
+    mounted() {
         var aid=this.$route.params.aid;
         this.getArticle(aid);
         this.getpinglun(aid);
@@ -169,21 +98,22 @@ export default {
     methods:{
         getArticle(aids){
             console.log("获取文章信息");
-            axios.get("http://localhost:8080/api/NewsViewSet//",{
+            axios.get("http://localhost:8080/api/NewsViewSet/",{
                 params:{
                     aid:aids
                 }
             })
             .then((res)=>{
-                console.log("sssssssssss");
-                console.log(res);
-                this.article.title=res.data.results.topic;
-                this.article.date=res.data.results.create_time;
-                this.article.content=res.data.results.content;
-                this.article.source=res.data.results.tag;
-                // this.article.writer=res.data.result.writer;
-                // this.article.readingQua=res.data.result.readingQua;
-                // this.article.src=res.data.result.src;
+                var m=aids;
+                console.log("XX( •̀ ω •́ )y新闻");
+                console.log(m);
+                
+                console.log(res.data);
+                
+                this.article.title=res.data[m].results.topic;
+                this.article.date=res.data[m].results.create_time;
+                this.article.content=res.data[m].results.content;
+                this.article.source=res.data[m].results.tag;
             })
             .catch(function(error){
                 console.log("error");
@@ -216,12 +146,26 @@ export default {
                 console.log(this.tiaoshu);
             })
         },
+        putpinglun(aids){
+            axios.post("http://localhost:8080/api/NewsCommentViewSet/",{
+                params:{
+                    aid:aids
+                }
+            })
+            .then((res)=>{
+                console.log("pinglun");
+            })
+            .catch(function(error){
+                console.log("error");
+            })
+        },
         input(){
             if(localStorage.getItem("token")==null){
                 this.$message.error('请先登录');
             }else{
+                this.putpinglun();
                 this.$message({
-                    message: "你已经成功提交评论:"+this.form,
+                    message: "你已经成功提交评论",
                     type: 'success'
                 });
             }
